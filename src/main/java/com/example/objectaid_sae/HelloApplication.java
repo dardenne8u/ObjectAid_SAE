@@ -1,5 +1,6 @@
 package com.example.objectaid_sae;
 
+import com.example.objectaid_sae.controleur.ControleurClasseCliquer;
 import com.example.objectaid_sae.model.Classe;
 import com.example.objectaid_sae.model.Model;
 import com.example.objectaid_sae.vue.VueClasse;
@@ -24,6 +25,7 @@ public class HelloApplication extends Application {
         classe.addMethode(1, "+ methode1 () : String");
         classe.addMethode(2, "+ methode2 () : int");
         vue.notifier(classe);
+        ControleurClasseCliquer controleurClasseCliquer = new ControleurClasseCliquer(classe);
         pane.getChildren().add(vue);
         Scene scene = new Scene(pane, 320, 240);
         stage.setTitle("Hello!");

@@ -26,8 +26,8 @@ public class Classe implements Sujet {
         this.attributs.put(HERITED, new ArrayList<>());
 
         this.methodes = new HashMap<>();
-        this.attributs.put(DECLARED, new ArrayList<>());
-        this.attributs.put(HERITED, new ArrayList<>());
+        this.methodes.put(DECLARED, new ArrayList<>());
+        this.methodes.put(HERITED, new ArrayList<>());
         this.constructeurs = new ArrayList<>();
     }
 
