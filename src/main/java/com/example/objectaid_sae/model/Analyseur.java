@@ -77,8 +77,18 @@ public class Analyseur {
 
     private void genConstructeurs() {
         String res;
+        int i;
         for(Constructor c : this.introspection.getConstructors()) {
             res = getSignature(c.getModifiers());
+            res += c.getName() + "(";
+            i = 0;
+            for(Parameter p : c.getParameters()) {
+                if(i>0) res += ", ";
+                res += p.getType().getSimpleName();
+                i++;
+            }
+            res += ")";
+            this.classe.addConstructeur(res);
         }
 
     }
