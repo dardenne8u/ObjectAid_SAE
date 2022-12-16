@@ -20,6 +20,10 @@ public class Classe implements Sujet {
     private String type;
     private double x,y;
 
+    private ArrayList<Observateur> observateurs;
+
+    //METHODES
+
     public void setType(String type) {
         this.type = type;
     }
@@ -41,6 +45,7 @@ public class Classe implements Sujet {
         this.methodes.put(DECLARED, new ArrayList<>());
         this.methodes.put(HERITED, new ArrayList<>());
         this.constructeurs = new ArrayList<>();
+        this.observateurs = new ArrayList<>();
     }
 
     public void addAttribut(int type, String attribut) {
@@ -129,11 +134,13 @@ public class Classe implements Sujet {
 
     @Override
     public void ajouterObservateur(Observateur o) {
-
+        this.observateurs.add(o);
     }
 
     @Override
     public void notifierObservateurs() {
-
+        for (Observateur obs : observateurs){
+            obs.notifier(this);
+        }
     }
 }
