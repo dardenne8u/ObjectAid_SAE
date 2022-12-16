@@ -40,13 +40,31 @@ public class VueClasse extends VBox implements Observateur {
 
          //DEUXIEME PARTIE : ATTRIBUTS
         Map<Integer, List<String>> attributsMap = classe.getAttributs();
-        this.afficherContenant(attributsMap, false, Classe.DECLARED );
+        if ((classe.isAfficheAttributsDeclare())&&(classe.isAfficheAttributsHerite())){
+            this.afficherContenant(attributsMap, true, Classe.DECLARED );
+        }
+        if((classe.isAfficheAttributsDeclare())&&(!classe.isAfficheAttributsHerite())){
+            this.afficherContenant(attributsMap, false, Classe.DECLARED );
+        }
+        if ((!classe.isAfficheAttributsDeclare())&&(classe.isAfficheAttributsHerite())){
+            this.afficherContenant(attributsMap, false, Classe.HERITED );
+        }
         this.getChildren().add(this.separer());
+
 
         //TROISIEME PARTIE : METHODES
         Map<Integer, List<String>> methodesMap = classe.getMethodes();
-        this.afficherContenant(methodesMap, true, Classe.DECLARED);
+        if ((classe.isAfficheMethodeDeclare())&&(classe.isAfficheMethodeHerite())){
+            this.afficherContenant(methodesMap, true, Classe.DECLARED);
+        }
+        if ((classe.isAfficheMethodeDeclare())&&(!classe.isAfficheMethodeHerite())){
+            this.afficherContenant(methodesMap, false, Classe.DECLARED);
+        }
+        if ((!classe.isAfficheMethodeDeclare())&&(classe.isAfficheMethodeHerite())){
+            this.afficherContenant(methodesMap, false, Classe.HERITED);
+        }
         this.getChildren().add(this.separer());
+
 
     }
 
@@ -54,7 +72,7 @@ public class VueClasse extends VBox implements Observateur {
         return new Rectangle(150, 2, Color.BLACK);
     }
 
-    public void afficherContenant(Map<Integer, List<String>> map, boolean afficherHeritage, int typeAttribut){
+    public void afficherContenant(Map<Integer, List<String>> map, boolean afficherLesDeux, int typeAttribut){
        if (map != null) {
            int i = 1;
            if (typeAttribut == Classe.DECLARED) i = 1;
@@ -65,7 +83,7 @@ public class VueClasse extends VBox implements Observateur {
                Label elem = new Label(elemC);
                this.getChildren().add(elem);
            }
-           if (afficherHeritage) {
+           if (afficherLesDeux) {
                afficherContenant(map, false, Classe.HERITED);
            }
 
