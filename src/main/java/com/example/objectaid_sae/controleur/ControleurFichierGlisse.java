@@ -5,6 +5,7 @@ import com.example.objectaid_sae.model.Model;
 import javafx.event.EventHandler;
 import javafx.event.EventType;
 import javafx.scene.Node;
+import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
@@ -28,15 +29,12 @@ public class ControleurFichierGlisse implements EventHandler<MouseEvent> {
         if (center.contains(mouseEvent.getSceneX(), mouseEvent.getSceneY())&& !source.contains(mouseEvent.getSceneX(), mouseEvent.getSceneY())){
             HBox h = (HBox)mouseEvent.getSource();
             Text t = (Text)h.getChildren().get(1);
+            Pane p = (Pane)source.getParent();
             Classe c = new Classe();
-            /*c.setX(mouseEvent.getSceneX());
-            String nom = t.getText();
-            c.setY(mouseEvent.getSceneY());*/
-            System.out.println("bon endroit");
+            //System.out.println("coos ds le Pane : " + (mouseEvent.getSceneX()-p.getWidth()) + " " + mouseEvent.getSceneY());
+            c.setX(mouseEvent.getSceneX()-p.getWidth());
+            c.setType(t.getText());
+            c.setY(mouseEvent.getSceneY());
         }
-        else {
-            System.out.println("pas bon endroit");
-        }
-
     }
 }

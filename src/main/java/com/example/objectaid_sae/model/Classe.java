@@ -20,6 +20,10 @@ public class Classe implements Sujet {
     private String type;
     private double x,y;
 
+    public void setType(String type) {
+        this.type = type;
+    }
+
     public void setX(double x) {
         this.x = x;
     }

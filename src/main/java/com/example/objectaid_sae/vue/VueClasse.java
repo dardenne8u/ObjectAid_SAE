@@ -61,5 +61,7 @@ public class VueClasse extends VBox implements Observateur {
            }
 
        }
+
+
     }
 }
