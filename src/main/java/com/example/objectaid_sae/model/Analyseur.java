@@ -19,7 +19,19 @@ public class Analyseur {
         genAttributs();
         genMethods();
         genConstructeurs();
+        genClassSignature();
         return this.classe;
+    }
+
+    private void genClassSignature() {
+        int code = introspection.getModifiers();
+        String res;
+        if(Modifier.isAbstract(code)) res = "abstract class";
+        else if (Modifier.isInterface(code)) res = "interface";
+        else res = "class";
+
+        res += " " + introspection.getSimpleName();
+        this.classe.setType(res);
     }
 
     private String getSignature(int code) {
