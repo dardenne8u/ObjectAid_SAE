@@ -20,6 +20,14 @@ public class Classe implements Sujet {
     private String type;
     private double x,y;
 
+    public void setX(double x) {
+        this.x = x;
+    }
+
+    public void setY(double y) {
+        this.y = y;
+    }
+
     public Classe() {
         this.attributs = new HashMap<>();
         this.attributs.put(DECLARED, new ArrayList<>());
