@@ -1,5 +1,8 @@
 package com.example.objectaid_sae;
 
+import com.example.objectaid_sae.model.Classe;
+import com.example.objectaid_sae.model.Model;
+import com.example.objectaid_sae.vue.VueClasse;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -15,13 +18,14 @@ public class HelloApplication extends Application {
     public void start(Stage stage) throws IOException {
         Pane pane = new Pane();
         VueClasse vue = new VueClasse();
-        vue.notifier(new Model());
+        Classe classe = new Classe();
+        classe.addAttribut(1, "- premier: String");
+        classe.addAttribut(1, "- deuxieme: int");
+        classe.addMethode(1, "+ methode1 () : String");
+        classe.addMethode(2, "+ methode2 () : int");
+        vue.notifier(classe);
         pane.getChildren().add(vue);
         Scene scene = new Scene(pane, 320, 240);
-        TreeItem<String> treeee = new TreeItem<>("coucou");
-        treeee.getChildren().add(new TreeItem<>("coucou2"));
-        TreeView<String> tree = new TreeView<>(treeee);
-        Scene scene = new Scene(tree);
         stage.setTitle("Hello!");
         stage.setScene(scene);
         stage.show();

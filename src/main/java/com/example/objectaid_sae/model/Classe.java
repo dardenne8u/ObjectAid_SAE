@@ -22,7 +22,12 @@ public class Classe implements Sujet {
 
     public Classe() {
         this.attributs = new HashMap<>();
+        this.attributs.put(DECLARED, new ArrayList<>());
+        this.attributs.put(HERITED, new ArrayList<>());
+
         this.methodes = new HashMap<>();
+        this.attributs.put(DECLARED, new ArrayList<>());
+        this.attributs.put(HERITED, new ArrayList<>());
         this.constructeurs = new ArrayList<>();
     }
 
