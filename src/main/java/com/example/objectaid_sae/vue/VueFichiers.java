@@ -1,5 +1,7 @@
 package com.example.objectaid_sae.vue;
 
+import com.example.objectaid_sae.HelloApplication;
+import com.example.objectaid_sae.model.Fichier;
 import com.example.objectaid_sae.observateur.Observateur;
 import com.example.objectaid_sae.observateur.Sujet;
 import javafx.scene.control.CheckBox;
@@ -15,10 +17,11 @@ import java.io.File;
 
 public class VueFichiers extends Pane implements Observateur {
 
+    private TreeView<HBox> arbre;
 
     public VueFichiers(String path) {
         File f = new File(path);
-        TreeView<HBox> arbre = new TreeView<>(tree(f));
+        arbre = new TreeView<>(tree(f));
          this.getChildren().add(arbre);
 
 
@@ -61,6 +64,7 @@ public class VueFichiers extends Pane implements Observateur {
 
     @Override
     public void notifier(Sujet s) {
-
+        Fichier f = (Fichier)s;
+        arbre = new TreeView<>(tree(new File(f.getPathDepart())));
     }
 }
