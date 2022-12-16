@@ -32,12 +32,12 @@ public class VueClasse extends VBox implements Observateur {
         this.setWidth(300);
         this.setStyle("-fx-background-color:#D3D3D3");
         this.setAlignment(Pos.CENTER);
+        setLayoutX(classe.getX());
+        setLayoutY(classe.getY());
 
 
         // PREMIERE PARTIE : TITRE
-        Label titre = new Label("Classe");
-
-
+        Label titre = new Label(classe.getType());
          this.getChildren().addAll(titre, this.separer());
 
          //DEUXIEME PARTIE : ATTRIBUTS

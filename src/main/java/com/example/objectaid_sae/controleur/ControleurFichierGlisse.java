@@ -1,10 +1,14 @@
 package com.example.objectaid_sae.controleur;
 
+import com.example.objectaid_sae.model.Analyseur;
 import com.example.objectaid_sae.model.Classe;
+import com.example.objectaid_sae.model.Fichier;
 import com.example.objectaid_sae.model.Model;
+import com.example.objectaid_sae.vue.VueClasse;
 import javafx.event.EventHandler;
 import javafx.event.EventType;
 import javafx.scene.Node;
+import javafx.scene.control.Label;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
 import javafx.scene.input.MouseEvent;
@@ -13,10 +17,17 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.List;
+
 
 public class ControleurFichierGlisse implements EventHandler<MouseEvent> {
 
     Model mod;
+
     @Override
     public void handle(MouseEvent mouseEvent) {
         //if (mouseEvent.getEventType().equals(MouseEvent.MOUSE_PRESSED)) System.out.println("pressed on " + mouseEvent.getSceneX() + " " + mouseEvent.getSceneY());
@@ -28,13 +39,32 @@ public class ControleurFichierGlisse implements EventHandler<MouseEvent> {
         Node center = bp.getCenter();
         if (center.contains(mouseEvent.getSceneX(), mouseEvent.getSceneY())&& !source.contains(mouseEvent.getSceneX(), mouseEvent.getSceneY())){
             HBox h = (HBox)mouseEvent.getSource();
-            Text t = (Text)h.getChildren().get(1);
+            Label l = (Label)h.getChildren().get(2);
+            Label t = (Label) h.getChildren().get(1);
             Pane p = (Pane)source.getParent();
-            Classe c = new Classe();
-            //System.out.println("coos ds le Pane : " + (mouseEvent.getSceneX()-p.getWidth()) + " " + mouseEvent.getSceneY());
-            c.setX(mouseEvent.getSceneX()-p.getWidth());
-            c.setType(t.getText());
-            c.setY(mouseEvent.getSceneY());
+            String abs = l.getText();
+            if(abs.contains("java")){
+                try {
+                    BufferedReader r = new BufferedReader(new FileReader(abs));
+                    String line = r.readLine();
+                    System.out.println(line);
+                    while (!line.contains("package ")) line = r.readLine();
+                        line = line.split("package ")[1].split(";")[0];
+                        System.out.println(line);
+                        Classe c = new Analyseur(line+"."+t.getText().split("\\.")[0]).analyseClasse();
+                        c.setX(mouseEvent.getSceneX());
+                        c.setType(t.getText());
+                        c.setY(mouseEvent.getSceneY());
+                        VueClasse vue = new VueClasse(c,null);
+                        c.ajouterObservateur(vue);
+                        c.notifierObservateurs();
+                        p.getChildren().add(vue);
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+            System.out.println("coos ds le Pane : " + (mouseEvent.getSceneX()-p.getWidth()) + " " + mouseEvent.getSceneY());
         }
     }
 }

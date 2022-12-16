@@ -1,6 +1,7 @@
 package com.example.objectaid_sae.vue;
 
 import com.example.objectaid_sae.HelloApplication;
+import com.example.objectaid_sae.controleur.ControleurFichierGlisse;
 import com.example.objectaid_sae.model.Fichier;
 import com.example.objectaid_sae.observateur.Observateur;
 import com.example.objectaid_sae.observateur.Sujet;
@@ -59,7 +60,7 @@ public class VueFichiers extends Pane implements Observateur {
 
 
         box.getChildren().addAll(check, name, path);
-
+        box.setOnMouseReleased(new ControleurFichierGlisse());
         TreeItem<HBox> res = new TreeItem<HBox>(box);
         res.setExpanded(true);
         return res;

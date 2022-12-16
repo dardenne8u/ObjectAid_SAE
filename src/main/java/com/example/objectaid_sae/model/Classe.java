@@ -46,6 +46,8 @@ public class Classe implements Sujet {
         this.methodes.put(HERITED, new ArrayList<>());
         this.constructeurs = new ArrayList<>();
         this.observateurs = new ArrayList<>();
+
+        afficheAttributsDeclare = afficheAttributsHerite = afficheMethodeDeclare = afficheConstructeur  = true;
     }
 
     public void addAttribut(int type, String attribut) {
