@@ -18,6 +18,7 @@ public class Analyseur {
     public Classe analyseClasse() {
         genAttributs();
         genMethods();
+        genConstructeurs();
         return this.classe;
     }
 
