@@ -1,15 +1,19 @@
 package com.example.objectaid_sae.model;
 
+import com.example.objectaid_sae.observateur.Observateur;
+import com.example.objectaid_sae.observateur.Sujet;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class Classe {
+public class Classe implements Sujet {
     public static final int DECLARED = 1;
     public static final int HERITED = 2;
 
     private boolean afficheAttributsDeclare, afficheAttributsHerite, afficheMethodeDeclare, afficheMethodeHerite, afficheConstructeur;
+    //integer : 1 = declared, 2 = herited
     private Map<Integer, List<String>> attributs, methodes;
     private List<String> constructeurs;
 
@@ -104,5 +108,15 @@ public class Classe {
 
     public void setAfficheMethodeHerite(boolean afficheMethodeHerite) {
         this.afficheMethodeHerite = afficheMethodeHerite;
+    }
+
+    @Override
+    public void ajouterObservateur(Observateur o) {
+
+    }
+
+    @Override
+    public void notifierObservateurs() {
+
     }
 }
