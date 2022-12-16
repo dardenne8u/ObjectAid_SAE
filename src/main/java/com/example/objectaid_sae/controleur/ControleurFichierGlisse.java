@@ -7,6 +7,10 @@ import javafx.event.EventType;
 import javafx.scene.Node;
 import javafx.scene.control.TreeView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
+import javafx.scene.text.Text;
 
 
 public class ControleurFichierGlisse implements EventHandler<MouseEvent> {
@@ -19,10 +23,19 @@ public class ControleurFichierGlisse implements EventHandler<MouseEvent> {
         if (mouseEvent.getEventType().equals(MouseEvent.MOUSE_RELEASED)) {//System.out.println("release on " + mouseEvent.getSceneX() + " " + mouseEvent.getSceneY());
             while (source.getClass() != TreeView.class) source = source.getParent();
         }
-        if (!source.contains(mouseEvent.getSceneX(), mouseEvent.getSceneY())){
+        BorderPane bp = (BorderPane)source.getParent().getParent();
+        Node center = bp.getCenter();
+        if (center.contains(mouseEvent.getSceneX(), mouseEvent.getSceneY())&& !source.contains(mouseEvent.getSceneX(), mouseEvent.getSceneY())){
+            HBox h = (HBox)mouseEvent.getSource();
+            Text t = (Text)h.getChildren().get(1);
             Classe c = new Classe();
-            c.setX(mouseEvent.getSceneX());
-            c.setY(mouseEvent.getSceneY());
+            /*c.setX(mouseEvent.getSceneX());
+            String nom = t.getText();
+            c.setY(mouseEvent.getSceneY());*/
+            System.out.println("bon endroit");
+        }
+        else {
+            System.out.println("pas bon endroit");
         }
 
     }
