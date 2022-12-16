@@ -9,6 +9,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
@@ -18,14 +19,15 @@ public class HelloApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         Pane pane = new Pane();
-        VueClasse vue = new VueClasse();
+
         Classe classe = new Classe();
+        VueClasse vue = new VueClasse(classe);
         classe.addAttribut(1, "- premier: String");
         classe.addAttribut(1, "- deuxieme: int");
         classe.addMethode(1, "+ methode1 () : String");
         classe.addMethode(2, "+ methode2 () : int");
         vue.notifier(classe);
-        ControleurClasseCliquer controleurClasseCliquer = new ControleurClasseCliquer(classe);
+
         pane.getChildren().add(vue);
         Scene scene = new Scene(pane, 320, 240);
         stage.setTitle("Hello!");

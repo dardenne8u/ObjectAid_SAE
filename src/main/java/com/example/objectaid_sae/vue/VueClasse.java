@@ -1,10 +1,12 @@
 package com.example.objectaid_sae.vue;
 
+import com.example.objectaid_sae.controleur.ControleurClasseCliquer;
 import com.example.objectaid_sae.model.Classe;
 import com.example.objectaid_sae.observateur.Observateur;
 import com.example.objectaid_sae.observateur.Sujet;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
@@ -14,6 +16,13 @@ import java.util.List;
 import java.util.Map;
 
 public class VueClasse extends VBox implements Observateur {
+
+    public VueClasse (Classe classe){
+        ControleurClasseCliquer controleurClasseCliquer = new ControleurClasseCliquer(classe);
+        this.addEventHandler(MouseEvent.MOUSE_CLICKED, controleurClasseCliquer);
+    }
+
+
     @Override
     public void notifier(Sujet s) {
         Classe classe = (Classe) s;

@@ -18,7 +18,8 @@ public class ControleurClasseCliquer implements EventHandler<MouseEvent> {
 
     @Override
     public void handle(MouseEvent mouseEvent) {
-        VueClasse vue = (VueClasse) mouseEvent.getTarget();
+        VueClasse vue = (VueClasse) mouseEvent.getSource();
         System.out.println("Vue cliquée !");
+        System.out.println("Source : " +vue);
     }
 }
