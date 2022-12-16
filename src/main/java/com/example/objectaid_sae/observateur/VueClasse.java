@@ -1,4 +1,6 @@
 package com.example.objectaid_sae.observateur;
 
-public class VueClasse {
+import javafx.scene.layout.VBox;
+
+public class VueClasse extends VBox  {
 }
