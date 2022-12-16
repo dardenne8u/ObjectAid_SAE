@@ -1,0 +1,21 @@
+@startuml
+'https://plantuml.com/use-case-diagram
+left to right direction
+
+:utilisateur: as util
+
+util -up- (glisser-déposer un fichier)
+util -down- (glisser une classe)
+util -right- (glisser une fleche)
+util -left- (masquer une classe)
+util -up- (generer une nouvelle classe)
+util -down- (ajouter des dependances a une classe)
+util -left- (modifier le squelette d'une classe)
+util -down- (ajouter informations classe)
+util -up- (ajouter des parents)
+util -up- (afficher les options general)
+util -down- (enregistrer UML)
+util -right- (nommer projet)
+util -right- (enregistrer image)
+
+@enduml

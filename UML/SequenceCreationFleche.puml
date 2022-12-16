@@ -1,0 +1,30 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+ControleurClasseCliquee -> Model: getEtat()
+return : EtatDeBase
+
+ControleurClasseCliquee -> EtatDeBase : gererClique(Model,Event)
+
+EtatDeBase -> Model : changerEtat(EtatCreationDeFleche)
+return
+EtatDeBase --> ControleurClasseCliquee
+
+
+ControleurClasseCliquee -> Model: getEtat()
+return :EtatCreationDeFleche
+
+ControleurClasseCliquee -> EtatCreationDeFleche : gererClique(Model,Event)
+EtatCreationDeFleche -> VueDiagramme : getChildren.add(new VueFleche())
+return
+EtatCreationDeFleche --> ControleurClasseCliquee
+ControleurNouvelleFleche -> Model : Ajouterdependance(classe1,classe2,"-->")
+Model -> classe1 : ajouterDependance(class2,"-->")
+classe1 -> FabriqueFlecheUtilisation : fabriquerFleche(classe1,classe2)
+return : fleche
+Model <-- classe1
+ControleurNouvelleFleche <-- Model
+
+ControleurNouvelleFleche -> Model : changerEtat(EtatDeBase)
+return
+@enduml

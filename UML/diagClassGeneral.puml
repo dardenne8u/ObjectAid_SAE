@@ -1,0 +1,313 @@
+@startuml
+'https://plantuml.com/class-diagram
+left to right direction
+
+
+package model{
+ class Classe{
+    - afficheAttributs : boolean
+    - afficheAttributsHerites : boolean
+    - affiche methode : boolean
+    - afficheDependance : boolean
+    - afficheConstructeur : boolean
+    - attributs : List<String>
+    - methodes : List<String>
+    - Constructeurs : List<String>
+    - type : String
+    - x : double
+    - y : double
+    --
+    +Classe(String)
+    +doitAfficherAttributs():boolean
+    +doitAfficherAttributsHerites():boolean
+    +doitAfficherMethodes():boolean
+    +doitAfficherDependances():boolean
+    +doitAfficherConstructeurs() : boolean
+    +ChangerAfficherAttributs(): void
+    +ChangerAfficherAttributsHerites(): void
+    +ChangerAfficherMethodes(): void
+    +ChangerAfficherDepandances(): void
+    +getX() : double
+    +getY() : double
+    +getTypeClasse() : String
+    +getDependances() : List<String>
+    +ajouterDependance(String) : void
+    +retirerDependance(String) : void
+    +ajouterParent(Classe) : void
+    +retirerParent(Classe) : void
+ }
+
+    class Fleche{
+        -type : String
+        --
+        +Fleche(Classe, Classe, String)
+        +getType() : String
+        +getDepart() : Classe
+        +getArrivee() : Classe
+        +estAffichee() : boolean
+    }
+
+Fleche "1" --> "0..* " Classe : -depart
+Fleche "1" --> "0..* " Classe : -arrivee
+Classe "1" --> "0..* " Fleche : -dependances
+
+
+ class Model{
+    -dernierObjectSelectionné : object
+    --
+    +notifierObservateurs() : void
+    +ajouterObservateur(Observateur) : void
+    +getEtat() : Etat
+    +getClasses(): list<Classe>
+    +ajouterFleche(classe, classe, string) : void
+
+ }
+
+ Model "1"--> "0..* " Classe : classes
+
+
+}
+
+package Vue{
+
+    class VueClasse{
+    --
+        + notifier(Sujet) : void
+    }
+    class VueFichier{
+    --
+        + notifier(Sujet) : void
+    }
+    class VueDiagramme{
+    --
+        + notifier(Sujet) : void
+    }
+    class VueFleche{
+    --
+        + notifier(Sujet) : void
+    }
+    class VueMenuTemporaire{
+    --
+        + notifier(Sujet) : void
+    }
+    class VueEnregistrer{
+    --
+        + notifier(Sujet) : void
+    }
+
+}
+
+Model <-- VueClasse : model
+Model <-- VueFichier : model
+Model <-- VueDiagramme : model
+Model <-- VueFleche : model
+Model <-- VueMenuTemporaire : model
+Model <-- VueEnregistrer : model
+
+VueClasse --^ VBox
+VueFichier --^ BorderPane
+VueDiagramme --^ Pane
+VueFleche --^ Pane
+VueMenuTemporaire --^ GridPane
+VueEnregistrer --^ GridPane
+
+package Controleur{
+
+    class ControleurClasseCliquee{
+    --
+    +handle(MouseEvent)
+    }
+
+    class ControleurClasseGlissee{
+    --
+        +handle(MouseEvent)
+    }
+
+    class ControleurFichierGlisse{
+    --
+        +handle(MouseEvent)
+    }
+
+    class ControleurMenu{
+    --
+        +handle(MouseEvent)
+    }
+
+    class ControleurNouvelleClasse{
+    --
+        +handle(MouseEvent)
+    }
+
+    class ControleurNouvelleFleche{
+    --
+        +handle(MouseEvent)
+    }
+
+    class ControleurToutGenerer{
+    --
+            +handle(ActionEvent)
+    }
+
+    class ControleurTouchePressee{
+    --
+        +handle(KeyEvent)
+    }
+
+    class ControleurToutSupprimer{
+    --
+        +handle(ActionEvent)
+    }
+
+    class ControleurAffichage{
+    --
+            +handle(ActionEvent)
+    }
+
+    class ControleurProjet{
+    --
+            +handle(ActionEvent)
+    }
+
+    class ControleurEnregistrement{
+    --
+            +handle(ActionEvent)
+    }
+
+interface "EventHandler<MouseEvent>" as mouse
+mouse ^.up. ControleurClasseCliquee
+mouse ^.up. ControleurClasseGlissee
+mouse ^.up. ControleurFichierGlisse
+mouse ^.up. ControleurMenu
+mouse ^.. ControleurNouvelleFleche
+
+interface "EventHandler<KeyEvent>" as key
+key ^.up. ControleurTouchePressee
+
+interface "EventHandler<ActionEvent>" as action
+action ^.up. ControleurAffichage
+action ^.. ControleurEnregistrement
+action ^.. ControleurNouvelleClasse
+action ^.. ControleurProjet
+action ^.. ControleurToutGenerer
+action ^.. ControleurToutSupprimer
+
+}
+
+ControleurToutSupprimer -> Model : model
+ControleurToutGenerer -> Model : model
+ControleurProjet ->Model : model
+ControleurNouvelleClasse -> Model : model
+ControleurAffichage -> Model : model
+ControleurEnregistrement -> Model : model
+ControleurTouchePressee ->Model : model
+ControleurMenu -> Model : model
+ControleurNouvelleFleche -> Model : model
+ControleurClasseGlissee -> Model : model
+ControleurClasseCliquee -> Model : model
+ControleurFichierGlisse -> Model : model
+
+package Observateur{
+  interface Sujet{
+    --
+    +notifierObservateurs() : void
+    +ajouterObservateur(Observateur) : void
+  }
+
+  interface Observateur{
+    --
+    + notifier(Sujet) : void
+  }
+}
+
+package Etat{
+    abstract class Etat{
+        --
+        #Etat(Model)
+        +//gererClique(MouseEvent, Model) : void//
+        +//gererTouchePressee(KeyEvent, Model) : void//
+    }
+
+    Class EtatCreationDeClasse{
+        --
+        +EtatCreationDeClasse()
+        +gererClique(MouseEvent, Model) : void
+        +gererTouchePressee(KeyEvent, Model) : void
+    }
+    EtatCreationDeClasse -up-^ Etat
+
+    Class EtatCreationDeFleche{
+            --
+            +EtatCreationDeFleche()
+            +gererClique(MouseEvent, Model) : void
+            +gererTouchePressee(KeyEvent, Model) : void
+        }
+    EtatCreationDeFleche -left-^ Etat
+
+    Class EtatBasique{
+                --
+                +EtatCreationDeFleche()
+                +gererClique(MouseEvent, Model) : void
+                +gererTouchePressee(KeyEvent, Model) : void
+            }
+        EtatBasique -down-^ Etat
+}
+
+package fabrique{
+
+ abstract class FabriqueFleche{
+ --
+ #FabriqueFleche()
+ +fabriquerFleche(): Fleche
+ }
+
+ class FabriqueFlecheImplementation{
+    --
+    +FabriqueFlecheImplementation()
+ +fabriquerFleche(): Fleche
+}
+
+ class FabriqueFlecheHeritage{
+    --
+    +FabriqueFlecheHeritage()
+ +fabriquerFleche(): Fleche
+}
+
+class FabriqueFlecheAttribut{
+--
++FabriqueFlecheAttribut()
++fabriquerFleche() : Fleche
+}
+
+class FabriqueFlecheUtilisation{
+--
++FabriqueFlecheUtilisation()
++fabriquerFleche() : Fleche
+}
+}
+
+Fleche <.. FabriqueFlecheAttribut
+Fleche <.. FabriqueFlecheUtilisation
+Fleche <.. FabriqueFlecheImplementation
+Fleche <.. FabriqueFlecheHeritage
+Fleche <.left. FabriqueFleche
+
+FabriqueFleche ^.down. FabriqueFlecheHeritage
+FabriqueFleche ^.. FabriqueFlecheUtilisation
+FabriqueFleche ^.. FabriqueFlecheAttribut
+FabriqueFleche ^.. FabriqueFlecheImplementation
+
+Observateur ^.. VueClasse
+Observateur ^.. VueFichier
+Observateur ^.. VueDiagramme
+Observateur ^.. VueFleche
+Observateur ^.. VueMenuTemporaire
+Observateur ^.. VueEnregistrer
+
+  Model ..^ Sujet
+  Model --> Observateur : -observateurs
+
+  Model --> Etat : -etatActuel  
+
+
+
+@enduml
