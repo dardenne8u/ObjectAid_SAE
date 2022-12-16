@@ -30,14 +30,14 @@ public class VueFichiers extends Pane implements Observateur {
     public TreeItem<HBox> tree(File file) {
         TreeItem<HBox> res = null;
         if (file.exists()) {
-            res = creerItem(file.getName());
+            res = creerItem(file);
             if (file.isDirectory()) {
                 File[] files = file.listFiles();
                 for (int i = 0; i < files.length; i++) {
                     if (files[i].isDirectory()) {
                         res.getChildren().add(tree(files[i]));
                     } else {
-                        res.getChildren().add(creerItem(files[i].getName()));
+                        res.getChildren().add(creerItem(files[i]));
                     }
                 }
             }
@@ -47,14 +47,18 @@ public class VueFichiers extends Pane implements Observateur {
     }
 
 
-    public TreeItem<HBox> creerItem(String text) {
+    public TreeItem<HBox> creerItem(File f) {
         HBox box = new HBox();
         box.setSpacing(5);
         CheckBox check = new CheckBox();
         check.setDisable(true);
-        Text t = new Text(text);
+        Label name = new Label(f.getName());
+        Label path = new Label(f.getAbsolutePath());
+        path.setVisible(false);
 
-        box.getChildren().addAll(check, t);
+
+
+        box.getChildren().addAll(check, name, path);
 
         TreeItem<HBox> res = new TreeItem<HBox>(box);
         res.setExpanded(true);
