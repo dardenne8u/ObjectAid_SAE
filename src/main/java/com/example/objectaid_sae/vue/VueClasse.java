@@ -19,10 +19,12 @@ import java.util.Map;
 
 public class VueClasse extends VBox implements Observateur {
 
+    private ControleurClasseGlissee controleurClasseGlissee;
+
     public VueClasse (Classe classe){
         ControleurClasseCliquer controleurClasseCliquer = new ControleurClasseCliquer(VueMenuTemporaire.VUE_TEMP, classe);
-        ControleurClasseGlissee controleurClasseGlissee = new ControleurClasseGlissee(classe);
-       // this.addEventHandler(MouseEvent.MOUSE_CLICKED, controleurClasseCliquer);
+        this.controleurClasseGlissee = new ControleurClasseGlissee(classe);
+        this.addEventHandler(MouseEvent.MOUSE_CLICKED, controleurClasseGlissee);
         this.addEventHandler(MouseEvent.MOUSE_DRAGGED, controleurClasseGlissee);
     }
 
@@ -69,7 +71,7 @@ public class VueClasse extends VBox implements Observateur {
         }
         this.getChildren().add(this.separer());
 
-
+        this.controleurClasseGlissee.set(this.getWidth());
     }
 
     public Rectangle separer(){

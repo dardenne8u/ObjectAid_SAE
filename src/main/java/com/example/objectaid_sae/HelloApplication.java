@@ -1,6 +1,7 @@
 package com.example.objectaid_sae;
 
 import com.example.objectaid_sae.controleur.ControleurClasseCliquer;
+import com.example.objectaid_sae.controleur.ControleurClasseGlissee;
 import com.example.objectaid_sae.controleur.ControleurFichierGlisse;
 import com.example.objectaid_sae.model.Classe;
 import com.example.objectaid_sae.model.Model;
@@ -21,9 +22,6 @@ import java.io.IOException;
 
 public class HelloApplication extends Application {
 
-    public void genererVueClasse(Classe classe) {
-
-    }
     @Override
     public void start(Stage stage) throws IOException {
         Pane pane = new Pane();
