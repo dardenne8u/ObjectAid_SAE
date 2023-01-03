@@ -4,6 +4,7 @@ import com.example.objectaid_sae.model.Classe;
 import com.example.objectaid_sae.vue.VueClasse;
 import com.example.objectaid_sae.vue.VueMenuTemporaire;
 import javafx.event.EventHandler;
+import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 
@@ -25,7 +26,7 @@ public class ControleurClasseCliquer implements EventHandler<MouseEvent> {
     @Override
     public void handle(MouseEvent mouseEvent) {
         VueClasse vue = (VueClasse) mouseEvent.getSource();
-
+        if(mouseEvent.getButton() == MouseButton.PRIMARY) return;
         if (mouseEvent.getSource() instanceof VueClasse) {
             final Pane pane = ((Pane) ((VueClasse) mouseEvent.getSource()).getParent());
             if (temp.isCacher())
@@ -39,7 +40,6 @@ public class ControleurClasseCliquer implements EventHandler<MouseEvent> {
             temp.setLayoutY(mouseEvent.getSceneY() - pane.getLayoutY());
             System.out.println("Source : " + vue);
         }
-        /*
         if (mouseEvent.getSource() instanceof VueMenuTemporaire){
             classe.setAfficheAttributsHerite(true);
             classe.setAfficheAttributsDeclare(true);
@@ -49,9 +49,5 @@ public class ControleurClasseCliquer implements EventHandler<MouseEvent> {
 
         temp.notifier(classe);
 
-        System.out.println("Vue cliquée !");
-
-    }
-*/
     }
 }

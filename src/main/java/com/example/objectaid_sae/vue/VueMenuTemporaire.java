@@ -36,6 +36,12 @@ public class VueMenuTemporaire extends VBox implements Observateur {
             Button methHeritee = new Button("méthodes héritées");
 
             this.getChildren().addAll(meth, methDeclaree, methHeritee);
+
+            // creation d'attribut ou methode
+
+            Button newMethode = new Button("Ajouter une methode");
+            Button newAttribut = new Button("ajouter un attribut");
+            getChildren().addAll(newAttribut, newMethode);
         } else {
             this.getChildren().clear();
         }
