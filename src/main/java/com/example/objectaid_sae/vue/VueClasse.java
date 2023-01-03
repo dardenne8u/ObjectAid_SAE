@@ -1,6 +1,8 @@
 package com.example.objectaid_sae.vue;
 
 import com.example.objectaid_sae.controleur.ControleurClasseCliquer;
+import com.example.objectaid_sae.controleur.ControleurClasseGlissee;
+import com.example.objectaid_sae.controleur.ControleurFichierGlisse;
 import com.example.objectaid_sae.model.Classe;
 import com.example.objectaid_sae.observateur.Observateur;
 import com.example.objectaid_sae.observateur.Sujet;
@@ -17,7 +19,13 @@ import java.util.Map;
 
 public class VueClasse extends VBox implements Observateur {
 
-    public VueClasse (){
+    public VueClasse (Classe classe, VueMenuTemporaire vueTemp){
+
+
+        ControleurClasseCliquer controleurClasseCliquer = new ControleurClasseCliquer(vueTemp, classe);
+        ControleurClasseGlissee controleurClasseGlissee = new ControleurClasseGlissee(classe);
+       // this.addEventHandler(MouseEvent.MOUSE_CLICKED, controleurClasseCliquer);
+        this.addEventHandler(MouseEvent.MOUSE_PRESSED, controleurClasseGlissee);
     }
 
 
