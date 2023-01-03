@@ -39,9 +39,10 @@ public class VueMenuTemporaire extends VBox implements Observateur {
 
             // creation d'attribut ou methode
 
+            Label add = new Label("Ajouts :");
             Button newMethode = new Button("Ajouter une methode");
             Button newAttribut = new Button("ajouter un attribut");
-            getChildren().addAll(newAttribut, newMethode);
+            getChildren().addAll(add, newAttribut, newMethode);
         } else {
             this.getChildren().clear();
         }
