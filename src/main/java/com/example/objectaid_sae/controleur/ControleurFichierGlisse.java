@@ -5,6 +5,7 @@ import com.example.objectaid_sae.model.Classe;
 import com.example.objectaid_sae.model.Fichier;
 import com.example.objectaid_sae.model.Model;
 import com.example.objectaid_sae.vue.VueClasse;
+import com.example.objectaid_sae.vue.VueMenuTemporaire;
 import javafx.event.EventHandler;
 import javafx.event.EventType;
 import javafx.scene.Node;
@@ -37,6 +38,7 @@ public class ControleurFichierGlisse implements EventHandler<MouseEvent> {
         }
         BorderPane bp = (BorderPane)source.getParent().getParent();
         Node center = bp.getCenter();
+        Pane centre = (Pane) center;
         if (center.contains(mouseEvent.getSceneX(), mouseEvent.getSceneY())&& !source.contains(mouseEvent.getSceneX(), mouseEvent.getSceneY())){
             HBox h = (HBox)mouseEvent.getSource();
             Label l = (Label)h.getChildren().get(2);
@@ -55,10 +57,10 @@ public class ControleurFichierGlisse implements EventHandler<MouseEvent> {
                         c.setX(mouseEvent.getSceneX());
                         c.setType(t.getText());
                         c.setY(mouseEvent.getSceneY());
-                        VueClasse vue = new VueClasse(c,null);
+                        VueClasse vue = new VueClasse(c,new VueMenuTemporaire(new Classe()));
                         c.ajouterObservateur(vue);
                         c.notifierObservateurs();
-                        p.getChildren().add(vue);
+                        centre.getChildren().add(vue);
 
                 } catch (Exception e) {
                     e.printStackTrace();
