@@ -36,9 +36,8 @@ public class ControleurVueTemporaireClasse implements EventHandler<ActionEvent> 
                 else v = new VueCreation("attribut", this);
                 System.out.println("vue cree");
                 ((Pane) (src.getParent().getParent())).getChildren().add(v);
-                v.setLayoutX(src.getLayoutX() + src.getWidth());
-                v.setLayoutY(src.getLayoutY());
-                System.out.println(((Pane) (src.getParent().getParent())).getChildren());
+                v.setLayoutX(src.getParent().getLayoutX() + src.getWidth());
+                v.setLayoutY(src.getParent().getLayoutY());
             }
 
 

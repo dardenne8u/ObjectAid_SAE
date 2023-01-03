@@ -52,6 +52,7 @@ public class VueMenuTemporaire extends VBox implements Observateur {
 
             Button newMethode = new Button("Ajouter une methode");
             newMethode.setMinWidth(this.getWidth());
+            newMethode.setOnAction(cont);
             Button newAttribut = new Button("ajouter un attribut");
             newAttribut.setOnAction(cont);
             newAttribut.setMinWidth(this.getWidth());
