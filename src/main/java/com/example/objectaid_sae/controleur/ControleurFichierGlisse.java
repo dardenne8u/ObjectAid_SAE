@@ -54,7 +54,7 @@ public class ControleurFichierGlisse implements EventHandler<MouseEvent> {
                         line = line.split("package ")[1].split(";")[0];
                         System.out.println(line);
                         Classe c = new Analyseur(line+"."+t.getText().split("\\.")[0]).analyseClasse();
-                        c.setX(mouseEvent.getSceneX());
+                        c.setX(mouseEvent.getSceneX()-p.getWidth());
                         c.setType(t.getText());
                         c.setY(mouseEvent.getSceneY());
                         VueClasse vue = new VueClasse(c,new VueMenuTemporaire(new Classe()));
