@@ -17,11 +17,7 @@ import java.util.Map;
 
 public class VueClasse extends VBox implements Observateur {
 
-    public VueClasse (Classe classe, VueMenuTemporaire vueTemp){
-
-
-        ControleurClasseCliquer controleurClasseCliquer = new ControleurClasseCliquer(vueTemp, classe);
-        this.addEventHandler(MouseEvent.MOUSE_CLICKED, controleurClasseCliquer);
+    public VueClasse (){
     }
 
 
