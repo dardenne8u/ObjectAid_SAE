@@ -1,6 +1,7 @@
 package com.example.objectaid_sae.vue;
 
 import com.example.objectaid_sae.controleur.ControleurVueTemporaireClasse;
+import com.example.objectaid_sae.model.Classe;
 import com.example.objectaid_sae.observateur.Observateur;
 import com.example.objectaid_sae.observateur.Sujet;
 import javafx.geometry.Pos;
@@ -35,6 +36,7 @@ public class VueMenuTemporaire extends VBox implements Observateur {
     @Override
     public void notifier(Sujet s) {
         if (!this.cacher){
+            ControleurVueTemporaireClasse cont = new ControleurVueTemporaireClasse((Classe) s);
 //            Classe classe = (Classe) s;
 //            this.getChildren().clear();
             this.setWidth(200);
@@ -51,7 +53,7 @@ public class VueMenuTemporaire extends VBox implements Observateur {
             Button newMethode = new Button("Ajouter une methode");
             newMethode.setMinWidth(this.getWidth());
             Button newAttribut = new Button("ajouter un attribut");
-            newAttribut.setOnAction(new ControleurVueTemporaireClasse());
+            newAttribut.setOnAction(cont);
             newAttribut.setMinWidth(this.getWidth());
             getChildren().addAll( newAttribut, newMethode);
 
