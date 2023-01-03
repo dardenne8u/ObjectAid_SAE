@@ -27,15 +27,16 @@ public class ControleurClasseCliquer implements EventHandler<MouseEvent> {
         VueClasse vue = (VueClasse) mouseEvent.getSource();
 
         if (mouseEvent.getSource() instanceof VueClasse){
+            final Pane pane = ((Pane) ((VueClasse) mouseEvent.getSource()).getParent());
             if(temp.isCacher())
-                ((Pane) ((VueClasse) mouseEvent.getSource()).getParent()).getChildren().add(temp);
+                pane.getChildren().add(temp);
             else
-                ((Pane) temp.getParent()).getChildren().remove(temp);
+                pane.getChildren().remove(temp);
             temp.setCacher(!temp.isCacher());
 //            temp.notifier(classe);
 
-            temp.setLayoutX(mouseEvent.getX());
-            temp.setLayoutY(mouseEvent.getY());
+            temp.setLayoutX(mouseEvent.getSceneX()-pane.getLayoutX());
+            temp.setLayoutY(mouseEvent.getSceneY()-pane.getLayoutY());
             System.out.println("Source : " +vue);
         }
         /*
