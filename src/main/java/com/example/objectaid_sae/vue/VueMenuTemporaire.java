@@ -5,7 +5,9 @@ import com.example.objectaid_sae.observateur.Observateur;
 import com.example.objectaid_sae.observateur.Sujet;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 public class VueMenuTemporaire extends VBox implements Observateur {
@@ -16,7 +18,19 @@ public class VueMenuTemporaire extends VBox implements Observateur {
 
     public VueMenuTemporaire(){
         this.cacher=true;
+            }
+
+    public void init(){
+        VBox sousMenu= new VBox();
+        CheckBox attdec = new CheckBox("attributs declarés");
+        CheckBox atther = new CheckBox("attributs hérités");
+        CheckBox metdec = new CheckBox("méthodes déclarées");
+        CheckBox mether = new CheckBox("méthodes héritées");
+
+        sousMenu.getChildren().addAll(attdec,atther,metdec,mether );
+
     }
+
 
     @Override
     public void notifier(Sujet s) {
@@ -27,24 +41,23 @@ public class VueMenuTemporaire extends VBox implements Observateur {
             this.setStyle("-fx-background-color:#F2F3F4");
             this.setAlignment(Pos.CENTER);
 
-            Label att = new Label("Attributs :");
-            Button attDeclare = new Button("attributs declarés");
-            Button attHerite = new Button("attributs hérités");
-            this.getChildren().addAll(att, attDeclare, attHerite);
+            Button Afficher = new Button("Afficher");
+            Afficher.setMinWidth(this.getWidth());
+            this.getChildren().addAll(Afficher);
 
-            Label meth = new Label("Methodes :");
-            Button methDeclaree = new Button("méthodes déclarées");
-            Button methHeritee = new Button("méthodes héritées");
-
-            this.getChildren().addAll(meth, methDeclaree, methHeritee);
 
             // creation d'attribut ou methode
 
-            Label add = new Label("Ajouts :");
             Button newMethode = new Button("Ajouter une methode");
+            newMethode.setMinWidth(this.getWidth());
             Button newAttribut = new Button("ajouter un attribut");
             newAttribut.setOnAction(new ControleurVueTemporaireClasse());
-            getChildren().addAll(add, newAttribut, newMethode);
+            newAttribut.setMinWidth(this.getWidth());
+            getChildren().addAll( newAttribut, newMethode);
+
+
+
+
         } else {
             this.getChildren().clear();
         }
