@@ -46,8 +46,6 @@ public class VueMenuTemporaire extends VBox implements Observateur {
         } else {
             this.getChildren().clear();
         }
-
-
     }
 
     public boolean isCacher(){
