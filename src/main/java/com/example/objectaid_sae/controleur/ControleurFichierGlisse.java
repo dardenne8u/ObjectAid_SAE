@@ -61,7 +61,7 @@ public class ControleurFichierGlisse implements EventHandler<MouseEvent> {
                         c.setType(t.getText());
                         c.setY(mouseEvent.getSceneY()-centre.getLayoutY());
                         cb.setSelected(true);
-                        VueClasse vue = new VueClasse();
+                        VueClasse vue = new VueClasse(c);
                         vue.setOnMouseClicked(new ControleurClasseCliquer(c));
                         c.ajouterObservateur(vue);
                         c.notifierObservateurs();

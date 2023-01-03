@@ -20,12 +20,12 @@ public class ControleurClasseGlissee implements EventHandler<MouseEvent> {
         System.out.println("rentré dans event");
         double Xmouse = mouseEvent.getSceneX();
         double Ymouse = mouseEvent.getSceneY();
+        System.out.println(Xmouse + "     " + Ymouse);
 
         VueClasse vc = (VueClasse) mouseEvent.getSource();
-        Node source = (Node) mouseEvent.getSource();
-        Pane p = (Pane)source.getParent();
-        s.setX(Xmouse-p.getWidth());
+        s.setX(Xmouse-280);
         s.setY(Ymouse);
+        System.out.println(s.getX() + "     " +s.getY());
         s.notifierObservateurs();
     }
 }

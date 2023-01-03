@@ -17,7 +17,7 @@ public class ControleurClasseCliquer implements EventHandler<MouseEvent> {
         this.classe = classe;
     }
 
-    public ControleurClasseCliquer (VueMenuTemporaire menutemp, Classe classe){
+    public ControleurClasseCliquer(VueMenuTemporaire menutemp, Classe classe) {
         this.temp = menutemp;
         this.classe = classe;
     }
@@ -26,18 +26,18 @@ public class ControleurClasseCliquer implements EventHandler<MouseEvent> {
     public void handle(MouseEvent mouseEvent) {
         VueClasse vue = (VueClasse) mouseEvent.getSource();
 
-        if (mouseEvent.getSource() instanceof VueClasse){
+        if (mouseEvent.getSource() instanceof VueClasse) {
             final Pane pane = ((Pane) ((VueClasse) mouseEvent.getSource()).getParent());
-            if(temp.isCacher())
+            if (temp.isCacher())
                 pane.getChildren().add(temp);
             else
                 pane.getChildren().remove(temp);
             temp.setCacher(!temp.isCacher());
-//            temp.notifier(classe);
+            //temp.notifier(classe);
 
-            temp.setLayoutX(mouseEvent.getSceneX()-pane.getLayoutX());
-            temp.setLayoutY(mouseEvent.getSceneY()-pane.getLayoutY());
-            System.out.println("Source : " +vue);
+            temp.setLayoutX(mouseEvent.getSceneX() - pane.getLayoutX());
+            temp.setLayoutY(mouseEvent.getSceneY() - pane.getLayoutY());
+            System.out.println("Source : " + vue);
         }
         /*
         if (mouseEvent.getSource() instanceof VueMenuTemporaire){
@@ -45,11 +45,13 @@ public class ControleurClasseCliquer implements EventHandler<MouseEvent> {
             classe.setAfficheAttributsDeclare(true);
             classe.setAfficheMethodeDeclare(true);
             classe.setAfficheMethodeHerite(true);
-        }*/
+        }
 
         temp.notifier(classe);
 
         System.out.println("Vue cliquée !");
 
+    }
+*/
     }
 }
