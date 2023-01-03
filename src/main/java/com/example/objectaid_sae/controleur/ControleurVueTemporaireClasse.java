@@ -29,7 +29,6 @@ public class ControleurVueTemporaireClasse implements EventHandler<ActionEvent> 
                     classe.getMethodes().get(Classe.DECLARED).add(nom);
                 else classe.getAttributs().get(Classe.DECLARED).add(nom);
                 ((Pane) (src.getParent().getParent())).getChildren().remove(src.getParent());
-                classe.notifierObservateurs();
             }else if (src.getText().equals("Afficher")) {}
             else{
                 VueCreation v;
@@ -45,7 +44,21 @@ public class ControleurVueTemporaireClasse implements EventHandler<ActionEvent> 
 
         } else {
             CheckBox src = (CheckBox) evt.getSource();
+            switch (src.getText()) {
+                case "attributs declarés":
+                    classe.setAfficheAttributsDeclare(src.isSelected());
+                    break;
+                case "attributs hérités":
+                    classe.setAfficheAttributsHerite(src.isSelected());
+                    break;
+                case "méthodes déclarées":
+                    classe.setAfficheMethodeDeclare(src.isSelected());
+                    break;
+                case "méthodes hérités":
+                    classe.setAfficheMethodeHerite(src.isSelected());
+                    break;
+            }
         }
-
+        classe.notifierObservateurs();
     }
 }
