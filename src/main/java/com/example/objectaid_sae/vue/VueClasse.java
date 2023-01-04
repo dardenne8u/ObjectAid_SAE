@@ -96,6 +96,7 @@ public class VueClasse extends VBox implements Observateur {
         return rec;
     }
 
+
     public void afficherContenant(Map<Integer, List<String>> map, boolean afficherLesDeux, int typeAttribut){
        if (map != null) {
            int i = 1;
