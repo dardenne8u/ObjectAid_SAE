@@ -27,10 +27,7 @@ public class HelloApplication extends Application {
         bp.setTop(new VueHaut());
 
         // setup du borderPane
-        pane.setBorder(new Border(new BorderStroke(Color.valueOf("#9E9E9E"),
-                BorderStrokeStyle.SOLID,
-                CornerRadii.EMPTY,
-                BorderWidths.DEFAULT)));
+        pane.setBorder(new Border(new BorderStroke(Color.valueOf("#9E9E9E"), BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
         bp.setCenter(pane);
 
         bp.setLeft(new VueFichiers("./src/main/java/com/example/objectaid_sae"));
