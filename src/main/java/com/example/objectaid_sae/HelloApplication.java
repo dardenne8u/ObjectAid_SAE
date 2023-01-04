@@ -5,6 +5,7 @@ import com.example.objectaid_sae.controleur.ControleurClasseGlissee;
 import com.example.objectaid_sae.controleur.ControleurFichierGlisse;
 import com.example.objectaid_sae.model.Classe;
 import com.example.objectaid_sae.model.Model;
+import com.example.objectaid_sae.vue.VueCentre;
 import com.example.objectaid_sae.vue.VueClasse;
 import com.example.objectaid_sae.vue.VueFichiers;
 import com.example.objectaid_sae.vue.VueMenuTemporaire;
@@ -24,7 +25,7 @@ public class HelloApplication extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        Pane pane = new Pane();
+        Pane pane = new VueCentre();
         BorderPane bp = new BorderPane();
 
 

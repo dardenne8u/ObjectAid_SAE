@@ -2,6 +2,7 @@ package com.example.objectaid_sae.controleur;
 
 import com.example.objectaid_sae.model.Classe;
 import com.example.objectaid_sae.observateur.Sujet;
+import com.example.objectaid_sae.vue.VueCentre;
 import com.example.objectaid_sae.vue.VueClasse;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
@@ -20,13 +21,19 @@ public class ControleurClasseGlissee implements EventHandler<MouseEvent> {
      * @param s, la classe deplacee
      */
     public ControleurClasseGlissee(Sujet s) {
+
         this.s = (Classe) s;
+
     }
 
     @Override
     public void handle(MouseEvent mouseEvent) {
         final VueClasse vue = (VueClasse) mouseEvent.getSource();
-        final Pane center = (Pane) vue.getParent();
+        final VueCentre center = (VueCentre) vue.getParent();
+
+        if (mouseEvent.getEventType() == MouseEvent.MOUSE_DRAGGED)
+            //suppression des menus temporaires
+            center.supprimerMenusTemp();
 
         // definition de la position x
         double mouseX = mouseEvent.getSceneX() - center.getLayoutX();
