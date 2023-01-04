@@ -30,11 +30,12 @@ public class ControleurClasseCliquer implements EventHandler<MouseEvent> {
         if(mouseEvent.getButton() == MouseButton.PRIMARY) return;
         if (mouseEvent.getSource() instanceof VueClasse) {
             final VueCentre pane = ((VueCentre) ((VueClasse) mouseEvent.getSource()).getParent());
-            if (temp.isCacher())
+            if (temp.isCacher()) {
+                temp.setCacher(false);
                 pane.getChildren().add(temp);
+            }
             else
                 pane.supprimerMenusTemp();
-            temp.setCacher(!temp.isCacher());
             //temp.notifier(classe);
 
             temp.setLayoutX(mouseEvent.getSceneX() - pane.getLayoutX());
