@@ -26,8 +26,6 @@ public class ControleurClasseGlissee implements EventHandler<MouseEvent> {
     public void handle(MouseEvent mouseEvent) {
         final VueClasse vue = (VueClasse) mouseEvent.getSource();
         final Pane center = (Pane) vue.getParent();
-        double widthVue = vue.getWidth();
-        System.out.println("width :" + this.width);
 
 
         if (mouseEvent.getEventType() == MouseEvent.MOUSE_CLICKED) {
@@ -48,7 +46,7 @@ public class ControleurClasseGlissee implements EventHandler<MouseEvent> {
             double mouseY = mouseEvent.getSceneY() - center.getLayoutY();
             mouseY = Math.max(0, mouseY); // minimum
             mouseY = Math.min((center.getLayoutY() + center.getHeight() - vue.getHeight()), mouseY); // maximum
-            System.out.println(mouseX + "  " + mouseY);
+
             s.setX(mouseX);
             s.setY(mouseY);
             s.notifierObservateurs();
