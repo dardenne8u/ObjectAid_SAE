@@ -22,12 +22,11 @@ public class VueClasse extends VBox implements Observateur {
     private ControleurClasseGlissee controleurClasseGlissee;
 
     public VueClasse (Classe classe){
-        classe.ajouterObservateur(this);
-        classe.notifierObservateurs();
-        ControleurClasseGlissee controleurClasseGlissee = new ControleurClasseGlissee(classe);
         this.controleurClasseGlissee = new ControleurClasseGlissee(classe);
         this.addEventHandler(MouseEvent.MOUSE_CLICKED, controleurClasseGlissee);
         this.addEventHandler(MouseEvent.MOUSE_DRAGGED, controleurClasseGlissee);
+        classe.ajouterObservateur(this);
+        classe.notifierObservateurs();
     }
 
 
