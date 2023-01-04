@@ -5,10 +5,7 @@ import com.example.objectaid_sae.controleur.ControleurClasseGlissee;
 import com.example.objectaid_sae.controleur.ControleurFichierGlisse;
 import com.example.objectaid_sae.model.Classe;
 import com.example.objectaid_sae.model.Model;
-import com.example.objectaid_sae.vue.VueCentre;
-import com.example.objectaid_sae.vue.VueClasse;
-import com.example.objectaid_sae.vue.VueFichiers;
-import com.example.objectaid_sae.vue.VueMenuTemporaire;
+import com.example.objectaid_sae.vue.*;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -27,7 +24,7 @@ public class HelloApplication extends Application {
     public void start(Stage stage) throws IOException {
         Pane pane = new VueCentre();
         BorderPane bp = new BorderPane();
-
+        bp.setTop(new VueHaut());
 
         // setup du borderPane
         pane.setBorder(new Border(new BorderStroke(Color.valueOf("#9E9E9E"),
