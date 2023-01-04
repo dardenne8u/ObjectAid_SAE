@@ -24,6 +24,7 @@ public class Classe implements Sujet {
 
     //METHODES
 
+
     public void setType(String type) {
         this.type = type;
     }
