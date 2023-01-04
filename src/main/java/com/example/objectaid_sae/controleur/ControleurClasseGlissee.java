@@ -2,12 +2,17 @@ package com.example.objectaid_sae.controleur;
 
 import com.example.objectaid_sae.model.Classe;
 import com.example.objectaid_sae.observateur.Sujet;
+import com.example.objectaid_sae.vue.VueCheckClass;
 import com.example.objectaid_sae.vue.VueClasse;
+import com.example.objectaid_sae.vue.VueCreation;
+import com.example.objectaid_sae.vue.VueMenuTemporaire;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.scene.control.cell.CheckBoxListCell;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+
+import java.util.ConcurrentModificationException;
 
 public class ControleurClasseGlissee implements EventHandler<MouseEvent> {
 
@@ -16,7 +21,7 @@ public class ControleurClasseGlissee implements EventHandler<MouseEvent> {
     private double yS;
     private double width;
 
-    public ControleurClasseGlissee(Sujet s){
+    public ControleurClasseGlissee(Sujet s) {
 
         this.s = (Classe) s;
 
@@ -34,9 +39,15 @@ public class ControleurClasseGlissee implements EventHandler<MouseEvent> {
             this.yS = mouseEvent.getSceneY();
 
         } else if (mouseEvent.getEventType() == MouseEvent.MOUSE_DRAGGED) {
+            //suppression des menus temporaires
+            try {
+                for (Node n : center.getChildren()) {
+                    if (n.getClass() == VueCheckClass.class || n.getClass() == VueMenuTemporaire.class || n.getClass() == VueCreation.class)
+                        center.getChildren().remove(n);
+                }
+            }
+            catch (ConcurrentModificationException ignored) {}
             // recuperation des valeurs
-
-
             // definition de la position x
             double mouseX = mouseEvent.getSceneX() - center.getLayoutX();
             mouseX = Math.max(0, mouseX); // minimum
@@ -53,7 +64,7 @@ public class ControleurClasseGlissee implements EventHandler<MouseEvent> {
         }
     }
 
-    public void set(double w){
+    public void set(double w) {
         this.width = w;
     }
 

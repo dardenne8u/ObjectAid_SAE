@@ -11,10 +11,12 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 
 public class ControleurVueTemporaireClasse implements EventHandler<ActionEvent> {
 
     Classe classe;
+    VBox MenuTemp;
 
     public ControleurVueTemporaireClasse(Classe classe) {
         this.classe = classe;
@@ -31,9 +33,13 @@ public class ControleurVueTemporaireClasse implements EventHandler<ActionEvent> 
                     classe.getMethodes().get(Classe.DECLARED).add(nom);
                 else classe.getAttributs().get(Classe.DECLARED).add(nom);
                 ((Pane) (src.getParent().getParent())).getChildren().remove(src.getParent());
-            }else if (src.getText().contains("Afficher")) {
+            }
+            else if (src.getText().contains("Afficher")) {
                 VueCheckClass ch = new VueCheckClass(this);
                 System.out.println("vue check");
+                if (MenuTemp != null) ((Pane) (src.getParent().getParent())).getChildren().remove(MenuTemp);
+                ch.setLayoutX(src.getParent().getLayoutX() + src.getWidth());
+                ch.setLayoutY(src.getParent().getLayoutY());
                 ((Pane) (src.getParent().getParent())).getChildren().add(ch);
                 for(Node node : ch.getChildren()) {
                     CheckBox check = (CheckBox) node;
@@ -52,8 +58,7 @@ public class ControleurVueTemporaireClasse implements EventHandler<ActionEvent> 
                             break;
                     }
                 }
-
-
+                MenuTemp = ch;
             }
             else{
                 VueCreation v;
@@ -63,6 +68,8 @@ public class ControleurVueTemporaireClasse implements EventHandler<ActionEvent> 
                 ((Pane) (src.getParent().getParent())).getChildren().add(v);
                 v.setLayoutX(src.getParent().getLayoutX() + src.getWidth());
                 v.setLayoutY(src.getParent().getLayoutY());
+                if (MenuTemp != null) ((Pane) (src.getParent().getParent())).getChildren().remove(MenuTemp);
+                MenuTemp = v;
             }
 
 
