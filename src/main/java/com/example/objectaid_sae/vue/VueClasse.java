@@ -22,6 +22,10 @@ public class VueClasse extends VBox implements Observateur {
 
     private ControleurClasseGlissee controleurClasseGlissee;
 
+    /**
+     * Constructeur creant une VueClasse et la liant aux controleurs associes
+     * @param classe, le sujet de la classe a afficher
+     */
     public VueClasse (Classe classe){
         this.controleurClasseGlissee = new ControleurClasseGlissee(classe);
         this.addEventHandler(MouseEvent.MOUSE_CLICKED, new ControleurClasseCliquer(classe));
@@ -32,11 +36,16 @@ public class VueClasse extends VBox implements Observateur {
     }
 
 
+    /**
+     * methode mettant a jour l'affichage dans la vue
+     * @param s, la classe a afficher
+     */
     @Override
     public void notifier(Sujet s) {
         Classe classe = (Classe) s;
         this.getChildren().clear();
-        //this.setPrefWidth(300);
+        this.setMaxWidth(200);
+        this.setWidth(this.getMaxWidth());
         this.setStyle("-fx-background-color:#D3D3D3");
         this.setAlignment(Pos.CENTER);
         setLayoutX(classe.getX());
@@ -74,11 +83,17 @@ public class VueClasse extends VBox implements Observateur {
         }
         this.getChildren().add(this.separer());
 
-        this.controleurClasseGlissee.set(this.getWidth());
+        this.controleurClasseGlissee.set((250-this.getWidth())+(2*this.getWidth()));
     }
 
+    /**
+     * methode creant un rectangle fin de séparation
+     * @return le rectangle de séparation
+     */
     public Rectangle separer(){
-        return new Rectangle(150, 2, Color.BLACK);
+        Rectangle rec = new Rectangle(150, 2, Color.BLACK);
+        rec.setWidth(this.getWidth());
+        return rec;
     }
 
     public void afficherContenant(Map<Integer, List<String>> map, boolean afficherLesDeux, int typeAttribut){
@@ -90,6 +105,7 @@ public class VueClasse extends VBox implements Observateur {
            List<String> element = map.get(i);
            for (String elemC : element) {
                Label elem = new Label(elemC);
+               elem.setWrapText(true);
                this.getChildren().add(elem);
            }
            if (afficherLesDeux) {
