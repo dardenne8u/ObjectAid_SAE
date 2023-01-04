@@ -5,6 +5,7 @@ import com.example.objectaid_sae.vue.VueCheckClass;
 import com.example.objectaid_sae.vue.VueCreation;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
@@ -34,6 +35,23 @@ public class ControleurVueTemporaireClasse implements EventHandler<ActionEvent> 
                 VueCheckClass ch = new VueCheckClass(this);
                 System.out.println("vue check");
                 ((Pane) (src.getParent().getParent())).getChildren().add(ch);
+                for(Node node : ch.getChildren()) {
+                    CheckBox check = (CheckBox) node;
+                    switch (check.getText()) {
+                        case "attributs declarés":
+                            check.setSelected(classe.isAfficheAttributsDeclare());
+                            break;
+                        case "attributs hérités":
+                            check.setSelected(classe.isAfficheAttributsHerite());
+                            break;
+                        case "méthodes déclarées":
+                            check.setSelected(classe.isAfficheMethodeDeclare());
+                            break;
+                        case "méthodes hérités":
+                            check.setSelected(classe.isAfficheMethodeHerite());
+                            break;
+                    }
+                }
 
 
             }
