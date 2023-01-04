@@ -1,6 +1,7 @@
 package com.example.objectaid_sae.controleur;
 
 import com.example.objectaid_sae.model.Classe;
+import com.example.objectaid_sae.vue.VueCheckClass;
 import com.example.objectaid_sae.vue.VueCreation;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -29,7 +30,13 @@ public class ControleurVueTemporaireClasse implements EventHandler<ActionEvent> 
                     classe.getMethodes().get(Classe.DECLARED).add(nom);
                 else classe.getAttributs().get(Classe.DECLARED).add(nom);
                 ((Pane) (src.getParent().getParent())).getChildren().remove(src.getParent());
-            }else if (src.getText().equals("Afficher")) {}
+            }else if (src.getText().contains("Afficher")) {
+                VueCheckClass ch = new VueCheckClass(this);
+                System.out.println("vue check");
+                ((Pane) (src.getParent().getParent())).getChildren().add(ch);
+
+
+            }
             else{
                 VueCreation v;
                 if (src.getText().contains("methode")) v = new VueCreation("methode", this);

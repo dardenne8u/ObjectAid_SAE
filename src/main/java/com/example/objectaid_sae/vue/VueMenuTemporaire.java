@@ -21,17 +21,6 @@ public class VueMenuTemporaire extends VBox implements Observateur {
         this.cacher=true;
             }
 
-    public void init(){
-        VBox sousMenu= new VBox();
-        CheckBox attdec = new CheckBox("attributs declarés");
-        CheckBox atther = new CheckBox("attributs hérités");
-        CheckBox metdec = new CheckBox("méthodes déclarées");
-        CheckBox mether = new CheckBox("méthodes héritées");
-
-        sousMenu.getChildren().addAll(attdec,atther,metdec,mether );
-
-    }
-
 
     @Override
     public void notifier(Sujet s) {
@@ -44,6 +33,7 @@ public class VueMenuTemporaire extends VBox implements Observateur {
             this.setAlignment(Pos.CENTER);
 
             Button Afficher = new Button("Afficher");
+            Afficher.setOnAction(cont);
             Afficher.setMinWidth(this.getWidth());
             this.getChildren().addAll(Afficher);
 
