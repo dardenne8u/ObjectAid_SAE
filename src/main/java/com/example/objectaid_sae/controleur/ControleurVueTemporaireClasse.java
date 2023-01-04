@@ -22,6 +22,28 @@ public class ControleurVueTemporaireClasse implements EventHandler<ActionEvent> 
         this.classe = classe;
     }
 
+
+
+    public boolean estAttribut(String attribut) {
+        if (attribut == null || attribut.trim().length() == 0) {
+            return false;
+        }
+        // La chaîne doit être au format "symbole nom: type"
+        String pattern = "^\\s*[+# -]\\s*[a-zA-Z0-9_]+\\s*:\\s*[a-zA-Z0-9_]+\\s*$";
+        return attribut.matches(pattern);
+    }
+
+    public boolean estMethode(String methode) {
+        if (methode == null || methode.trim().length() == 0) {
+            return false;
+        }
+        // La chaîne doit être au format "nom(arg1: type1, arg2: type2, ...): typeRetour"
+        String pattern = "^\\s*[+# -]\\s*[a-zA-Z0-9_]+\\s*\\(([a-zA-Z0-9_]+\\s*:\\s*[a-zA-Z0-9_]+\\s*,\\s*)*([a-zA-Z0-9_]+\\s*:\\s*[a-zA-Z0-9_]+)\\s*\\)\\s*:\\s*[a-zA-Z0-9_]+\\s*$";
+        return methode.matches(pattern);
+    }
+
+
+
     @Override
     public void handle(ActionEvent evt) {
 
@@ -30,9 +52,11 @@ public class ControleurVueTemporaireClasse implements EventHandler<ActionEvent> 
             if (src.getText().contains("Valider")) {
                 String nom = ((TextField) (src.getParent().getChildrenUnmodifiable().get(1))).getText();
                 if (((Label) (src.getParent().getChildrenUnmodifiable().get(0))).getText().contains("methode"))
-                    classe.getMethodes().get(Classe.DECLARED).add(nom);
-                else classe.getAttributs().get(Classe.DECLARED).add(nom);
-                ((Pane) (src.getParent().getParent())).getChildren().remove(src.getParent());
+                    if(estMethode(nom))classe.getMethodes().get(Classe.DECLARED).add(nom);
+                else if(estAttribut(nom)) {
+                    classe.getAttributs().get(Classe.DECLARED).add(nom);
+                    ((Pane) (src.getParent().getParent())).getChildren().remove(src.getParent());
+                }
             }
             else if (src.getText().contains("Afficher")) {
                 VueCheckClass ch = new VueCheckClass(this);
