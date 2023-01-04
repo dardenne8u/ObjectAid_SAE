@@ -49,13 +49,19 @@ public class ControleurVueTemporaireClasse implements EventHandler<ActionEvent> 
 
         if (evt.getSource().getClass() == Button.class) {
             Button src = (Button) evt.getSource();
+
+
+
             if (src.getText().contains("Valider")) {
                 String nom = ((TextField) (src.getParent().getChildrenUnmodifiable().get(1))).getText();
-                if (((Label) (src.getParent().getChildrenUnmodifiable().get(0))).getText().contains("methode"))
-                    if(estMethode(nom))classe.getMethodes().get(Classe.DECLARED).add(nom);
-                else if(estAttribut(nom)) {
-                    classe.getAttributs().get(Classe.DECLARED).add(nom);
-                    ((Pane) (src.getParent().getParent())).getChildren().remove(src.getParent());
+                if (((Label) (src.getParent().getChildrenUnmodifiable().get(0))).getText().contains("methode")) {
+                    if (estMethode(nom)) classe.getMethodes().get(Classe.DECLARED).add(nom);}
+                else {
+                    if (estAttribut(nom)) {
+                        System.out.println("ceci est un attribut");
+                        classe.getAttributs().get(Classe.DECLARED).add(nom);
+                        ((Pane) (src.getParent().getParent())).getChildren().remove(src.getParent());
+                    }
                 }
             }
             else if (src.getText().contains("Afficher")) {
