@@ -1,6 +1,7 @@
 package com.example.objectaid_sae.controleur;
 
 import com.example.objectaid_sae.model.Classe;
+import com.example.objectaid_sae.vue.VueCentre;
 import com.example.objectaid_sae.vue.VueClasse;
 import com.example.objectaid_sae.vue.VueMenuTemporaire;
 import javafx.event.EventHandler;
@@ -28,11 +29,11 @@ public class ControleurClasseCliquer implements EventHandler<MouseEvent> {
         VueClasse vue = (VueClasse) mouseEvent.getSource();
         if(mouseEvent.getButton() == MouseButton.PRIMARY) return;
         if (mouseEvent.getSource() instanceof VueClasse) {
-            final Pane pane = ((Pane) ((VueClasse) mouseEvent.getSource()).getParent());
+            final VueCentre pane = ((VueCentre) ((VueClasse) mouseEvent.getSource()).getParent());
             if (temp.isCacher())
                 pane.getChildren().add(temp);
             else
-                pane.getChildren().remove(temp);
+                pane.supprimerMenusTemp();
             temp.setCacher(!temp.isCacher());
             //temp.notifier(classe);
 

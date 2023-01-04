@@ -47,10 +47,6 @@ public class VueMenuTemporaire extends VBox implements Observateur {
             newAttribut.setOnAction(cont);
             newAttribut.setMinWidth(this.getWidth());
             getChildren().addAll( newAttribut, newMethode);
-
-
-
-
         } else {
             this.getChildren().clear();
         }
