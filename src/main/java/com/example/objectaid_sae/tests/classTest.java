@@ -8,12 +8,13 @@ public class classTest extends AbstractTest implements InterfaceTest{
         super(num);
     }
 
-    public int AtributPublique;
-
     @Override
-    public void methodeHeritee() {
+    protected void methodeHeriteeAb() {
 
     }
+
+    public int AtributPublique;
+
 
     public String methodeDeclare(){
         return attributDeclare;

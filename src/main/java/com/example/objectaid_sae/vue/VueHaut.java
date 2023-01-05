@@ -1,14 +1,10 @@
 package com.example.objectaid_sae.vue;
 
-import com.example.objectaid_sae.controleur.ControleurButtonNewClass;
 import com.example.objectaid_sae.controleur.ControleurAffichageGlobal;
-import com.example.objectaid_sae.model.Model;
+import com.example.objectaid_sae.controleur.ControleurButtonNewClass;
 import javafx.scene.control.Button;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
-import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 
@@ -18,14 +14,12 @@ public class VueHaut extends GridPane {
         setGridLinesVisible(true);
         setMinHeight(50);
         setMaxWidth(Double.MAX_VALUE);
-        Button prj = new Button("Projet");
-        prj.setFont(Font.font(null, FontWeight.BOLD, 16));
+        Button prj = new Button("projet");
         GridPane.setHgrow(prj, Priority.ALWAYS);
         GridPane.setVgrow(prj, Priority.ALWAYS);
         prj.setMaxWidth(Double.MAX_VALUE);
         prj.setMaxHeight(Double.MAX_VALUE);
-        Button aff = new Button("Affichage");
-        aff.setFont(Font.font(null, FontWeight.BOLD, 16));
+        Button aff = new Button("affichage");
         aff.setOnAction(new ControleurAffichageGlobal());
         GridPane.setHgrow(aff, Priority.ALWAYS);
         GridPane.setVgrow(aff, Priority.ALWAYS);

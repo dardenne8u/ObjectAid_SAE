@@ -1,7 +1,6 @@
 package com.example.objectaid_sae.controleur;
 
 import com.example.objectaid_sae.vue.VueCentre;
-import com.example.objectaid_sae.vue.VueMenuTemporaire;
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;

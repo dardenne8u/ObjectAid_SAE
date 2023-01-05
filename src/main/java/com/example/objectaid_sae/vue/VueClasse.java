@@ -2,8 +2,6 @@ package com.example.objectaid_sae.vue;
 
 import com.example.objectaid_sae.controleur.ControleurClasseCliquer;
 import com.example.objectaid_sae.controleur.ControleurClasseGlissee;
-import com.example.objectaid_sae.controleur.ControleurFichierGlisse;
-import com.example.objectaid_sae.controleur.ControleurVueTemporaireClasse;
 import com.example.objectaid_sae.model.Classe;
 import com.example.objectaid_sae.observateur.Observateur;
 import com.example.objectaid_sae.observateur.Sujet;
@@ -14,7 +12,6 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 

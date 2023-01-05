@@ -5,11 +5,8 @@ import com.example.objectaid_sae.observateur.Sujet;
 import com.example.objectaid_sae.vue.VueCentre;
 import com.example.objectaid_sae.vue.VueClasse;
 import javafx.event.EventHandler;
-import javafx.scene.Node;
-import javafx.scene.control.cell.CheckBoxListCell;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Pane;
 
 public class ControleurClasseGlissee implements EventHandler<MouseEvent> {
 

@@ -4,9 +4,13 @@ public abstract class AbstractTest {
 
     protected int attributHerite;
 
-    abstract void methodeHeritee();
+    public void methodeHeritee(){}
+
+    protected void methodeProtectedHeritee(){}
 
     protected AbstractTest(int num){
         attributHerite = num;
     }
+
+    protected abstract void methodeHeriteeAb();
 }

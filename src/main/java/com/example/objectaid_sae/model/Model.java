@@ -24,7 +24,7 @@ public class Model implements Sujet {
     /**
      * Constructeur qui cree un modele
      */
-    public Model() {
+    private Model() {
         this.classes = new ArrayList<>();
         this.observateurs = new ArrayList<>();
     }

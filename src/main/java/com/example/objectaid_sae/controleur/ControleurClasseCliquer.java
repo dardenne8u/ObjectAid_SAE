@@ -7,7 +7,6 @@ import com.example.objectaid_sae.vue.VueMenuTemporaire;
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Pane;
 
 public class ControleurClasseCliquer implements EventHandler<MouseEvent> {
 
