@@ -79,11 +79,8 @@ public class ControleurVueTemporaireClasse implements EventHandler<ActionEvent> 
                 System.out.println("vue check");
                 if (MenuTemp != null) ((Pane) (src.getParent().getParent())).getChildren().remove(MenuTemp);
                 if( affichageCoteDroit(src)) {
-                    System.out.println("Cote droit");
                     ch.setLayoutX(src.getParent().getLayoutX() + src.getWidth());
                 }else{
-                    System.out.println("Cote gauche");
-                    System.out.println(ch.getWidth());
                     ch.setLayoutX(src.getParent().getLayoutX() - ch.getWidth());
                 }
                 ch.setLayoutY(src.getParent().getLayoutY());
@@ -111,8 +108,12 @@ public class ControleurVueTemporaireClasse implements EventHandler<ActionEvent> 
                 VueCreation v;
                 if (src.getText().contains("methode")) v = new VueCreation("methode", this);
                 else v = new VueCreation("attribut", this);
+                if( affichageCoteDroit(src)) {
+                    v.setLayoutX(src.getParent().getLayoutX() + src.getWidth());
+                }else{
+                    v.setLayoutX(src.getParent().getLayoutX() - v.getWidth());
+                }
                 ((Pane) (src.getParent().getParent())).getChildren().add(v);
-                v.setLayoutX(src.getParent().getLayoutX() + src.getWidth());
                 v.setLayoutY(src.getParent().getLayoutY());
                 if (MenuTemp != null) ((Pane) (src.getParent().getParent())).getChildren().remove(MenuTemp);
                 MenuTemp = v;
