@@ -83,7 +83,7 @@ public class ControleurVueTemporaireClasse implements EventHandler<ActionEvent> 
                         case "méthodes déclarées":
                             check.setSelected(classe.isAfficheMethodeDeclare());
                             break;
-                        case "méthodes hérités":
+                        case "méthodes héritées":
                             check.setSelected(classe.isAfficheMethodeHerite());
                             break;
                     }
@@ -94,7 +94,6 @@ public class ControleurVueTemporaireClasse implements EventHandler<ActionEvent> 
                 VueCreation v;
                 if (src.getText().contains("methode")) v = new VueCreation("methode", this);
                 else v = new VueCreation("attribut", this);
-                System.out.println("vue cree");
                 ((Pane) (src.getParent().getParent())).getChildren().add(v);
                 v.setLayoutX(src.getParent().getLayoutX() + src.getWidth());
                 v.setLayoutY(src.getParent().getLayoutY());
@@ -115,11 +114,10 @@ public class ControleurVueTemporaireClasse implements EventHandler<ActionEvent> 
                 case "méthodes déclarées":
                     classe.setAfficheMethodeDeclare(src.isSelected());
                     break;
-                case "méthodes hérités":
+                case "méthodes héritées":
                     classe.setAfficheMethodeHerite(src.isSelected());
                     break;
             }
         }
-        classe.notifierObservateurs();
     }
 }

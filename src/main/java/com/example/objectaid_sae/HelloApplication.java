@@ -22,15 +22,16 @@ public class HelloApplication extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
+        Model m = new Model();
         Pane pane = new VueCentre();
         BorderPane bp = new BorderPane();
-        bp.setTop(new VueHaut());
+        bp.setTop(new VueHaut(m));
 
         // setup du borderPane
         pane.setBorder(new Border(new BorderStroke(Color.valueOf("#9E9E9E"), BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
         bp.setCenter(pane);
 
-        bp.setLeft(new VueFichiers("./src/main/java/com/example/objectaid_sae"));
+        bp.setLeft(new VueFichiers("./src/main/java/com/example/objectaid_sae",m));
         Scene scene = new Scene(bp, 800, 600);
         stage.setTitle("ObjectAid SAE");
         stage.setScene(scene);

@@ -48,25 +48,29 @@ public class Classe implements Sujet {
         this.constructeurs = new ArrayList<>();
         this.observateurs = new ArrayList<>();
 
-        afficheAttributsDeclare = afficheAttributsHerite = afficheMethodeDeclare = afficheConstructeur  = true;
+        afficheAttributsDeclare = afficheAttributsHerite = afficheMethodeDeclare = afficheConstructeur = afficheMethodeHerite = true;
     }
 
     public void addAttribut(int type, String attribut) {
         if(!this.attributs.get(type).contains(attribut))
             this.attributs.get(type).add(attribut);
+        notifierObservateurs();
     }
 
     public void removeAttribut(int type, String attribut) {
         this.attributs.get(type).remove(attribut);
+        notifierObservateurs();
     }
 
     public void addMethode(int type, String methode) {
         if(!this.methodes.get(type).contains(methode))
             this.methodes.get(type).add(methode);
+        notifierObservateurs();
     }
 
     public void removeMethode(int type, String methode) {
         this.methodes.get(type).remove(methode);
+        notifierObservateurs();
     }
 
     public void addConstructeur(String constructeur) {
@@ -121,18 +125,22 @@ public class Classe implements Sujet {
 
     public void setAfficheAttributsDeclare(boolean afficheAttributsDeclare) {
         this.afficheAttributsDeclare = afficheAttributsDeclare;
+        notifierObservateurs();
     }
 
     public void setAfficheAttributsHerite(boolean afficheAttributsHerite) {
         this.afficheAttributsHerite = afficheAttributsHerite;
+        notifierObservateurs();
     }
 
     public void setAfficheMethodeDeclare(boolean afficheMethodeDeclare) {
         this.afficheMethodeDeclare = afficheMethodeDeclare;
+        notifierObservateurs();
     }
 
     public void setAfficheMethodeHerite(boolean afficheMethodeHerite) {
         this.afficheMethodeHerite = afficheMethodeHerite;
+        notifierObservateurs();
     }
 
     @Override
@@ -145,5 +153,23 @@ public class Classe implements Sujet {
         for (Observateur obs : observateurs){
             obs.notifier(this);
         }
+    }
+
+    @Override
+    public String toString() {
+        return "Classe{" +
+                "\nafficheAttributsDeclare=" + afficheAttributsDeclare +
+                "\n, afficheAttributsHerite=" + afficheAttributsHerite +
+                "\n, afficheMethodeDeclare=" + afficheMethodeDeclare +
+                "\n, afficheMethodeHerite=" + afficheMethodeHerite +
+                "\n, afficheConstructeur=" + afficheConstructeur +
+                "\n, attributs=" + attributs +
+                "\n, methodes=" + methodes +
+                "\n, constructeurs=" + constructeurs +
+                "\n, type='" + type + '\'' +
+                "\n, x=" + x +
+                "\n, y=" + y +
+                "\n, observateurs=" + observateurs +
+                '}';
     }
 }

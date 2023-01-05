@@ -1,6 +1,8 @@
 package com.example.objectaid_sae.vue;
 
 import com.example.objectaid_sae.controleur.ControleurButtonNewClass;
+import com.example.objectaid_sae.controleur.ControleurAffichageGlobal;
+import com.example.objectaid_sae.model.Model;
 import javafx.scene.control.Button;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
@@ -10,7 +12,7 @@ import javafx.scene.paint.Color;
 
 public class VueHaut extends GridPane {
 
-    public VueHaut(){
+    public VueHaut(Model m){
         setGridLinesVisible(true);
         setMinHeight(50);
         setMaxWidth(Double.MAX_VALUE);
@@ -20,6 +22,7 @@ public class VueHaut extends GridPane {
         prj.setMaxWidth(Double.MAX_VALUE);
         prj.setMaxHeight(Double.MAX_VALUE);
         Button aff = new Button("affichage");
+        aff.setOnAction(new ControleurAffichageGlobal(m));
         GridPane.setHgrow(aff, Priority.ALWAYS);
         GridPane.setVgrow(aff, Priority.ALWAYS);
         aff.setMaxWidth(Double.MAX_VALUE);

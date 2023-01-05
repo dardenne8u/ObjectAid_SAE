@@ -32,7 +32,7 @@ public class VueClasse extends VBox implements Observateur {
         this.addEventHandler(MouseEvent.MOUSE_CLICKED, controleurClasseGlissee);
         this.addEventHandler(MouseEvent.MOUSE_DRAGGED, controleurClasseGlissee);
         classe.ajouterObservateur(this);
-        classe.notifierObservateurs();
+        notifier(classe);
     }
 
 
@@ -43,6 +43,7 @@ public class VueClasse extends VBox implements Observateur {
     @Override
     public void notifier(Sujet s) {
         Classe classe = (Classe) s;
+        System.out.println(classe);
         this.getChildren().clear();
         this.setMaxWidth(200);
         this.setWidth(this.getMaxWidth());
@@ -58,7 +59,7 @@ public class VueClasse extends VBox implements Observateur {
 
          //DEUXIEME PARTIE : ATTRIBUTS
         Map<Integer, List<String>> attributsMap = classe.getAttributs();
-        if ((classe.isAfficheAttributsDeclare())&&(classe.isAfficheAttributsHerite())){
+        /*if ((classe.isAfficheAttributsDeclare())&&(classe.isAfficheAttributsHerite())){
             this.afficherContenant(attributsMap, true, Classe.DECLARED );
         }
         if((classe.isAfficheAttributsDeclare())&&(!classe.isAfficheAttributsHerite())){
@@ -66,13 +67,15 @@ public class VueClasse extends VBox implements Observateur {
         }
         if ((!classe.isAfficheAttributsDeclare())&&(classe.isAfficheAttributsHerite())){
             this.afficherContenant(attributsMap, false, Classe.HERITED );
-        }
+        }*/
+        if (classe.isAfficheAttributsDeclare()) this.afficherContenant(attributsMap, false, Classe.DECLARED );
+        if (classe.isAfficheAttributsHerite()) this.afficherContenant(attributsMap, false, Classe.HERITED );
         this.getChildren().add(this.separer());
 
 
         //TROISIEME PARTIE : METHODES
         Map<Integer, List<String>> methodesMap = classe.getMethodes();
-        if ((classe.isAfficheMethodeDeclare())&&(classe.isAfficheMethodeHerite())){
+        /*if ((classe.isAfficheMethodeDeclare())&&(classe.isAfficheMethodeHerite())){
             this.afficherContenant(methodesMap, true, Classe.DECLARED);
         }
         if ((classe.isAfficheMethodeDeclare())&&(!classe.isAfficheMethodeHerite())){
@@ -80,7 +83,9 @@ public class VueClasse extends VBox implements Observateur {
         }
         if ((!classe.isAfficheMethodeDeclare())&&(classe.isAfficheMethodeHerite())){
             this.afficherContenant(methodesMap, false, Classe.HERITED);
-        }
+        }*/
+        if (classe.isAfficheMethodeDeclare()) this.afficherContenant(methodesMap, false, Classe.DECLARED);
+        if (classe.isAfficheMethodeHerite()) this.afficherContenant(methodesMap, false, Classe.HERITED);
         this.getChildren().add(this.separer());
 
         this.controleurClasseGlissee.set((250-this.getWidth())+(2*this.getWidth()));
@@ -99,11 +104,8 @@ public class VueClasse extends VBox implements Observateur {
 
     public void afficherContenant(Map<Integer, List<String>> map, boolean afficherLesDeux, int typeAttribut){
        if (map != null) {
-           int i = 1;
-           if (typeAttribut == Classe.DECLARED) i = 1;
-           else if (typeAttribut == Classe.HERITED) i = 2;
 
-           List<String> element = map.get(i);
+           List<String> element = map.get(typeAttribut);
            for (String elemC : element) {
                Label elem = new Label(elemC);
                elem.setWrapText(true);

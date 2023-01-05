@@ -1,26 +1,26 @@
 package com.example.objectaid_sae.vue;
 
-import com.example.objectaid_sae.HelloApplication;
 import com.example.objectaid_sae.controleur.ControleurFichierGlisse;
 import com.example.objectaid_sae.model.Fichier;
+import com.example.objectaid_sae.model.Model;
 import com.example.objectaid_sae.observateur.Observateur;
 import com.example.objectaid_sae.observateur.Sujet;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
-import javafx.scene.text.Text;
 
 import java.io.File;
 
 public class VueFichiers extends Pane implements Observateur {
 
     private TreeView<HBox> arbre;
+    private Model mod;
 
-    public VueFichiers(String path) {
+    public VueFichiers(String path, Model m) {
+        mod = m;
         File f = new File(path);
         arbre = new TreeView<>(tree(f));
          this.getChildren().add(arbre);
@@ -60,7 +60,7 @@ public class VueFichiers extends Pane implements Observateur {
 
 
         box.getChildren().addAll(check, name, path);
-        box.setOnMouseReleased(new ControleurFichierGlisse());
+        box.setOnMouseReleased(new ControleurFichierGlisse(mod));
         TreeItem<HBox> res = new TreeItem<HBox>(box);
         res.setExpanded(true);
         return res;
