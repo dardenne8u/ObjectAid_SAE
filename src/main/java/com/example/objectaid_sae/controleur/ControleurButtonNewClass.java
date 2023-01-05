@@ -1,6 +1,7 @@
 package com.example.objectaid_sae.controleur;
 
 import com.example.objectaid_sae.model.Classe;
+import com.example.objectaid_sae.model.Model;
 import com.example.objectaid_sae.vue.VueCentre;
 import com.example.objectaid_sae.vue.VueClasse;
 import com.example.objectaid_sae.vue.VueNewClasse;
@@ -27,11 +28,9 @@ public class ControleurButtonNewClass implements EventHandler<ActionEvent> {
             secondaryStage.show();
         }
 
-
-
-
     @Override
     public void handle(ActionEvent evt) {
+        Model mod = Model.getModel();
         if (evt.getSource().getClass() == Button.class) {
             Button src = (Button) evt.getSource();
             if (src.getText().equals("Nouvelle classe")) {
@@ -50,6 +49,7 @@ public class ControleurButtonNewClass implements EventHandler<ActionEvent> {
             }
             if (src.getText().equals("Valider")) {
                 Classe newClasse= new Classe();
+                mod.addClasse(newClasse);
                 newClasse.addAttribut(1, "test");
                 VueClasse vC = new VueClasse(newClasse);
                 VueNewClasse vnc = (VueNewClasse) ((Button) evt.getSource()).getParent();

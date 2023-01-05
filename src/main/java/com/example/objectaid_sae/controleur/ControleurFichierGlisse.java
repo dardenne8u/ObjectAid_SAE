@@ -20,14 +20,9 @@ import java.io.FileReader;
 
 public class ControleurFichierGlisse implements EventHandler<MouseEvent> {
 
-    Model mod;
-
-    public ControleurFichierGlisse(Model m){
-        mod = m;
-    }
-
     @Override
     public void handle(MouseEvent mouseEvent) {
+        Model mod = Model.getModel();
         Node source = (Node) mouseEvent.getSource();
         if (mouseEvent.getEventType().equals(MouseEvent.MOUSE_RELEASED)) {
             while (source.getClass() != TreeView.class) source = source.getParent();

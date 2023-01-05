@@ -13,14 +13,9 @@ import javafx.scene.layout.Pane;
 
 public class ControleurAffichageGlobal implements EventHandler<ActionEvent> {
 
-    private Model mod;
-
-    public ControleurAffichageGlobal(Model m) {
-        mod = m;
-    }
-
     @Override
     public void handle(ActionEvent actionEvent) {
+        Model mod = Model.getModel();
         if (actionEvent.getSource().getClass() == Button.class) {
             VueCentre centre = (VueCentre) (((BorderPane) (((Button) actionEvent.getSource()).getParent()).getParent())).getCenter();
             VueCheckClass vCheck = new VueCheckClass(this);
@@ -32,24 +27,28 @@ public class ControleurAffichageGlobal implements EventHandler<ActionEvent> {
             CheckBox src = (CheckBox) actionEvent.getSource();
             switch (src.getText()) {
                 case "attributs declarés":
-                    for(Classe classe : mod.getClasses()) {
+                    for (Classe classe : mod.getClasses()) {
                         classe.setAfficheAttributsDeclare(src.isSelected());
                     }
+                    System.out.println("cliqué");
                     break;
                 case "attributs hérités":
-                    for(Classe classe : mod.getClasses()) {
+                    for (Classe classe : mod.getClasses()) {
                         classe.setAfficheAttributsHerite(src.isSelected());
                     }
+                    System.out.println("cliqué");
                     break;
                 case "méthodes déclarées":
-                    for(Classe classe : mod.getClasses()) {
+                    for (Classe classe : mod.getClasses()) {
                         classe.setAfficheMethodeDeclare(src.isSelected());
                     }
+                    System.out.println("cliqué");
                     break;
-                case "méthodes hérités":
-                    for(Classe classe : mod.getClasses()){
-                    classe.setAfficheMethodeHerite(src.isSelected());
-                }
+                case "méthodes héritées":
+                    for (Classe classe : mod.getClasses()) {
+                        classe.setAfficheMethodeHerite(src.isSelected());
+                    }
+                    System.out.println("cliqué");
                     break;
             }
 

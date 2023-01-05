@@ -10,6 +10,17 @@ public class Model implements Sujet {
     private List<Classe> classes;
     private List<Observateur> observateurs;
 
+    private static Model mod;
+
+    public static synchronized Model getModel(){
+        if (mod == null) mod = new Model();
+        return mod;
+    }
+
+    public static synchronized void resetModel(){
+        mod = null;
+    }
+
     /**
      * Constructeur qui cree un modele
      */
@@ -23,7 +34,7 @@ public class Model implements Sujet {
      * @param classe la classe a ajouter
      */
     public void addClasse(Classe classe) {
-        if(this.classes.contains(classe))
+        if(!this.classes.contains(classe))
             this.classes.add(classe);
     }
 

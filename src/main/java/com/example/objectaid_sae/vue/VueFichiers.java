@@ -17,10 +17,8 @@ import java.io.File;
 public class VueFichiers extends Pane implements Observateur {
 
     private TreeView<HBox> arbre;
-    private Model mod;
 
-    public VueFichiers(String path, Model m) {
-        mod = m;
+    public VueFichiers(String path) {
         File f = new File(path);
         arbre = new TreeView<>(tree(f));
          this.getChildren().add(arbre);
@@ -60,7 +58,7 @@ public class VueFichiers extends Pane implements Observateur {
 
 
         box.getChildren().addAll(check, name, path);
-        box.setOnMouseReleased(new ControleurFichierGlisse(mod));
+        box.setOnMouseReleased(new ControleurFichierGlisse());
         TreeItem<HBox> res = new TreeItem<HBox>(box);
         res.setExpanded(true);
         return res;

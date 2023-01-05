@@ -12,7 +12,7 @@ import javafx.scene.paint.Color;
 
 public class VueHaut extends GridPane {
 
-    public VueHaut(Model m){
+    public VueHaut(){
         setGridLinesVisible(true);
         setMinHeight(50);
         setMaxWidth(Double.MAX_VALUE);
@@ -22,7 +22,7 @@ public class VueHaut extends GridPane {
         prj.setMaxWidth(Double.MAX_VALUE);
         prj.setMaxHeight(Double.MAX_VALUE);
         Button aff = new Button("affichage");
-        aff.setOnAction(new ControleurAffichageGlobal(m));
+        aff.setOnAction(new ControleurAffichageGlobal());
         GridPane.setHgrow(aff, Priority.ALWAYS);
         GridPane.setVgrow(aff, Priority.ALWAYS);
         aff.setMaxWidth(Double.MAX_VALUE);
