@@ -1,5 +1,6 @@
 package com.example.objectaid_sae.vue;
 
+import com.example.objectaid_sae.controleur.ControleurButtonNewClass;
 import javafx.scene.control.Button;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
@@ -33,7 +34,8 @@ public class VueHaut extends GridPane {
         genAll.setMaxHeight(Double.MAX_VALUE);
         GridPane.setHgrow(genAll, Priority.ALWAYS);
         GridPane.setVgrow(genAll, Priority.ALWAYS);
-        Button nouvelleClasse = new Button("nouvelle classe");
+        Button nouvelleClasse = new Button("Nouvelle classe");
+        nouvelleClasse.setOnAction(new ControleurButtonNewClass());
         nouvelleClasse.setMaxWidth(Double.MAX_VALUE);
         nouvelleClasse.setMaxHeight(Double.MAX_VALUE);
         GridPane.setVgrow(nouvelleClasse, Priority.ALWAYS);
