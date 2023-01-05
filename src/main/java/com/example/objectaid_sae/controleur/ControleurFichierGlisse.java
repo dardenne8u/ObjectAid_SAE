@@ -3,6 +3,7 @@ package com.example.objectaid_sae.controleur;
 import com.example.objectaid_sae.model.Analyseur;
 import com.example.objectaid_sae.model.Classe;
 import com.example.objectaid_sae.model.Model;
+import com.example.objectaid_sae.vue.VueCentre;
 import com.example.objectaid_sae.vue.VueClasse;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
@@ -29,7 +30,7 @@ public class ControleurFichierGlisse implements EventHandler<MouseEvent> {
         }
         BorderPane bp = (BorderPane) source.getParent().getParent();
         Node center = bp.getCenter();
-        Pane centre = (Pane) center;
+        VueCentre centre = (VueCentre) center;
         if (center.contains(mouseEvent.getSceneX(), mouseEvent.getSceneY()) && !source.contains(mouseEvent.getSceneX(), mouseEvent.getSceneY())) {
             HBox h = (HBox) mouseEvent.getSource();
             CheckBox cb = (CheckBox) h.getChildren().get(0);
@@ -51,7 +52,7 @@ public class ControleurFichierGlisse implements EventHandler<MouseEvent> {
                     VueClasse vue = new VueClasse(c);
                     centre.getChildren().add(vue);
                     mod.addClasse(c);
-
+                    centre.supprimerMenusTemp();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

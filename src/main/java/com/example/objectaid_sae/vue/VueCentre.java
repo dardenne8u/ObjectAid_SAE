@@ -10,7 +10,7 @@ public class VueCentre extends Pane {
     }
 
     public void supprimerMenusTemp() {
-        getChildren().removeIf(n -> n.getClass() == VueCheckClass.class || n.getClass() == VueMenuTemporaire.class || n.getClass() == VueCreation.class);
+        getChildren().removeIf(n -> n.getClass() == VueCheckClass.class || n.getClass() == VueMenuTemporaire.class || n.getClass() == VueCreation.class || n.getClass() == VueAffichageGlobal.class);
         VueMenuTemporaire.VUE_TEMP.setCacher(true);
         VueMenuTemporaire.VUE_TEMP.notifier(null);
     }
