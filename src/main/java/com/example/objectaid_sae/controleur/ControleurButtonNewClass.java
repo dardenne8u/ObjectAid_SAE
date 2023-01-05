@@ -10,6 +10,7 @@ import javafx.event.EventHandler;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
@@ -53,12 +54,15 @@ public class ControleurButtonNewClass implements EventHandler<ActionEvent> {
                 newClasse.addAttribut(1, "test");
                 VueClasse vC = new VueClasse(newClasse);
                 VueNewClasse vnc = (VueNewClasse) ((Button) evt.getSource()).getParent();
-                newClasse.setType(vnc.getTypeClass());
+                newClasse.setType(((TextField)(src.getParent().getChildrenUnmodifiable().get(1))).getText());
                 stock.getChildren().add(vC);
                 stock = null;
+                newClasse.notifierObservateurs();
                 ((Stage) src.getScene().getWindow()).close();
-                // TODO : c pas fini
+                // TODO : c'est pas fini
             }
         }
+
+
     }
 }

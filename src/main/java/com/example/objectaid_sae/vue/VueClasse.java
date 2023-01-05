@@ -43,7 +43,6 @@ public class VueClasse extends VBox implements Observateur {
     @Override
     public void notifier(Sujet s) {
         Classe classe = (Classe) s;
-        System.out.println(classe);
         this.getChildren().clear();
         this.setMaxWidth(200);
         this.setWidth(this.getMaxWidth());

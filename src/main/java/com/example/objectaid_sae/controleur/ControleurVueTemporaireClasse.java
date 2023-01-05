@@ -1,6 +1,7 @@
 package com.example.objectaid_sae.controleur;
 
 import com.example.objectaid_sae.model.Classe;
+import com.example.objectaid_sae.vue.VueCentre;
 import com.example.objectaid_sae.vue.VueCheckClass;
 import com.example.objectaid_sae.vue.VueCreation;
 import javafx.event.ActionEvent;
@@ -44,6 +45,15 @@ public class ControleurVueTemporaireClasse implements EventHandler<ActionEvent> 
 
 
 
+    public boolean affichageCoteDroit(Node n){
+        VueCentre pane = (VueCentre) n.getParent().getParent();
+        double wp = pane.getWidth();
+        double x =  n.getParent().getLayoutX();
+        System.out.println("wp : " + wp + "\nx : " + x);
+        if(x >= wp/2 )return false;
+        return true;
+    }
+
     @Override
     public void handle(ActionEvent evt) {
 
@@ -68,7 +78,14 @@ public class ControleurVueTemporaireClasse implements EventHandler<ActionEvent> 
                 VueCheckClass ch = new VueCheckClass(this);
                 System.out.println("vue check");
                 if (MenuTemp != null) ((Pane) (src.getParent().getParent())).getChildren().remove(MenuTemp);
-                ch.setLayoutX(src.getParent().getLayoutX() + src.getWidth());
+                if( affichageCoteDroit(src)) {
+                    System.out.println("Cote droit");
+                    ch.setLayoutX(src.getParent().getLayoutX() + src.getWidth());
+                }else{
+                    System.out.println("Cote gauche");
+                    System.out.println(ch.getWidth());
+                    ch.setLayoutX(src.getParent().getLayoutX() - ch.getWidth());
+                }
                 ch.setLayoutY(src.getParent().getLayoutY());
                 ((Pane) (src.getParent().getParent())).getChildren().add(ch);
                 for(Node node : ch.getChildren()) {

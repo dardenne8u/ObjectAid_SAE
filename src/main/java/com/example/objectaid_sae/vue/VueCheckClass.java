@@ -2,6 +2,7 @@ package com.example.objectaid_sae.vue;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Insets;
 import javafx.scene.control.CheckBox;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
@@ -14,6 +15,8 @@ public class VueCheckClass extends VBox {
         CheckBox atther = new CheckBox("attributs hérités");
         CheckBox metdec = new CheckBox("méthodes déclarées");
         CheckBox mether = new CheckBox("méthodes héritées");
+        this.setWidth(130);
+        this.setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)));
         getChildren().addAll(attdec,atther,metdec,mether );
         attdec.setOnAction(handler);
         atther.setOnAction(handler);
