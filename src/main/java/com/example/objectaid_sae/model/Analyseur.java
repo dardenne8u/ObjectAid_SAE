@@ -6,15 +6,34 @@ import java.util.List;
 
 public class Analyseur {
 
+    /**
+     * Classe stockant les valeurs
+     * de l'introspection
+     */
     private final Classe classe;
+
+    /**
+     * La classe java a introspecte
+     */
     private final Class introspection;
 
 
+    /**
+     * Constructeur qui cree une classe vide
+     * et charge la classe a intropecte
+     * @param className nom de la classe compile
+     * @throws ClassNotFoundException Si le nom de la classe compile n'est pas bon
+     */
     public Analyseur(String className) throws ClassNotFoundException {
         this.introspection = Class.forName(className);
         this.classe = new Classe();
     }
 
+    /**
+     * Methode qui retour une classe
+     * apres analyse de la classe
+     * @return classe apres analyse
+     */
     public Classe analyseClasse() {
         genAttributs();
         genMethods();
@@ -24,7 +43,14 @@ public class Analyseur {
         return this.classe;
     }
 
+    /**
+     * Methode analysant les dependances
+     * vis-a-vis des implementations et
+     * des heritages
+     */
     private void genImplementAndExtendsDependencies() {
+
+        // Implementations
         String link;
         List<Class> interfaces = List.of(introspection.getInterfaces());
         for(Class inter : interfaces) {
@@ -32,6 +58,7 @@ public class Analyseur {
             classe.addDependencies(link);
         }
 
+        // Heritage
         Class superClass = introspection.getSuperclass();
         if(superClass != null) {
             link = introspection.getSimpleName() + " --|> " + superClass.getSimpleName();
@@ -39,16 +66,30 @@ public class Analyseur {
         }
     }
 
+    /**
+     * Methode analysant la signature
+     * d'une classe
+     * exemple : abstract class Example
+     * interface Example
+     */
     private void genClassSignature() {
         int code = introspection.getModifiers();
         String res;
-        if(Modifier.isAbstract(code)) res = "abstract class";
-        else if (Modifier.isInterface(code)) res = "interface";
+        if(Modifier.isInterface(code)) res = "interface";
+        else if (Modifier.isAbstract(code)) res = "abstract class";
         else res = "class";
 
         res += " " + introspection.getSimpleName();
         this.classe.setType(res);
     }
+
+    /**
+     * Permet de savoir si
+     * c'est prive, protegee, public
+     * et static ou abstract
+     * @param code Code de l'introspection
+     * @return Un string correspondant au plantUML
+     */
     private String getSignature(int code) {
         String res = "";
         if(Modifier.isPrivate(code)) res += "-";
@@ -60,6 +101,10 @@ public class Analyseur {
         return res;
     }
 
+    /**
+     * Permet de generer l'introspection
+     * des attributs
+     */
     private void genAttributs() {
         List<Field> herited = new ArrayList<>(List.of(introspection.getFields()));
         List<Field> declared = new ArrayList<>(List.of(introspection.getDeclaredFields()));
