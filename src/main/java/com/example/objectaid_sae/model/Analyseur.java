@@ -49,7 +49,6 @@ public class Analyseur {
         res += " " + introspection.getSimpleName();
         this.classe.setType(res);
     }
-
     private String getSignature(int code) {
         String res = "";
         if(Modifier.isPrivate(code)) res += "-";
@@ -88,7 +87,6 @@ public class Analyseur {
         Class type = field.getType();
         String typeName = type.getSimpleName();
         if(notClassicType(typeName)) return false;
-        System.out.println(typeName);
         String cardinalite = " \"0..1\" ";
         if(type.isArray()) {
             cardinalite = " \"0..*\" ";
@@ -101,7 +99,6 @@ public class Analyseur {
         }
 
         String link = introspection.getSimpleName() + " -->" + cardinalite + typeName + " : " + getSignature(field.getModifiers()) +field.getName();
-        System.out.println(link);
         classe.addDependencies(link);
         return true;
     }

@@ -1,0 +1,19 @@
+@startmindmap
+'https://plantuml.com/mindmap-diagram
+top to bottom direction
+
+title graphe de scene
+
+* BorderPane
+** left
+*** TreeView
+** center
+*** Pane
+**** VuClasse
+**** VuMenuTemp
+**** VucheckClass
+** top
+*** GrifPane
+
+
+@endmindmap
