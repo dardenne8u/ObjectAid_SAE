@@ -27,10 +27,10 @@ public class FabriqueVueFlecheExtends implements FabriqueVueFleche{
         VueFleche res = new VueFleche();
         Polygon poly;
         poly = fbpoly.fabriquer();
-        res.getChildren().add(poly);
         FabriqueLignePleine fbLigne = new FabriqueLignePleine(0,0,0,len);
         Line l = fbLigne.fabriquer();
         res.getChildren().add(l);
+        res.getChildren().add(poly);
         Rotate r = new Rotate();
         r.setPivotX(0);
         r.setPivotY(0);
