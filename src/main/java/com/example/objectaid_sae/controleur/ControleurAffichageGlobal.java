@@ -22,6 +22,7 @@ public class ControleurAffichageGlobal implements EventHandler<ActionEvent> {
         if(txt.contains("affichage")) {
             VueCentre centre = (VueCentre) (((BorderPane) (((Button) actionEvent.getSource()).getParent()).getParent())).getCenter();
             VueAffichageGlobal vaff = new VueAffichageGlobal(this);
+            centre.supprimerMenusTemp();
             centre.getChildren().add(vaff);
             vaff.setLayoutY(0);
             double maxX = ((((Button) actionEvent.getSource()).getParent()).getScene().getWidth() / 5 - ((Pane) (((BorderPane) (((Button) actionEvent.getSource()).getParent()).getParent())).getLeft()).getWidth());

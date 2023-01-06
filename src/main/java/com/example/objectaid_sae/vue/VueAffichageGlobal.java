@@ -6,6 +6,7 @@ import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Priority;
 
 public class VueAffichageGlobal extends GridPane {
 
@@ -22,6 +23,8 @@ public class VueAffichageGlobal extends GridPane {
         addColumn(1,aAttDec,aAttHer,aMetHer,aMtDec);
         for(Node n : getChildren()){
             ((Button)n).setOnAction(handler);
+            GridPane.setVgrow(n, Priority.ALWAYS);
+            ((Button) n).setMaxWidth(Double.MAX_VALUE);
         }
     }
 }
