@@ -189,6 +189,11 @@ public class Classe implements Sujet {
 
     @Override
     public String toString() {
+
+        String s = "Classe{\n";
+        //attributs :
+
+
         return "Classe{" +
                 "\n, attributs=" + attributs +
                 "\n, methodes=" + methodes +
