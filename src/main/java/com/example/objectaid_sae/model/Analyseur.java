@@ -143,7 +143,7 @@ public class Analyseur {
             if(notClassicType(typeName)) return false;
         }
 
-        String link = introspection.getSimpleName() + " -->" + cardinalite + typeName + " : " + getSignature(field.getModifiers()) +field.getName();
+        String link = introspection.getSimpleName() + " -->" + cardinalite + typeName + " : " + getSignature(field.getModifiers()) + " " +field.getName();
         classe.addDependencies(link);
         return true;
     }
