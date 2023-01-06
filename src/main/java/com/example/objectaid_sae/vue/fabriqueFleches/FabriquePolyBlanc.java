@@ -22,9 +22,9 @@ public class FabriquePolyBlanc implements FabriquePolygone{
     public Polygon fabriquer() {
         Polygon poly = new Polygon();
         poly.getPoints().addAll(new Double[]{
-                xc1, yc1,
-                xc1, (yc1+20.0),
-                (xc1+20.0), yc1,
+                0.0, 0.0,
+                (Math.cos(Math.acos(xc2/29600)+45)*20), (((Math.sin(Math.asin(yc2/29600)+45)*20))),
+                ((Math.cos(Math.acos(xc2/29600)-45)*20)), ((Math.sin(Math.asin(yc2/29600)-45)*20)),
 
         });
         poly.setFill(Paint.valueOf("white"));
