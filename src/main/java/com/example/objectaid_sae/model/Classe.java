@@ -9,19 +9,43 @@ import java.util.List;
 import java.util.Map;
 
 public class Classe implements Sujet {
+
+    /**
+     * constante qui correspond à un attribut déclaré
+     */
     public static final int DECLARED = 1;
+    /**
+     * constant qui correspond à un attrbut hérité
+     */
     public static final int HERITED = 2;
-
+    /**
+     * booleen permettant de savoir si les attributs et méthodes doivent etre affiches dans
+     * l'application ou non
+     */
     private boolean afficheAttributsDeclare, afficheAttributsHerite, afficheMethodeDeclare, afficheMethodeHerite, afficheConstructeur;
-    //integer : 1 = declared, 2 = herited
+    /**
+     * liste des attributs et methodes de la classe. 1 si declare, 2 si herite
+     */
     private Map<Integer, List<String>> attributs, methodes;
+    /**
+     * Liste des constructeurs de la classe
+     */
     private List<String> constructeurs;
-
+    /**
+     * signature de la classe (interface...)
+     */
     private String type;
+    /**
+     * coordonnees x,y de la classe dans le pane une fois affichee
+     */
     private double x,y;
-
+    /**
+     * liste des obervateurs de la classe
+     */
     private ArrayList<Observateur> observateurs;
-
+    /**
+     * listes de dependances de la classe
+     */
     private List<String> dependencies;
 
     //METHODES
@@ -55,7 +79,7 @@ public class Classe implements Sujet {
     }
 
     public void addAttribut(int type, String attribut) {
-        if(!this.attributs.get(type).contains(attribut))
+        if (!this.attributs.get(type).contains(attribut))
             this.attributs.get(type).add(attribut);
         notifierObservateurs();
     }
@@ -66,7 +90,7 @@ public class Classe implements Sujet {
     }
 
     public void addMethode(int type, String methode) {
-        if(!this.methodes.get(type).contains(methode))
+        if (!this.methodes.get(type).contains(methode))
             this.methodes.get(type).add(methode);
         notifierObservateurs();
     }
@@ -77,12 +101,12 @@ public class Classe implements Sujet {
     }
 
     public void addConstructeur(String constructeur) {
-        if(!this.constructeurs.contains(constructeur))
+        if (!this.constructeurs.contains(constructeur))
             this.constructeurs.add(constructeur);
     }
 
     public void addDependencies(String dependence) {
-        if(!this.dependencies.contains(dependence))
+        if (!this.dependencies.contains(dependence))
             this.dependencies.add(dependence);
     }
 
@@ -158,7 +182,7 @@ public class Classe implements Sujet {
 
     @Override
     public void notifierObservateurs() {
-        for (Observateur obs : observateurs){
+        for (Observateur obs : observateurs) {
             obs.notifier(this);
         }
     }
@@ -169,8 +193,12 @@ public class Classe implements Sujet {
                 "\n, attributs=" + attributs +
                 "\n, methodes=" + methodes +
                 "\n, constructeurs=" + constructeurs +
-                "\n, dependence="+ dependencies +
+                "\n, dependence=" + dependencies +
                 "\n, type='" + type + '\'' +
                 '}';
+    }
+
+    public List<String> getDependencies() {
+        return dependencies;
     }
 }
