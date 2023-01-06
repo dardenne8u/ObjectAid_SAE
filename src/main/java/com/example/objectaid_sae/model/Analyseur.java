@@ -20,7 +20,23 @@ public class Analyseur {
         genMethods();
         genConstructeurs();
         genClassSignature();
+        genImplementAndExtendsDependencies();
         return this.classe;
+    }
+
+    private void genImplementAndExtendsDependencies() {
+        String link;
+        List<Class> interfaces = List.of(introspection.getInterfaces());
+        for(Class inter : interfaces) {
+            link = introspection.getSimpleName() + " ..|> " + inter.getSimpleName();
+            classe.addDependencies(link);
+        }
+
+        Class superClass = introspection.getSuperclass();
+        if(!superClass.equals("Object")) {
+            link = introspection.getSimpleName() + " --|> " + superClass.getSimpleName();
+            classe.addDependencies(link);
+        }
     }
 
     private void genClassSignature() {
