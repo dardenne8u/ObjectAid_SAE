@@ -2,8 +2,11 @@ package com.example.objectaid_sae.controleur;
 
 import com.example.objectaid_sae.model.Analyseur;
 import com.example.objectaid_sae.model.Classe;
+import com.example.objectaid_sae.model.Fleche;
 import com.example.objectaid_sae.model.Model;
 import com.example.objectaid_sae.vue.VueClasse;
+import com.example.objectaid_sae.vue.fabriqueFleches.FabriqueVueFlecheImplement;
+import com.example.objectaid_sae.vue.fabriqueFleches.FabriqueVueFlecheUtilisation;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.scene.control.CheckBox;
@@ -53,6 +56,18 @@ public class ControleurFichierGlisse implements EventHandler<MouseEvent> {
             cb.setSelected(true);
             VueClasse vue = new VueClasse(c);
             centre.getChildren().add(vue);
+            for(Classe cl : mod.getClasses()){
+                for (String dep : cl.getDependencies()){
+                    if(dep.contains(nom)){
+                        Fleche f;
+                        if(dep.contains(".|>")) f = new Fleche(cl, c, "..|>");
+                        else if(dep.contains("-|>")) f = new Fleche(cl, c, "--|>");
+                        else f = new Fleche(cl,c,"-->");
+                        mod.addFleche(f);
+                        centre.getChildren().add(new FabriqueVueFlecheImplement(f).fabriquer());
+                    }
+                }
+            }
             mod.addClasse(c);
         } catch (Exception e) {
             e.printStackTrace();

@@ -19,7 +19,7 @@ public class ControleurAffichageGlobal implements EventHandler<ActionEvent> {
         Model mod = Model.getModel();
         Button src = (Button) actionEvent.getSource();
         String txt = src.getText();
-        if(txt.contains("affichage")) {
+        if(txt.contains("Affichage")) {
             VueCentre centre = (VueCentre) (((BorderPane) (((Button) actionEvent.getSource()).getParent()).getParent())).getCenter();
             VueAffichageGlobal vaff = new VueAffichageGlobal(this);
             centre.supprimerMenusTemp();

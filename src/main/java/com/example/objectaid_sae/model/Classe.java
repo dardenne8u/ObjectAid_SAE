@@ -51,7 +51,6 @@ public class Classe implements Sujet {
     //METHODES
 
 
-
     public void setType(String type) {
         this.type = type;
     }
@@ -80,7 +79,7 @@ public class Classe implements Sujet {
     }
 
     public void addAttribut(int type, String attribut) {
-        if(!this.attributs.get(type).contains(attribut))
+        if (!this.attributs.get(type).contains(attribut))
             this.attributs.get(type).add(attribut);
         notifierObservateurs();
     }
@@ -91,7 +90,7 @@ public class Classe implements Sujet {
     }
 
     public void addMethode(int type, String methode) {
-        if(!this.methodes.get(type).contains(methode))
+        if (!this.methodes.get(type).contains(methode))
             this.methodes.get(type).add(methode);
         notifierObservateurs();
     }
@@ -102,12 +101,12 @@ public class Classe implements Sujet {
     }
 
     public void addConstructeur(String constructeur) {
-        if(!this.constructeurs.contains(constructeur))
+        if (!this.constructeurs.contains(constructeur))
             this.constructeurs.add(constructeur);
     }
 
     public void addDependencies(String dependence) {
-        if(!this.dependencies.contains(dependence))
+        if (!this.dependencies.contains(dependence))
             this.dependencies.add(dependence);
     }
 
@@ -183,7 +182,7 @@ public class Classe implements Sujet {
 
     @Override
     public void notifierObservateurs() {
-        for (Observateur obs : observateurs){
+        for (Observateur obs : observateurs) {
             obs.notifier(this);
         }
     }
@@ -194,8 +193,12 @@ public class Classe implements Sujet {
                 "\n, attributs=" + attributs +
                 "\n, methodes=" + methodes +
                 "\n, constructeurs=" + constructeurs +
-                "\n, dependence="+ dependencies +
+                "\n, dependence=" + dependencies +
                 "\n, type='" + type + '\'' +
                 '}';
+    }
+
+    public List<String> getDependencies() {
+        return dependencies;
     }
 }

@@ -21,12 +21,9 @@ public class FabriquePolyBlanc implements FabriquePolygone{
     @Override
     public Polygon fabriquer() {
         Polygon poly = new Polygon();
-        poly.getPoints().addAll(new Double[]{
-                0.0, 0.0,
-                (Math.cos(Math.acos(xc2/29600)+45)*20), (((Math.sin(Math.asin(yc2/29600)+45)*20))),
-                ((Math.cos(Math.acos(xc2/29600)-45)*20)), ((Math.sin(Math.asin(yc2/29600)-45)*20)),
-
-        });
+        poly.getPoints().addAll(xc1, yc1,
+                xc1, (yc1+20.0),
+                (xc1+20.0), yc1);
         poly.setFill(Paint.valueOf("white"));
         poly.setStroke(Paint.valueOf("black"));
         return poly;

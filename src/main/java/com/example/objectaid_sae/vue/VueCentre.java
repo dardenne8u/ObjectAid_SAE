@@ -14,4 +14,8 @@ public class VueCentre extends Pane {
         VueMenuTemporaire.VUE_TEMP.setCacher(true);
         VueMenuTemporaire.VUE_TEMP.notifier(null);
     }
+
+    public void supprimerFleches(){
+        getChildren().removeIf(n -> n.getClass() == VueFleche.class);
+    }
 }

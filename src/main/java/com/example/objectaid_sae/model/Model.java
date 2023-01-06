@@ -10,6 +10,8 @@ public class Model implements Sujet {
     private List<Classe> classes;
     private List<Observateur> observateurs;
 
+    private List<Fleche> fleches;
+
     private static Model mod;
 
     public static synchronized Model getModel(){
@@ -27,6 +29,7 @@ public class Model implements Sujet {
     private Model() {
         this.classes = new ArrayList<>();
         this.observateurs = new ArrayList<>();
+        fleches = new ArrayList<>();
     }
 
     /**
@@ -64,5 +67,13 @@ public class Model implements Sujet {
         for(Observateur o : this.observateurs) {
             o.notifier(this);
         }
+    }
+
+    public List<Fleche> getFleches() {
+        return fleches;
+    }
+
+    public void addFleche(Fleche f){
+        fleches.add(f);
     }
 }

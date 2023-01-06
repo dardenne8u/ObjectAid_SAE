@@ -8,9 +8,9 @@ import javafx.scene.layout.Pane;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Polygon;
 
-public class VueFleche extends Pane implements Observateur {
+public class VueFleche extends Pane {
 
-    public Classe c1;
+    /*public Classe c1;
     public Classe c2;
 
     public VueFleche (Sujet s1, Sujet s2){
@@ -32,5 +32,5 @@ public class VueFleche extends Pane implements Observateur {
 
         this.getChildren().addAll(f.fabriquer(), fpp);
         
-    }
+    }*/
 }
