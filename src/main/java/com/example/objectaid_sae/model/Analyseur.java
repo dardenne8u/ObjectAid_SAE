@@ -33,7 +33,7 @@ public class Analyseur {
         }
 
         Class superClass = introspection.getSuperclass();
-        if(!superClass.equals("Object")) {
+        if(superClass != null) {
             link = introspection.getSimpleName() + " --|> " + superClass.getSimpleName();
             classe.addDependencies(link);
         }
