@@ -9,22 +9,47 @@ import java.util.List;
 import java.util.Map;
 
 public class Classe implements Sujet {
+
+    /**
+     * constante qui correspond à un attribut déclaré
+     */
     public static final int DECLARED = 1;
+    /**
+     * constant qui correspond à un attrbut hérité
+     */
     public static final int HERITED = 2;
-
+    /**
+     * booleen permettant de savoir si les attributs et méthodes doivent etre affiches dans
+     * l'application ou non
+     */
     private boolean afficheAttributsDeclare, afficheAttributsHerite, afficheMethodeDeclare, afficheMethodeHerite, afficheConstructeur;
-    //integer : 1 = declared, 2 = herited
+    /**
+     * liste des attributs et methodes de la classe. 1 si declare, 2 si herite
+     */
     private Map<Integer, List<String>> attributs, methodes;
+    /**
+     * Liste des constructeurs de la classe
+     */
     private List<String> constructeurs;
-
+    /**
+     * signature de la classe (interface...)
+     */
     private String type;
+    /**
+     * coordonnees x,y de la classe dans le pane une fois affichee
+     */
     private double x,y;
-
+    /**
+     * liste des obervateurs de la classe
+     */
     private ArrayList<Observateur> observateurs;
-
+    /**
+     * listes de dependances de la classe
+     */
     private List<String> dependencies;
 
     //METHODES
+
 
 
     public void setType(String type) {
