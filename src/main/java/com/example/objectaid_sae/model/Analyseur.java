@@ -55,13 +55,57 @@ public class Analyseur {
 
     private void genAttributsInClass(int code,List<Field> fields) {
         String res;
+        Class type;
         for (Field f : fields) {
+            type = f.getType();
+            if(type.getSimpleName().matches("^[A-Z][A-z]+"))
+                if(genLink(f))
+                    continue;
             res = getSignature(f.getModifiers());
             res += f.getName();
-            res += " : " + f.getType().getSimpleName();
+            res += " : " + type.getSimpleName();
             this.classe.addAttribut(code, res);
         }
     }
+
+    private boolean genLink(Field field) {
+        Class type = field.getType();
+        String typeName = type.getSimpleName();
+        if(notClassicType(typeName)) return false;
+        System.out.println(typeName);
+        String cardinalite = " \"0..1\" ";
+        if(type.isArray()) {
+            cardinalite = " \"0..*\" ";
+            typeName = typeName.substring(0, typeName.lastIndexOf("["));
+        } else if (isContainsMoreThanOneValue(typeName)) {
+            cardinalite  = " \"0..*\" ";
+            typeName = field.getGenericType().getTypeName();
+            typeName = typeName.substring(typeName.lastIndexOf(".")+1, typeName.length()-1);
+            if(notClassicType(typeName)) return false;
+        }
+
+        String link = introspection.getSimpleName() + " -->" + cardinalite + typeName + " : " + getSignature(field.getModifiers()) +field.getName();
+        System.out.println(link);
+        classe.addDependencies(link);
+        return true;
+    }
+
+    private boolean isContainsMoreThanOneValue(String type) {
+        boolean isList = type.contains("List");
+        boolean isMap = type.contains("Map");
+        boolean isSet = type.contains("Set");
+        return isSet || isList || isMap;
+    }
+
+    private boolean notClassicType(String simpleName) {
+        boolean string = simpleName.contains("String");
+        boolean integer = simpleName.contains("Integer");
+        boolean doubleClass = simpleName.contains("Double");
+        boolean floatClass = simpleName.contains("Float");
+        boolean longClass = simpleName.contains("Long");
+        return string || integer || doubleClass || floatClass || longClass;
+    }
+
 
     private void genMethods() {
         List<Method> herited = new ArrayList<>(List.of(introspection.getMethods()));
@@ -103,6 +147,12 @@ public class Analyseur {
             res += ")";
             this.classe.addConstructeur(res);
         }
+
+    }
+
+    public static void main(String[] args) throws ClassNotFoundException {
+        System.out.println(
+        new Analyseur("com.example.objectaid_sae.tests.classTest").analyseClasse());
 
     }
 

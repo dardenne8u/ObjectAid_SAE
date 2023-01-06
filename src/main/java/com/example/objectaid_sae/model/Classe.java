@@ -22,6 +22,8 @@ public class Classe implements Sujet {
 
     private ArrayList<Observateur> observateurs;
 
+    private List<String> dependencies;
+
     //METHODES
 
 
@@ -47,6 +49,7 @@ public class Classe implements Sujet {
         this.methodes.put(HERITED, new ArrayList<>());
         this.constructeurs = new ArrayList<>();
         this.observateurs = new ArrayList<>();
+        this.dependencies = new ArrayList<>();
 
         afficheAttributsDeclare = afficheAttributsHerite = afficheMethodeDeclare = afficheConstructeur = afficheMethodeHerite = true;
     }
@@ -76,6 +79,11 @@ public class Classe implements Sujet {
     public void addConstructeur(String constructeur) {
         if(!this.constructeurs.contains(constructeur))
             this.constructeurs.add(constructeur);
+    }
+
+    public void addDependencies(String dependence) {
+        if(!this.dependencies.contains(dependence))
+            this.dependencies.add(dependence);
     }
 
 
@@ -158,18 +166,11 @@ public class Classe implements Sujet {
     @Override
     public String toString() {
         return "Classe{" +
-                "\nafficheAttributsDeclare=" + afficheAttributsDeclare +
-                "\n, afficheAttributsHerite=" + afficheAttributsHerite +
-                "\n, afficheMethodeDeclare=" + afficheMethodeDeclare +
-                "\n, afficheMethodeHerite=" + afficheMethodeHerite +
-                "\n, afficheConstructeur=" + afficheConstructeur +
                 "\n, attributs=" + attributs +
                 "\n, methodes=" + methodes +
                 "\n, constructeurs=" + constructeurs +
+                "\n, dependence="+ dependencies +
                 "\n, type='" + type + '\'' +
-                "\n, x=" + x +
-                "\n, y=" + y +
-                "\n, observateurs=" + observateurs +
                 '}';
     }
 }
