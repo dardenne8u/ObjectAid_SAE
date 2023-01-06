@@ -10,7 +10,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 
 public class VueNewClasse extends GridPane {
-    private CheckBox abstr, impl, exte, pub, pro, pri;
+    private CheckBox abstr, impl, exte, pub, pro, pri, inter;
     private TextField impleName, nameField,extName;
 
 
@@ -23,6 +23,7 @@ public class VueNewClasse extends GridPane {
         // Création des éléments de la vue
         Label name = new Label("Nom de la nouvelle classe :");
         nameField = new TextField();
+        inter = new CheckBox("Interface");
         abstr = new CheckBox("classe abstraite");
         impl = new CheckBox("classe implémente");
         exte = new CheckBox("classe hérite");
@@ -37,8 +38,25 @@ public class VueNewClasse extends GridPane {
 
 
         valider.setAlignment(Pos.BASELINE_RIGHT);
-        impl.setOnAction(event -> impleName.setDisable(!impl.isSelected()));
-        exte.setOnAction(event -> extName.setDisable(!exte.isSelected()));
+        impl.setOnAction(event -> {if (impl.isSelected()) {
+            inter.setSelected(false);
+            impleName.setDisable(false);
+        }else{ impleName.setDisable(true);impleName.clear();} });
+        exte.setOnAction(event ->{ extName.setDisable(!exte.isSelected()); extName.clear();});
+
+
+        inter.setOnAction(event -> {
+            if (inter.isSelected()) {
+                impl.setSelected(false);
+                abstr.setSelected(false);
+                impleName.clear();
+                impleName.setDisable(true);
+            }
+        });
+
+        abstr.setOnAction(event -> {
+            if (abstr.isSelected())inter.setSelected(false);
+        });
 
 
 
@@ -71,6 +89,7 @@ public class VueNewClasse extends GridPane {
         // Ajout des éléments au GridPane
         add(name, 0, 0);
         add(nameField, 1, 0);
+        add(inter, 0, 1);
         add(abstr, 0, 2);
         add(impl, 0, 3);
         add(impleName, 1, 3);
@@ -87,14 +106,21 @@ public class VueNewClasse extends GridPane {
     }
 
     public String getTypeClass() {
-        String res = "public";
-        if(pub.isSelected()) res = "public";
-        else if(pri.isSelected()) res = "private";
-        else if(pro.isSelected()) res = "protected";
+        String res = "";
+        if(pub.isSelected()) res = "public ";
+        else if(pri.isSelected()) res = "private ";
+        else if(pro.isSelected()) res = "protected ";
 
-        if(abstr.isSelected()) res += " abstract";
-        if(nameField.getText().matches("^[A-Z][A-z]+"))
-            res += " " + nameField.getText();
+        if(inter.isSelected()) res += "interface ";
+        else if(abstr.isSelected()) res += "abstract class ";
+        else res += "class ";
+        res += nameField.getText();
+
+        System.out.println(res);
         return res;
+    }
+
+    public boolean matchName() {
+        return nameField.getText().matches("^[A-Z][A-z]+");
     }
 }
