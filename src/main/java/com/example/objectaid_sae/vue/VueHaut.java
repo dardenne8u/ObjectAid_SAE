@@ -14,12 +14,14 @@ public class VueHaut extends GridPane {
         setGridLinesVisible(true);
         setMinHeight(50);
         setMaxWidth(Double.MAX_VALUE);
-        Button prj = new Button("projet");
+        Button prj = new Button("Projet");
+        prj.setFont(Font.font(null, FontWeight.BOLD, 16));
         GridPane.setHgrow(prj, Priority.ALWAYS);
         GridPane.setVgrow(prj, Priority.ALWAYS);
         prj.setMaxWidth(Double.MAX_VALUE);
         prj.setMaxHeight(Double.MAX_VALUE);
-        Button aff = new Button("affichage");
+        Button aff = new Button("Affichage");
+        aff.setFont(Font.font(null, FontWeight.BOLD, 16));
         aff.setOnAction(new ControleurAffichageGlobal());
         GridPane.setHgrow(aff, Priority.ALWAYS);
         GridPane.setVgrow(aff, Priority.ALWAYS);
