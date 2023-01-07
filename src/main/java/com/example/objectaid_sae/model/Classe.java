@@ -22,15 +22,20 @@ public class Classe implements Sujet {
      * booleen permettant de savoir si les attributs et méthodes doivent etre affiches dans
      * l'application ou non
      */
-    private boolean afficheAttributsDeclare, afficheAttributsHerite, afficheMethodeDeclare, afficheMethodeHerite, afficheConstructeur;
+    private boolean afficheAttributsDeclare;
+    private boolean afficheAttributsHerite;
+    private boolean afficheMethodeDeclare;
+    private boolean afficheMethodeHerite;
+    private final boolean afficheConstructeur;
     /**
      * liste des attributs et methodes de la classe. 1 si declare, 2 si herite
      */
-    private Map<Integer, List<String>> attributs, methodes;
+    private final Map<Integer, List<String>> attributs;
+    private final Map<Integer, List<String>> methodes;
     /**
      * Liste des constructeurs de la classe
      */
-    private List<String> constructeurs;
+    private final List<String> constructeurs;
     /**
      * signature de la classe (interface...)
      */
@@ -42,11 +47,11 @@ public class Classe implements Sujet {
     /**
      * liste des obervateurs de la classe
      */
-    private ArrayList<Observateur> observateurs;
+    private final ArrayList<Observateur> observateurs;
     /**
      * listes de dependances de la classe
      */
-    private List<String> dependencies;
+    private final List<String> dependencies;
 
     //METHODES
 

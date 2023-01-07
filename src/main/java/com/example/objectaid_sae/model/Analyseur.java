@@ -195,7 +195,7 @@ public class Analyseur {
         int i;
         for(Constructor c : this.introspection.getConstructors()) {
             res = getSignature(c.getModifiers());
-            res += c.getName() + "(";
+            res += introspection.getSimpleName() + "(";
             i = 0;
             for(Parameter p : c.getParameters()) {
                 if(i>0) res += ", ";
