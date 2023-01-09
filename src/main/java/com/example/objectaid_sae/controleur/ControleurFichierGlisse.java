@@ -61,8 +61,8 @@ public class ControleurFichierGlisse implements EventHandler<MouseEvent> {
             for(Classe cl : mod.getClasses()){
                 for (String dep : cl.getDependencies()){
                     if(dep.contains(nom)){
-                        Fleche f;
-                        FabriqueVueFleche fab;
+                        Fleche f = null;
+                        FabriqueVueFleche fab = null;
                         if(dep.contains(".|>")) {
                             f = new Fleche(cl, c, "..|>");
                             fab = new FabriqueVueFlecheImplement(f);
@@ -71,7 +71,7 @@ public class ControleurFichierGlisse implements EventHandler<MouseEvent> {
                             f = new Fleche(cl, c, "--|>");
                             fab = new FabriqueVueFlecheExtends (f);
                         }
-                        else {
+                        else if(dep.contains("->")){
                             f = new Fleche(cl, c, "-->");
                             fab = new FabriqueVueFlecheUtilisation(f);
                         }

@@ -15,12 +15,14 @@ public class VueAffichageGlobal extends GridPane {
         Button mAttHer = new Button("masquer attributs hérités");
         Button mMtDec = new Button("masquer méthodes déclarées");
         Button mMetHer = new Button("masquer méthodes héritées");
+        Button mDep = new Button("masquer dépendances");
         Button aAttDec = new Button("afficher attributs déclarés");
         Button aAttHer = new Button("afficher attributs hérités");
         Button aMtDec = new Button("afficher méthodes déclarées");
         Button aMetHer = new Button("afficher méthodes héritées");
-        addColumn(0,mAttDec,mAttHer,mMetHer,mMtDec);
-        addColumn(1,aAttDec,aAttHer,aMetHer,aMtDec);
+        Button aDep = new Button("afficher dépendances");
+        addColumn(0,mAttDec,mAttHer,mMetHer,mMtDec,mDep);
+        addColumn(1,aAttDec,aAttHer,aMetHer,aMtDec,aDep);
         for(Node n : getChildren()){
             ((Button)n).setOnAction(handler);
             GridPane.setVgrow(n, Priority.ALWAYS);
