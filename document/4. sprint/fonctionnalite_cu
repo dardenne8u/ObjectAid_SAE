@@ -1,14 +1,18 @@
-Affichage des dépendances externes :
+1. Affichage des dépendances externes :
+(Gregory)
 Permettre a une classe de pouvoir générer
 le diagramme des classes externes qu'il utilise tel que (EventHandler, BufferedReader, ...)
 
-Enregistrer le document sous le format image :
+2. Enregistrer le document sous le format image :
+(Nathan)
 Permettre à l'utilisateur d'enregistrer son diagramme sous forme d'image
 
-Enregistrer le document sous le format PlantUML :
+3. Enregistrer le document sous le format PlantUML :
+(Lucie)
 Permettre à l'utilisateur d'enregistrer le diagramme
 sous le format texte de plantUML
 
-Afficher les dépendances:
+4. Afficher les dépendances:
+(Nathanael)
 Permettre à l'utilisateur de voir les dépendances entre chaque
 classe par le biais de flèche les représentant
