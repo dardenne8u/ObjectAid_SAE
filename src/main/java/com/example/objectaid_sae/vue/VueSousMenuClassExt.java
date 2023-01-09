@@ -17,10 +17,12 @@ public class VueSousMenuClassExt extends VBox implements Observateur {
     public void notifier(Sujet s) {
         final Classe classe = (Classe) s;
         final Pane centre = (Pane) this.getParent();
+        this.setWidth(100);
         this.getChildren().clear();
         if(classe.getPackageExternes().size() > 0) {
             for(String packageExt : classe.getPackageExternes()) {
                 Button lab = new Button(packageExt);
+                lab.setMinWidth(100);
                 for(Classe cTemp : Model.getModel().getClasses()) {
                     String name = packageExt.substring(packageExt.lastIndexOf(".")+1);
                     System.out.println(cTemp.getType() + "  " + name);
