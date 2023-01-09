@@ -58,8 +58,6 @@ public class Analyseur {
         for(Class inter : interfaces) {
             link = introspection.getSimpleName() + " ..|> " + inter.getSimpleName();
             if(!inter.getPackageName().contains(packageProjet)){
-                System.out.println(inter.getPackageName());
-                System.out.println(packageProjet);
                 classe.addPackageExternes(inter.getName());
             }
 

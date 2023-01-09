@@ -29,7 +29,7 @@ public class VueFichiers extends GridPane implements Observateur {
                         BufferedReader br = new BufferedReader(new FileReader(file));
                         String line = br.readLine();
                         if(line != null) {
-                            Analyseur.packageProjet = line.substring(line.indexOf(" ")+1);
+                            Analyseur.packageProjet = line.substring(line.indexOf(" ")+1, line.indexOf(";"));
                         } else {
                             Analyseur.packageProjet = "";
                         }
