@@ -1,2 +1,4 @@
 Pour le prochain sprint :
 refactoriser le code des enregistrements pour éviter les copié/collé de code.
+Pour les dépendances, les flèches suivent bien le centre de leur classe avec le polygone de la flèche
+seulement quand les classes passent en dessous ou au dessus, ce n'est plus bon.
