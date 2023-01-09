@@ -6,13 +6,18 @@ import com.example.objectaid_sae.observateur.Sujet;
 import javafx.beans.Observable;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontPosture;
+import javafx.scene.text.FontWeight;
 
 public class VueProjet  extends GridPane implements Observateur{
 
     Button saveImg, saveUml, giveTitle, cancel, valider;
     TextField pathImg, pathUml, nameTitle;
+    Label err;
 
 
     public VueProjet(ControleurButtonProjet cont){
@@ -43,6 +48,10 @@ public class VueProjet  extends GridPane implements Observateur{
         pathUml.setVisible(false);
         nameTitle = new TextField();
         nameTitle.setMaxWidth(250);
+
+        err = new Label("Dossier Introuvable");
+        err.setFont(Font.font("Verdana", FontWeight.BOLD, FontPosture.REGULAR, 14));
+        err.setVisible(false);
 
 
         cancel.setOnAction(cont);
@@ -78,6 +87,7 @@ public class VueProjet  extends GridPane implements Observateur{
 
         add(cancel, 0, 3);
         add(valider, 5, 3);
+        add(err,1, 3 );
 
 
 

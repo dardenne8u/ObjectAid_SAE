@@ -6,16 +6,18 @@ import com.example.objectaid_sae.vue.VueCentre;
 import com.example.objectaid_sae.vue.VueProjet;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.SnapshotParameters;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.WritableImage;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.embed.swing.SwingFXUtils;
-
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -27,6 +29,8 @@ public class ControleurButtonProjet implements EventHandler<ActionEvent> {
 
     Pane pane;
     VueProjet vueProjet;
+
+    boolean exit = true;
 
     public ControleurButtonProjet(VueProjet vueProjet){
         this.vueProjet = (VueProjet) vueProjet;
@@ -51,8 +55,6 @@ public class ControleurButtonProjet implements EventHandler<ActionEvent> {
         // Enregistrer l'image dans un fichier
         File file = new File(path);
         ImageIO.write(SwingFXUtils.fromFXImage(image,null), "png", file);
-
-
     }
 
 
@@ -65,6 +67,9 @@ public class ControleurButtonProjet implements EventHandler<ActionEvent> {
                 BorderPane borderPane = (BorderPane) src.getParent().getParent();
                 pane = (VueCentre) borderPane.getCenter();
                 openProjetWindow();
+            }
+            if (src.getText().equals("Annuler")){
+                ((Stage) src.getScene().getWindow()).close();
             }
             if (src.getText().equals("Valider")){
 
@@ -80,6 +85,7 @@ public class ControleurButtonProjet implements EventHandler<ActionEvent> {
                 if (file_verif_img.exists()){
                         if (string_nom != null){
                         String img_nom = string_enregistrer_uml + "\\" + string_nom;
+                            exit=true;
                             System.out.println("existant ! : " + img_nom);
                             try{saveImg(pane, img_nom);
 
@@ -89,7 +95,8 @@ public class ControleurButtonProjet implements EventHandler<ActionEvent> {
                         }
                 }else {
                     System.out.println("inexistant");
-
+                    ((Label) src.getParent().getChildrenUnmodifiable().get(8)).setVisible(true);
+                    exit = false;
                 }
 
 
@@ -99,6 +106,7 @@ public class ControleurButtonProjet implements EventHandler<ActionEvent> {
 
                     if (string_nom != null){
                         String uml_nom = string_enregistrer_uml + "\\" + string_nom;
+                        exit=true;
                         System.out.println("existant ! : " + uml_nom);
                     try {
                         this.enregUML(uml_nom);
@@ -106,12 +114,12 @@ public class ControleurButtonProjet implements EventHandler<ActionEvent> {
                         e.printStackTrace();
                     }
                     }
-                }else {
+                } else {
                     System.out.println("inexistant");
-
+                    ((Label) src.getParent().getChildrenUnmodifiable().get(8)).setVisible(true);
+                    exit=false;
                 }
-
-
+                    if(exit)((Stage) src.getScene().getWindow()).close();
             }
 
 
