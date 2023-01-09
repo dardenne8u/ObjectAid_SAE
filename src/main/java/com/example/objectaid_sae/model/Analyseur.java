@@ -6,6 +6,8 @@ import java.util.List;
 
 public class Analyseur {
 
+
+    public static String packageProjet;
     /**
      * Classe stockant les valeurs
      * de l'introspection
@@ -55,6 +57,10 @@ public class Analyseur {
         List<Class> interfaces = List.of(introspection.getInterfaces());
         for(Class inter : interfaces) {
             link = introspection.getSimpleName() + " ..|> " + inter.getSimpleName();
+            if(!inter.getPackageName().contains(packageProjet)){
+                classe.addPackageExternes(inter.getName());
+            }
+
             classe.addDependencies(link);
         }
 
@@ -63,6 +69,10 @@ public class Analyseur {
         if(superClass != null) {
             link = introspection.getSimpleName() + " --|> " + superClass.getSimpleName();
             classe.addDependencies(link);
+            if(!superClass.getPackageName().contains(packageProjet)){
+                classe.addPackageExternes(superClass.getName());
+            }
+
         }
     }
 
@@ -113,6 +123,12 @@ public class Analyseur {
         genAttributsInClass(Classe.DECLARED, declared);
     }
 
+    /**
+     * Genere l'introspection en fonction
+     * du code et de la list donnee
+     * @param code code de la map (herited, declared)
+     * @param fields list des attributs
+     */
     private void genAttributsInClass(int code,List<Field> fields) {
         String res;
         Class type;
@@ -128,19 +144,32 @@ public class Analyseur {
         }
     }
 
+    /**
+     * Permet de generer un lien entre deux classes
+     * en prenant en compte l'attribut
+     * @param field attribut faisant le lien
+     * @return boolean pour exprimer si le lien a ete cree
+     */
     private boolean genLink(Field field) {
-        Class type = field.getType();
+        Class<?> type = field.getType();
         String typeName = type.getSimpleName();
+        if(notClassicType(typeName)) return false; // lien non genere
         if(notClassicType(typeName)) return false;
+        if(!type.getPackageName().contains(packageProjet)) {
+            classe.addPackageExternes(type.getName());
+        }
         String cardinalite = " \"0..1\" ";
-        if(type.isArray()) {
+
+        if(type.isArray()) { // verification si l'attribut est un tableau -> []
             cardinalite = " \"0..*\" ";
             typeName = typeName.substring(0, typeName.lastIndexOf("["));
-        } else if (isContainsMoreThanOneValue(typeName)) {
+        } else if (isContainsMoreThanOneValue(typeName)) { // verifie si l'attribut est une Collection
             cardinalite  = " \"0..*\" ";
             typeName = field.getGenericType().getTypeName();
+            // typeName = Collection<package.ClassName>
             typeName = typeName.substring(typeName.lastIndexOf(".")+1, typeName.length()-1);
-            if(notClassicType(typeName)) return false;
+            // typeName = ClassName
+            if(notClassicType(typeName)) return false; // lien non genere
         }
 
         String link = introspection.getSimpleName() + " -->" + cardinalite + typeName + " : " + getSignature(field.getModifiers()) + " " +field.getName();
@@ -148,6 +177,12 @@ public class Analyseur {
         return true;
     }
 
+    /**
+     * Permet de verifier si un attribut
+     * est une collection
+     * @param type String du type de l'attribut
+     * @return vrai si c'est une collection, faux sinon
+     */
     private boolean isContainsMoreThanOneValue(String type) {
         boolean isList = type.contains("List");
         boolean isMap = type.contains("Map");
@@ -155,6 +190,13 @@ public class Analyseur {
         return isSet || isList || isMap;
     }
 
+    /**
+     * Permet de vérifier que le type
+     * n'est pas une classe correspondant a
+     * int, double, float, long ou String
+     * @param simpleName type de l'attribut
+     * @return vrai si ca correspond, sinon faux
+     */
     private boolean notClassicType(String simpleName) {
         boolean string = simpleName.contains("String");
         boolean integer = simpleName.contains("Integer");
@@ -165,6 +207,10 @@ public class Analyseur {
     }
 
 
+    /**
+     * Permet de generer toute les methodes
+     * de la class a analysee
+     */
     private void genMethods() {
         List<Method> herited = new ArrayList<>(List.of(introspection.getMethods()));
         List<Method> declared = new ArrayList<>(List.of(introspection.getDeclaredMethods()));
@@ -173,37 +219,50 @@ public class Analyseur {
         genMethodsInClass(Classe.DECLARED, declared);
     }
 
+    /**
+     * Genere le string des methods a partir
+     * de la list donnee en parametre et le stock
+     * dans la map avec le code donnee en parametre
+     * @param code code pour la map, utiliser les constantes(HERITED, DECLARED)
+     * @param methods liste des methods dans la classe
+     */
     private void genMethodsInClass(int code, List<Method> methods) {
-        String res;
+        StringBuilder res;
         int i;
         for(Method m : methods) {
-            res = getSignature(m.getModifiers());
-            res += m.getName() + "(";
+            res = new StringBuilder(getSignature(m.getModifiers()));
+            res.append(m.getName()).append("(");
             i = 0;
             for(Parameter p : m.getParameters()) {
-                if(i>0) res += ", ";
-                res += p.getType().getSimpleName();
+                if(i>0) res.append(", ");
+                res.append(p.getType().getSimpleName());
                 i++;
             }
-            res += ") : " + m.getReturnType().getSimpleName();
-            this.classe.addMethode(code, res);
+            res.append(") : ").append(m.getReturnType().getSimpleName());
+            this.classe.addMethode(code, res.toString());
         }
     }
 
+    /**
+     * Genere les constructeur de la classe
+     * a analyse
+     */
     private void genConstructeurs() {
-        String res;
+        StringBuilder res;
         int i;
         for(Constructor c : this.introspection.getConstructors()) {
-            res = getSignature(c.getModifiers());
-            res += c.getName() + "(";
+            res = new StringBuilder(getSignature(c.getModifiers()));
+            res.append(introspection.getSimpleName()).append("(");
+            // res = + ClassName(
             i = 0;
             for(Parameter p : c.getParameters()) {
-                if(i>0) res += ", ";
-                res += p.getType().getSimpleName();
+                if(i>0) res.append(", "); // ajoute une virgule si un argument ou plus a ete mis
+                // Ajout du type de l'argument p
+                res.append(p.getType().getSimpleName());
                 i++;
             }
-            res += ")";
-            this.classe.addConstructeur(res);
+            res.append(")");
+            this.classe.addConstructeur(res.toString());
         }
 
     }

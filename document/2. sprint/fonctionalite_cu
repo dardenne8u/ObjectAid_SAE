@@ -1,0 +1,14 @@
+fonctionalitées du sprint :
+1. affichage menu temporaire :
+(Gregory, Nathan)
+Affichage d'un menu au clique droit de la souris sur une classe dans le graphe. Dans ce menu, possibilité de
+masquer ou afficher certains composants de la classe
+
+2. déplacer une classe déjà affichée dans le Pane :
+(Lucie>Gregory)
+Clique gauche maintenu sur une classe pour la bouger dans le pane. Fait de manière à ce que la classe ne puisse
+pas sortir de la fenêtre.
+
+3. ajouter un attribut ou une méthode :
+(Nathan, Nathanael)
+Permet depuis le menu temporaire d'ajouter des composants à la classe (des attributs ou des méthodes)

@@ -18,7 +18,7 @@ public class classTest extends AbstractTest implements InterfaceTest{
 
     private Set<Analyseur> set;
 
-    protected classTest(int num) {
+    public classTest(int num) {
         super(num);
     }
 

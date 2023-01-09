@@ -4,6 +4,7 @@ import com.example.objectaid_sae.model.Analyseur;
 import com.example.objectaid_sae.model.Classe;
 import com.example.objectaid_sae.model.Fleche;
 import com.example.objectaid_sae.model.Model;
+import com.example.objectaid_sae.vue.VueCentre;
 import com.example.objectaid_sae.vue.VueClasse;
 import com.example.objectaid_sae.vue.fabriqueFleches.FabriqueVueFleche;
 import com.example.objectaid_sae.vue.fabriqueFleches.FabriqueVueFlecheExtends;
@@ -53,54 +54,14 @@ public class ControleurFichierGlisse implements EventHandler<MouseEvent> {
             while (!line.contains("package ")) line = r.readLine();
             line = line.split("package ")[1].split(";")[0];
             Classe c = new Analyseur(line + "."+ nom).analyseClasse();
+            VueClasse vue = new VueClasse(c);
             c.setX(mouseEvent.getSceneX() - centre.getLayoutX());
             c.setY(mouseEvent.getSceneY() - centre.getLayoutY());
             cb.setSelected(true);
-            VueClasse vue = new VueClasse(c);
             centre.getChildren().add(vue);
-            for(Classe cl : mod.getClasses()){
-                for (String dep : cl.getDependencies()){
-                    if(dep.contains(nom)){
-                        Fleche f;
-                        FabriqueVueFleche fab;
-                        if(dep.contains(".|>")) {
-                            f = new Fleche(cl, c, "..|>");
-                            fab = new FabriqueVueFlecheImplement(f);
-                        }
-                        else if(dep.contains("-|>")) {
-                            f = new Fleche(cl, c, "--|>");
-                            fab = new FabriqueVueFlecheExtends (f);
-                        }
-                        else {
-                            f = new Fleche(cl, c, "-->");
-                            fab = new FabriqueVueFlecheUtilisation(f);
-                        }
-                        mod.addFleche(f);
-                        centre.getChildren().add(fab.fabriquer());
-                    }
-                    for(String dep2 : c.getDependencies()){
-                        if(dep2.contains(cl.getType().substring(cl.getType().lastIndexOf(" ")))){
-                            Fleche f;
-                            FabriqueVueFleche fab;
-                            if(dep.contains(".|>")) {
-                                f = new Fleche(c, cl, "..|>");
-                                fab = new FabriqueVueFlecheImplement(f);
-                            }
-                            else if(dep.contains("-|>")) {
-                                f = new Fleche(c, cl, "--|>");
-                                fab = new FabriqueVueFlecheExtends (f);
-                            }
-                            else {
-                                f = new Fleche(c, cl, "-->");
-                                fab = new FabriqueVueFlecheUtilisation(f);
-                            }
-                            mod.addFleche(f);
-                            centre.getChildren().add(fab.fabriquer());
-                        }
-                    }
-                }
-            }
+            Fleche.CreerFleches(c, (VueCentre) centre);
             mod.addClasse(c);
+            vue.notifier(c);
         } catch (Exception e) {
             e.printStackTrace();
         }

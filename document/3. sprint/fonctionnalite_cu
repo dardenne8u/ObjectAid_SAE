@@ -1,15 +1,17 @@
-1. Créer une nouvelle classe :
+1. Créer une nouvelle classe : (Nathan)
 Bouton qui permet de créer une nouvelle classe. Une nouvelle fenêtre d'affiche,
 un formulaire à remplir (Nom et état de la classe)
 
-2. générer un diagramme UML d'un package
+2. générer un diagramme UML d'un package (Nathanael)
 Permet de glisser-déposer un dossier entier et d'en afficher toutes les classes.
 
-3. Affichage des opérations générales applicables à toutes les classes
+3. Affichage des opérations générales applicables à toutes les classes (Nathanael)
 Choisir ce qui est visible ou non des classes afficher (attributs, méthode ...) sur
 toutes les classes en même temps.
 
 4. Afficher les dépendances
+(Gregory{modele/analyseur}, Lucie{FabriquePoly, FabriqueLigne, VueFleche, calculs annexes},
+Nathanael{FabriqeFleche, VueFleche})
 Affichage des flèches de dépendances entre les classes. Les flèches (aspect d'implémentation)
 s'affichent d'une classe à l'autre mais elles ne bougent pas si la classe est déplacée. Et elles
 ont toutes le même aspect pour les différents types de dépendances.

@@ -3,10 +3,7 @@ package com.example.objectaid_sae.model;
 import com.example.objectaid_sae.observateur.Observateur;
 import com.example.objectaid_sae.observateur.Sujet;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class Classe implements Sujet {
 
@@ -22,15 +19,20 @@ public class Classe implements Sujet {
      * booleen permettant de savoir si les attributs et méthodes doivent etre affiches dans
      * l'application ou non
      */
-    private boolean afficheAttributsDeclare, afficheAttributsHerite, afficheMethodeDeclare, afficheMethodeHerite, afficheConstructeur;
+    private boolean afficheAttributsDeclare;
+    private boolean afficheAttributsHerite;
+    private boolean afficheMethodeDeclare;
+    private boolean afficheMethodeHerite;
+    private boolean afficheConstructeur;
     /**
      * liste des attributs et methodes de la classe. 1 si declare, 2 si herite
      */
-    private Map<Integer, List<String>> attributs, methodes;
+    private final Map<Integer, List<String>> attributs;
+    private final Map<Integer, List<String>> methodes;
     /**
      * Liste des constructeurs de la classe
      */
-    private List<String> constructeurs;
+    private final List<String> constructeurs;
     /**
      * signature de la classe (interface...)
      */
@@ -42,11 +44,13 @@ public class Classe implements Sujet {
     /**
      * liste des obervateurs de la classe
      */
-    private ArrayList<Observateur> observateurs;
+    private final ArrayList<Observateur> observateurs;
     /**
      * listes de dependances de la classe
      */
-    private List<String> dependencies;
+    private final List<String> dependencies;
+
+    private List<String> packageClassExternes;
 
     //METHODES
 
@@ -64,6 +68,7 @@ public class Classe implements Sujet {
     }
 
     public Classe() {
+        this.packageClassExternes = new ArrayList<>();
         this.attributs = new HashMap<>();
         this.attributs.put(DECLARED, new ArrayList<>());
         this.attributs.put(HERITED, new ArrayList<>());
@@ -76,6 +81,16 @@ public class Classe implements Sujet {
         this.dependencies = new ArrayList<>();
 
         afficheAttributsDeclare = afficheAttributsHerite = afficheMethodeDeclare = afficheConstructeur = afficheMethodeHerite = true;
+    }
+
+
+    public void addPackageExternes(String packageExt) {
+        if(!this.packageClassExternes.contains(packageExt))
+            this.packageClassExternes.add(packageExt);
+    }
+
+    public List<String> getPackageExternes() {
+        return this.packageClassExternes;
     }
 
     public void addAttribut(int type, String attribut) {
@@ -189,16 +204,55 @@ public class Classe implements Sujet {
 
     @Override
     public String toString() {
-        return "Classe{" +
-                "\n, attributs=" + attributs +
-                "\n, methodes=" + methodes +
-                "\n, constructeurs=" + constructeurs +
-                "\n, dependence=" + dependencies +
-                "\n, type='" + type + '\'' +
-                '}';
+
+        String s = this.type+"{\n";
+        //attributs :
+        List<String> listAtt = attributs.get(1);
+        Iterator<String> iterAtt1 = listAtt.iterator();
+        while (iterAtt1.hasNext()){
+            s += iterAtt1.next() + "{\n";
+        }
+        List<String> listAt = attributs.get(2);
+        Iterator<String> iterAt2 = listAt.iterator();
+        while (iterAt2.hasNext()){
+            s += iterAt2.next() + "\n";
+        }
+
+
+        //constructeurs
+        Iterator<String> iterConst = constructeurs.iterator();
+        while(iterConst.hasNext()){
+            s+= iterConst.next() + "\n";
+        }
+
+        //methode
+        List<String> listmeth1 = methodes.get(1);
+        Iterator<String> iterMeth1 = listmeth1.iterator();
+        while (iterMeth1.hasNext()){
+            s += iterMeth1.next() + "\n";
+        }
+        List<String> listmeth2 = methodes.get(2);
+        Iterator<String> itermeth2 = listmeth2.iterator();
+        while (itermeth2.hasNext()){
+            s += itermeth2.next() + "\n";
+        }
+        s += "}\n";
+
+        Iterator<String> iterateur_dépendance = dependencies.iterator();
+        while (iterateur_dépendance.hasNext()){
+            s+= iterateur_dépendance.next() + "\n";
+        }
+
+
+        return s;
     }
 
     public List<String> getDependencies() {
         return dependencies;
+    }
+
+    public void setAfficheConstructeur(boolean selected) {
+        this.afficheConstructeur = selected;
+        this.notifierObservateurs();
     }
 }

@@ -4,6 +4,7 @@ import com.example.objectaid_sae.model.Classe;
 import com.example.objectaid_sae.vue.VueCentre;
 import com.example.objectaid_sae.vue.VueCheckClass;
 import com.example.objectaid_sae.vue.VueCreation;
+import com.example.objectaid_sae.vue.VueSousMenuClassExt;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
@@ -100,9 +101,24 @@ public class ControleurVueTemporaireClasse implements EventHandler<ActionEvent> 
                         case "méthodes héritées":
                             check.setSelected(classe.isAfficheMethodeHerite());
                             break;
+                        case "constructeur":
+                            check.setSelected(classe.isAfficheConstructeur());
+                            break;
                     }
                 }
                 MenuTemp = ch;
+            }
+            else if(src.getText().equals("Classes externes")) {
+                final Pane pane = (Pane) src.getParent().getParent();
+                if( affichageCoteDroit(src)) {
+                    VueSousMenuClassExt.classeExt.setLayoutX(src.getParent().getLayoutX() + src.getWidth());
+                }else{
+                    VueSousMenuClassExt.classeExt.setLayoutX(src.getParent().getLayoutX() - VueSousMenuClassExt.classeExt.getWidth());
+                }
+                VueSousMenuClassExt.classeExt.setLayoutY(src.getParent().getLayoutY());
+                classe.ajouterObservateur(VueSousMenuClassExt.classeExt);
+                pane.getChildren().add(VueSousMenuClassExt.classeExt);
+                VueSousMenuClassExt.classeExt.notifier(classe);
             }
             else{
                 VueCreation v;
@@ -135,7 +151,11 @@ public class ControleurVueTemporaireClasse implements EventHandler<ActionEvent> 
                 case "méthodes héritées":
                     classe.setAfficheMethodeHerite(src.isSelected());
                     break;
+                case "constructeur":
+                    classe.setAfficheConstructeur(src.isSelected());
+                    break;
             }
         }
+
     }
 }

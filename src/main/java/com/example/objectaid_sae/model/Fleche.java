@@ -2,6 +2,11 @@ package com.example.objectaid_sae.model;
 
 import com.example.objectaid_sae.observateur.Observateur;
 import com.example.objectaid_sae.observateur.Sujet;
+import com.example.objectaid_sae.vue.VueCentre;
+import com.example.objectaid_sae.vue.fabriqueFleches.FabriqueVueFleche;
+import com.example.objectaid_sae.vue.fabriqueFleches.FabriqueVueFlecheExtends;
+import com.example.objectaid_sae.vue.fabriqueFleches.FabriqueVueFlecheImplement;
+import com.example.objectaid_sae.vue.fabriqueFleches.FabriqueVueFlecheUtilisation;
 import javafx.scene.control.Label;
 
 import java.util.ArrayList;
@@ -36,6 +41,53 @@ public class Fleche implements Sujet {
     }
 
     //METHODES
+
+    public static void CreerFleches(Classe c, VueCentre centre){
+        Model mod = Model.getModel();
+        String nom = c.getType();
+        for(Classe cl : mod.getClasses()){
+            for (String dep : cl.getDependencies()){
+                if(dep.contains(nom)){
+                    Fleche f = null;
+                    FabriqueVueFleche fab = null;
+                    if(dep.contains(".|>")) {
+                        f = new Fleche(cl, c, "..|>");
+                        fab = new FabriqueVueFlecheImplement(f);
+                    }
+                    else if(dep.contains("-|>")) {
+                        f = new Fleche(cl, c, "--|>");
+                        fab = new FabriqueVueFlecheExtends(f);
+                    }
+                    else if(dep.contains("->")){
+                        f = new Fleche(cl, c, "-->");
+                        fab = new FabriqueVueFlecheUtilisation(f);
+                    }
+                    mod.addFleche(f);
+                    centre.getChildren().add(fab.fabriquer());
+                }
+                for(String dep2 : c.getDependencies()){
+                    if(dep2.contains(cl.getType().substring(cl.getType().lastIndexOf(" ")))){
+                        Fleche f;
+                        FabriqueVueFleche fab;
+                        if(dep.contains(".|>")) {
+                            f = new Fleche(c, cl, "..|>");
+                            fab = new FabriqueVueFlecheImplement(f);
+                        }
+                        else if(dep.contains("-|>")) {
+                            f = new Fleche(c, cl, "--|>");
+                            fab = new FabriqueVueFlecheExtends (f);
+                        }
+                        else {
+                            f = new Fleche(c, cl, "-->");
+                            fab = new FabriqueVueFlecheUtilisation(f);
+                        }
+                        mod.addFleche(f);
+                        centre.getChildren().add(fab.fabriquer());
+                    }
+                }
+            }
+        }
+    }
 
     /**
      * retourne le type

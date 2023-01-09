@@ -1,0 +1,19 @@
+1. Test enregistrement UML :
+On rentre un chemin de dossier valide dans la rubrique Test. Un nom de fichier nouveau.
+On vérifie dans les dossiers qu'un nouveau fichier portant le nom rentré dans le TextField à
+l'endroit désiré est enregistré. De même que si le chemin de dossier n'existe pas, rien ne se
+passe.
+De plus, on vérifie le contenu du fichier créer pour voir si les classes affichées sont bien rengistrées
+et s'affichent correctement dans le graphe UML.
+
+2. Test Enregistrement image :
+On fait la même vérification sur l'endroit de l'enregistrement et le bon nom de fichier.
+A l'ouverture de l'image, on vérifie que l'image est bien copie conforme de ce qui est
+affiché dans l'application.
+
+3. Affichage des dépendances externes :
+Lorsqu'on clique droit sur une classe,  qu'on choisit dans le menu apparu d'afficher les dépendances
+de packages externes à celui visualisé, la ou les nouvelles classes doivent s'afficher.
+A un moment donné, la classe s'affichait autant de fois qu'on appuyait sur le bouton
+"afficher les dépendances externes". Problème réglé en enregistrant la classe
+externe dans le modèle.
