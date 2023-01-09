@@ -11,6 +11,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
 public class VueSousMenuClassExt extends VBox implements Observateur {
+    public static final VueSousMenuClassExt classeExt = new VueSousMenuClassExt();
     @Override
     public void notifier(Sujet s) {
         final Classe classe = (Classe) s;
@@ -19,6 +20,13 @@ public class VueSousMenuClassExt extends VBox implements Observateur {
         if(classe.getPackageExternes().size() > 0) {
             for(String packageExt : classe.getPackageExternes()) {
                 Button lab = new Button(packageExt);
+                for(Classe cTemp : Model.getModel().getClasses()) {
+                    String name = packageExt.substring(packageExt.lastIndexOf(".")+1);
+                    System.out.println(cTemp.getType() + "  " + name);
+                    if(cTemp.getType().contains(name)) {
+                        lab.setDisable(true);
+                    }
+                }
                 lab.setOnAction(event -> {
                     Classe c;
                     try {
@@ -26,6 +34,7 @@ public class VueSousMenuClassExt extends VBox implements Observateur {
                         VueClasse vue = new VueClasse(c);
                         centre.getChildren().add(vue);
                         Model.getModel().addClasse(c);
+                        lab.setDisable(true);
                     } catch (ClassNotFoundException e) {
                         System.out.println("Class not found : " + packageExt);
                     }
