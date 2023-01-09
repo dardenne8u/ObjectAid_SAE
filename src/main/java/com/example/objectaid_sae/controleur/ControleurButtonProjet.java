@@ -75,13 +75,18 @@ public class ControleurButtonProjet implements EventHandler<ActionEvent> {
                 //modifier le titre
                 String string_nom = ((TextField) src.getParent().getChildrenUnmodifiable().get(5)).getText();
 
-                //verification dossier uml existant :
+                //verification dossier img existant :
                 File file_verif_img = new File(string_enregistrer_img);
                 if (file_verif_img.exists()){
-                    System.out.println("existant !");
-                    if (string_enregistrer_uml != null){
+                        if (string_nom != null){
+                        String img_nom = string_enregistrer_uml + "\\" + string_nom;
+                            System.out.println("existant ! : " + img_nom);
+                            try{saveImg(pane, img_nom);
 
-                    }
+                    } catch (IOException e) {
+                               e.printStackTrace();
+                            }
+                        }
                 }else {
                     System.out.println("inexistant");
 
@@ -108,6 +113,9 @@ public class ControleurButtonProjet implements EventHandler<ActionEvent> {
 
 
             }
+
+
+
 
 
 
