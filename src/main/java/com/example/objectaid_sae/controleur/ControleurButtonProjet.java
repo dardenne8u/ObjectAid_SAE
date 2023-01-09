@@ -62,7 +62,7 @@ public class ControleurButtonProjet implements EventHandler<ActionEvent> {
             Button src = (Button) evt.getSource();
             System.out.println(src.getText());
             if (src.getText().equals("Projet")) {
-                BorderPane borderPane = (BorderPane) src.getParent();
+                BorderPane borderPane = (BorderPane) src.getParent().getParent();
                 pane = (VueCentre) borderPane.getCenter();
                 openProjetWindow();
             }
@@ -73,28 +73,40 @@ public class ControleurButtonProjet implements EventHandler<ActionEvent> {
                 //enregistrer UML
                 String string_enregistrer_uml = ((TextField) src.getParent().getChildrenUnmodifiable().get(3)).getText();
                 //modifier le titre
-                String string_changer_nom = ((TextField) src.getParent().getChildrenUnmodifiable().get(5)).getText();
+                String string_nom = ((TextField) src.getParent().getChildrenUnmodifiable().get(5)).getText();
 
-                //verification dossier existant :
-                File file_verif = new File(string_enregistrer_img);
-                if (file_verif.exists()){
+                //verification dossier uml existant :
+                File file_verif_img = new File(string_enregistrer_img);
+                if (file_verif_img.exists()){
                     System.out.println("existant !");
+                    if (string_enregistrer_uml != null){
+
+                    }
                 }else {
                     System.out.println("inexistant");
 
                 }
 
 
-                if (string_enregistrer_img != null){
-                    //this.saveImg(this.pane, string_enregistrer_img);
-                }
-                if (string_enregistrer_uml != null){
-                   /* try {
-                        this.enregUML(string_enregistrer_uml);
+                //verification dossier uml existant :
+                File file_verif = new File(string_enregistrer_uml);
+                if (file_verif.exists()){
+
+                    if (string_nom != null){
+                        String uml_nom = string_enregistrer_uml + "\\" + string_nom;
+                        System.out.println("existant ! : " + uml_nom);
+                    try {
+                        this.enregUML(uml_nom);
                     } catch (IOException e) {
                         e.printStackTrace();
-                    }*/
+                    }
+                    }
+                }else {
+                    System.out.println("inexistant");
+
                 }
+
+
             }
 
 
@@ -104,7 +116,8 @@ public class ControleurButtonProjet implements EventHandler<ActionEvent> {
 
 
     public void enregUML(String path) throws IOException {
-        FileWriter fileWriter = new FileWriter(path, true);
+        String path_extension = path + ".txt";
+        FileWriter fileWriter = new FileWriter(path_extension, true);
 
         Model model = Model.getModel();
         String string_uml_model = model.enregistrerUML();
