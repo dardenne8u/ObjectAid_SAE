@@ -1,5 +1,6 @@
 package com.example.objectaid_sae.controleur;
 
+import com.example.objectaid_sae.observateur.Observateur;
 import com.example.objectaid_sae.vue.VueCentre;
 import com.example.objectaid_sae.vue.VueNewClasse;
 import com.example.objectaid_sae.vue.VueProjet;
@@ -8,6 +9,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 import javafx.scene.image.WritableImage;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
@@ -17,6 +19,11 @@ import javafx.stage.Window;
 public class ControleurButtonProjet implements EventHandler<ActionEvent> {
 
     Pane pane;
+    VueProjet vueProjet;
+
+    public ControleurButtonProjet(VueProjet vueProjet){
+        this.vueProjet = (VueProjet) vueProjet;
+    }
 
 
     private void openProjetWindow() {
@@ -46,8 +53,29 @@ public class ControleurButtonProjet implements EventHandler<ActionEvent> {
                  */
                 openProjetWindow();
             }
+            if (src.getText().equals("Valider")){
+                //enregistrer img
+                String string_enregistrer_img = ((TextField) src.getParent().getChildrenUnmodifiable().get(1)).getText();
+                //enregistrer UML
+                String string_enregistrer_uml = ((TextField) src.getParent().getChildrenUnmodifiable().get(3)).getText();
+                //modifier le titre
+                String string_changer_nom = ((TextField) src.getParent().getChildrenUnmodifiable().get(5)).getText();
+
+                if (string_enregistrer_img != null){
+                    this.saveImg(this.pane, string_enregistrer_img);
+                }
+                if (string_enregistrer_uml != null){
+                    this.enregUML();
+                }
+            }
+
 
 
         }
+    }
+
+
+    public void enregUML(){
+
     }
 }

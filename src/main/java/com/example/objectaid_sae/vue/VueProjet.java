@@ -1,18 +1,24 @@
 package com.example.objectaid_sae.vue;
 
 import com.example.objectaid_sae.controleur.ControleurButtonProjet;
+import com.example.objectaid_sae.observateur.Observateur;
+import com.example.objectaid_sae.observateur.Sujet;
+import javafx.beans.Observable;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 
-public class VueProjet extends GridPane {
+public class VueProjet  extends GridPane implements Observateur{
 
     Button saveImg, saveUml, giveTitle, cancel, valider;
     TextField pathImg, pathUml, nameTitle;
 
 
     public VueProjet(ControleurButtonProjet cont){
+
+        ControleurButtonProjet controleurButtonProjet = new ControleurButtonProjet(this);
+
         setPadding(new Insets(10, 10, 10, 10));
         setVgap(8);
         setHgap(10);
@@ -38,10 +44,6 @@ public class VueProjet extends GridPane {
         nameTitle = new TextField();
         nameTitle.setMaxWidth(250);
         nameTitle.setVisible(false);
-
-
-
-
 
         cancel.setOnAction(cont);
         valider.setOnAction(cont);
@@ -89,4 +91,17 @@ public class VueProjet extends GridPane {
     }
 
 
+    @Override
+    public void notifier(Sujet s) {
+
+    }
+
+
+    public TextField getPathImg() {
+        return pathImg;
+    }
+
+    public TextField getPathUml() {
+        return pathUml;
+    }
 }

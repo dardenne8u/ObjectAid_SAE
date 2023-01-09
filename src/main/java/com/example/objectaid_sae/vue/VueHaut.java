@@ -16,7 +16,7 @@ public class VueHaut extends GridPane {
         setMinHeight(50);
         setMaxWidth(Double.MAX_VALUE);
         Button prj = new Button("Projet");
-        prj.setOnAction(new ControleurButtonProjet());
+        prj.setOnAction(new ControleurButtonProjet(null));
         prj.setFont(Font.font(null, FontWeight.BOLD, 16));
         GridPane.setHgrow(prj, Priority.ALWAYS);
         GridPane.setVgrow(prj, Priority.ALWAYS);
