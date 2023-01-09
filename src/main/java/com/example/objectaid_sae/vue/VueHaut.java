@@ -2,6 +2,7 @@ package com.example.objectaid_sae.vue;
 
 import com.example.objectaid_sae.controleur.ControleurAffichageGlobal;
 import com.example.objectaid_sae.controleur.ControleurButtonNewClass;
+import com.example.objectaid_sae.controleur.ControleurButtonProjet;
 import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
@@ -15,6 +16,7 @@ public class VueHaut extends GridPane {
         setMinHeight(50);
         setMaxWidth(Double.MAX_VALUE);
         Button prj = new Button("Projet");
+        prj.setOnAction(new ControleurButtonProjet());
         prj.setFont(Font.font(null, FontWeight.BOLD, 16));
         GridPane.setHgrow(prj, Priority.ALWAYS);
         GridPane.setVgrow(prj, Priority.ALWAYS);
