@@ -23,7 +23,7 @@ public class Classe implements Sujet {
     private boolean afficheAttributsHerite;
     private boolean afficheMethodeDeclare;
     private boolean afficheMethodeHerite;
-    private final boolean afficheConstructeur;
+    private boolean afficheConstructeur;
     /**
      * liste des attributs et methodes de la classe. 1 si declare, 2 si herite
      */
@@ -249,5 +249,10 @@ public class Classe implements Sujet {
 
     public List<String> getDependencies() {
         return dependencies;
+    }
+
+    public void setAfficheConstructeur(boolean selected) {
+        this.afficheConstructeur = selected;
+        this.notifierObservateurs();
     }
 }

@@ -101,6 +101,9 @@ public class ControleurVueTemporaireClasse implements EventHandler<ActionEvent> 
                         case "méthodes héritées":
                             check.setSelected(classe.isAfficheMethodeHerite());
                             break;
+                        case "constructeur":
+                            check.setSelected(classe.isAfficheConstructeur());
+                            break;
                     }
                 }
                 MenuTemp = ch;
@@ -149,7 +152,11 @@ public class ControleurVueTemporaireClasse implements EventHandler<ActionEvent> 
                 case "méthodes héritées":
                     classe.setAfficheMethodeHerite(src.isSelected());
                     break;
+                case "constructeur":
+                    classe.setAfficheConstructeur(src.isSelected());
+                    break;
             }
         }
+
     }
 }
