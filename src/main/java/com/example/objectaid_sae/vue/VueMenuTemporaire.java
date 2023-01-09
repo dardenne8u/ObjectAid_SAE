@@ -16,15 +16,13 @@ public class VueMenuTemporaire extends VBox implements Observateur {
 
     public VueMenuTemporaire(){
         this.cacher=true;
-            }
+    }
 
 
     @Override
     public void notifier(Sujet s) {
         if (!this.cacher){
             ControleurVueTemporaireClasse cont = new ControleurVueTemporaireClasse((Classe) s);
-//            Classe classe = (Classe) s;
-//            this.getChildren().clear();
             this.setWidth(200);
             this.setStyle("-fx-background-color:#F2F3F4");
             this.setAlignment(Pos.CENTER);
@@ -33,6 +31,11 @@ public class VueMenuTemporaire extends VBox implements Observateur {
             Afficher.setOnAction(cont);
             Afficher.setMinWidth(this.getWidth());
             this.getChildren().addAll(Afficher);
+
+            Button classExternes = new Button("Classes externes");
+            classExternes.setMinWidth(this.getWidth());
+            this.getChildren().addAll(classExternes);
+            classExternes.setOnAction(cont);
 
 
             // creation d'attribut ou methode

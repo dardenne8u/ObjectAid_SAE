@@ -4,6 +4,7 @@ import com.example.objectaid_sae.model.Classe;
 import com.example.objectaid_sae.vue.VueCentre;
 import com.example.objectaid_sae.vue.VueCheckClass;
 import com.example.objectaid_sae.vue.VueCreation;
+import com.example.objectaid_sae.vue.VueSousMenuClassExt;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
@@ -103,6 +104,19 @@ public class ControleurVueTemporaireClasse implements EventHandler<ActionEvent> 
                     }
                 }
                 MenuTemp = ch;
+            }
+            else if(src.getText().equals("Classes externes")) {
+                final Pane pane = (Pane) src.getParent().getParent();
+                final VueSousMenuClassExt classExt= new VueSousMenuClassExt();
+                if( affichageCoteDroit(src)) {
+                    classExt.setLayoutX(src.getParent().getLayoutX() + src.getWidth());
+                }else{
+                    classExt.setLayoutX(src.getParent().getLayoutX() - classExt.getWidth());
+                }
+                classExt.setLayoutY(src.getParent().getLayoutY());
+                classe.ajouterObservateur(classExt);
+                pane.getChildren().add(classExt);
+                classExt.notifier(classe);
             }
             else{
                 VueCreation v;
