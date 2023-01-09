@@ -1,5 +1,17 @@
 fonctionalitées réalisées :
-- glisser-deposer (Nathanael)
-- afficher une classe (Lucie)
-- introspecter une classe (Gregorry)
-- affichage de l'arborecence du fichier (Nathan)
+
+1. affichage de l'arborecence du fichier (Nathan)
+Dans l'application, montre l'arborescence du fichier dans lequel on se trouve afin de sélectionner les
+classes qu'on souhaite afficher
+
+2. glisser-deposer (Nathanael)
+Permet de glisser une classe présente dans l'arbre du dossier à gauche sur le graphe et d'afficher la classe.
+
+3. afficher une classe (Lucie)
+La vue permettant d'afficher une classe rajoutée au modèle (classe affichée dans le graph)
+
+4. introspecter une classe (Gregory)
+Récupérer les informations d'une classe sélectionnée et d'en créer son objet Classe
+
+
+
