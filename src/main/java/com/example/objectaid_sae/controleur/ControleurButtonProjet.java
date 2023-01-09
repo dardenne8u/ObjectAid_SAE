@@ -84,7 +84,7 @@ public class ControleurButtonProjet implements EventHandler<ActionEvent> {
                 File file_verif_img = new File(string_enregistrer_img);
                 if (file_verif_img.exists()){
                         if (string_nom != null){
-                        String img_nom = string_enregistrer_uml + "\\" + string_nom;
+                        String img_nom = string_enregistrer_uml + "\\" + string_nom + ".png";
                             exit=true;
                             System.out.println("existant ! : " + img_nom);
                             try{saveImg(pane, img_nom);
@@ -132,8 +132,8 @@ public class ControleurButtonProjet implements EventHandler<ActionEvent> {
 
 
     public void enregUML(String path) throws IOException {
-        String path_extension = path + ".txt";
-        FileWriter fileWriter = new FileWriter(path_extension, true);
+        String path_extension = path + ".puml";
+        FileWriter fileWriter = new FileWriter(path_extension, false);
 
         Model model = Model.getModel();
         String string_uml_model = model.enregistrerUML();
