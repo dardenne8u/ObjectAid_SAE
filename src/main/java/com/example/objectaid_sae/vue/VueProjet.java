@@ -43,7 +43,7 @@ public class VueProjet  extends GridPane implements Observateur{
         pathUml.setVisible(false);
         nameTitle = new TextField();
         nameTitle.setMaxWidth(250);
-        nameTitle.setVisible(false);
+
 
         cancel.setOnAction(cont);
         valider.setOnAction(cont);
@@ -65,13 +65,7 @@ public class VueProjet  extends GridPane implements Observateur{
             pathUml.setVisible(true);
         }});
 
-        giveTitle.setOnAction(event -> {if(nameTitle.isVisible()){
-            nameTitle.setVisible(false);
-            nameTitle.clear();
-        }else{
-            nameTitle.clear();
-            nameTitle.setVisible(true);
-        }});
+
 
 
         // Ajout des éléments au GridPane

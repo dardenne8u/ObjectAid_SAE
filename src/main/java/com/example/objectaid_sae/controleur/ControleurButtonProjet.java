@@ -17,9 +17,7 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.stage.Window;
 
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.Writer;
+import java.io.*;
 
 public class ControleurButtonProjet implements EventHandler<ActionEvent> {
 
@@ -59,6 +57,7 @@ public class ControleurButtonProjet implements EventHandler<ActionEvent> {
                 openProjetWindow();
             }
             if (src.getText().equals("Valider")){
+
                 //enregistrer img
                 String string_enregistrer_img = ((TextField) src.getParent().getChildrenUnmodifiable().get(1)).getText();
                 //enregistrer UML
@@ -66,15 +65,25 @@ public class ControleurButtonProjet implements EventHandler<ActionEvent> {
                 //modifier le titre
                 String string_changer_nom = ((TextField) src.getParent().getChildrenUnmodifiable().get(5)).getText();
 
+                //verification dossier existant :
+                File file_verif = new File(string_enregistrer_img);
+                if (file_verif.exists()){
+                    System.out.println("existant !");
+                }else {
+                    System.out.println("inexistant");
+
+                }
+
+
                 if (string_enregistrer_img != null){
                     //this.saveImg(this.pane, string_enregistrer_img);
                 }
                 if (string_enregistrer_uml != null){
-                    try {
+                   /* try {
                         this.enregUML(string_enregistrer_uml);
                     } catch (IOException e) {
                         e.printStackTrace();
-                    }
+                    }*/
                 }
             }
 
@@ -86,8 +95,11 @@ public class ControleurButtonProjet implements EventHandler<ActionEvent> {
 
     public void enregUML(String path) throws IOException {
         FileWriter fileWriter = new FileWriter(path, true);
+
         Model model = Model.getModel();
         String string_uml_model = model.enregistrerUML();
         System.out.println(string_uml_model);
+        fileWriter.write(string_uml_model);
+        fileWriter.close();
     }
 }
