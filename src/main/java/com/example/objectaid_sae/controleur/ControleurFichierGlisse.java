@@ -6,10 +6,6 @@ import com.example.objectaid_sae.model.Fleche;
 import com.example.objectaid_sae.model.Model;
 import com.example.objectaid_sae.vue.VueCentre;
 import com.example.objectaid_sae.vue.VueClasse;
-import com.example.objectaid_sae.vue.fabriqueFleches.FabriqueVueFleche;
-import com.example.objectaid_sae.vue.fabriqueFleches.FabriqueVueFlecheExtends;
-import com.example.objectaid_sae.vue.fabriqueFleches.FabriqueVueFlecheImplement;
-import com.example.objectaid_sae.vue.fabriqueFleches.FabriqueVueFlecheUtilisation;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.scene.control.CheckBox;
@@ -55,13 +51,21 @@ public class ControleurFichierGlisse implements EventHandler<MouseEvent> {
             line = line.split("package ")[1].split(";")[0];
             Classe c = new Analyseur(line + "."+ nom).analyseClasse();
             VueClasse vue = new VueClasse(c);
-            c.setX(mouseEvent.getSceneX() - centre.getLayoutX());
-            c.setY(mouseEvent.getSceneY() - centre.getLayoutY());
             cb.setSelected(true);
             centre.getChildren().add(vue);
-            Fleche.CreerFleches(c, (VueCentre) centre);
-            mod.addClasse(c);
+            // definition de la position x
+            double mouseX = mouseEvent.getSceneX() - centre.getLayoutX();
+            mouseX = Math.max(vue.getWidth()/2,mouseX); // minimum
+            mouseX = Math.min((centre.getWidth() - vue.getWidth()/2), mouseX); // maximum
+            // definition de la position y
+            double mouseY = mouseEvent.getSceneY() - centre.getLayoutY();
+            mouseY = Math.min((centre.getLayoutY() + centre.getHeight() - vue.getHeight()/2 - 150), mouseY); // maximum
+            mouseY = Math.max(vue.getHeight()/2, (centre.getLayoutY() + mouseY)); // minimum
+            c.setX(mouseX);
+            c.setY(mouseY);
             vue.notifier(c);
+            Fleche.creerFleches(c, (VueCentre) centre);
+            mod.addClasse(c);
         } catch (Exception e) {
             e.printStackTrace();
         }

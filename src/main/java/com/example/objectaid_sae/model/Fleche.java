@@ -7,7 +7,6 @@ import com.example.objectaid_sae.vue.fabriqueFleches.FabriqueVueFleche;
 import com.example.objectaid_sae.vue.fabriqueFleches.FabriqueVueFlecheExtends;
 import com.example.objectaid_sae.vue.fabriqueFleches.FabriqueVueFlecheImplement;
 import com.example.objectaid_sae.vue.fabriqueFleches.FabriqueVueFlecheUtilisation;
-import javafx.scene.control.Label;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,14 +41,15 @@ public class Fleche implements Sujet {
 
     //METHODES
 
-    public static void CreerFleches(Classe c, VueCentre centre){
+    public static void creerFleches(Classe c, VueCentre centre){
         Model mod = Model.getModel();
         String nom = c.getType();
+        nom = nom.substring(nom.lastIndexOf(" "));
         for(Classe cl : mod.getClasses()){
             for (String dep : cl.getDependencies()){
                 if(dep.contains(nom)){
-                    Fleche f = null;
-                    FabriqueVueFleche fab = null;
+                    Fleche f;
+                    FabriqueVueFleche fab;
                     if(dep.contains(".|>")) {
                         f = new Fleche(cl, c, "..|>");
                         fab = new FabriqueVueFlecheImplement(f);
@@ -58,7 +58,7 @@ public class Fleche implements Sujet {
                         f = new Fleche(cl, c, "--|>");
                         fab = new FabriqueVueFlecheExtends(f);
                     }
-                    else if(dep.contains("->")){
+                    else {
                         f = new Fleche(cl, c, "-->");
                         fab = new FabriqueVueFlecheUtilisation(f);
                     }
@@ -66,7 +66,9 @@ public class Fleche implements Sujet {
                     centre.getChildren().add(fab.fabriquer());
                 }
                 for(String dep2 : c.getDependencies()){
-                    if(dep2.contains(cl.getType().substring(cl.getType().lastIndexOf(" ")))){
+                    String temp = cl.getType().substring(cl.getType().lastIndexOf(" ")+1);
+                    System.out.println(temp);
+                    if(dep2.contains(temp)){
                         Fleche f;
                         FabriqueVueFleche fab;
                         if(dep.contains(".|>")) {

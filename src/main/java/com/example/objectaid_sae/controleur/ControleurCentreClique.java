@@ -17,6 +17,5 @@ public class ControleurCentreClique implements EventHandler<MouseEvent> {
     public void handle(MouseEvent mouseEvent) {
         if(mouseEvent.getButton() == MouseButton.SECONDARY) return;
         vue.supprimerMenusTemp();
-        System.out.println("centre");
     }
 }
