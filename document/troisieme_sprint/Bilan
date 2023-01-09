@@ -1,0 +1,11 @@
+Bilan du sprint 3 :
+
+Les fonctionnalités "créer une nouvelle classe", "Générer un diagramme UML d'un package",
+et "affichage des opérations générales applicables à toutes les classes" sont terminées et
+opérationnelles.
+
+Pour l'affichage des dépendances, et donc la gestion des flèches, le model est bien modifié pour
+accueillir cette nouvelle fonctionnalité. Les flèches s'affichent, mais un bug n'est pas encore
+corrigé et les flèches sont reliées par les coordonnées du coin haut-gauche des classes.
+
+Pour le prochain sprint, cette fonctionnalité est à poursuivre

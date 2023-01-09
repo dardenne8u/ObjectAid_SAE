@@ -19,6 +19,8 @@ public class FabriqueLignePleine implements FabriqueLigne{
 
     @Override
     public Line fabriquer() {
-        return new Line(xc1, yc1, xc2, yc2);
+        Line l =  new Line(xc1, yc1, xc2, yc2);
+        l.getStrokeDashArray().add(10000000.0);
+        return l;
     }
 }
