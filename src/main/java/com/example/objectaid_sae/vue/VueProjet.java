@@ -42,12 +42,15 @@ public class VueProjet  extends GridPane implements Observateur{
         valider = new Button("Valider");
         pathImg = new TextField();
         pathImg.setMaxWidth(250);
+        pathImg.setPromptText("Chemin du dossier");
         pathImg.setVisible(false);
         pathUml = new TextField();
         pathUml.setMaxWidth(250);
+        pathUml.setPromptText("Chemin du dossier");
         pathUml.setVisible(false);
         nameTitle = new TextField();
         nameTitle.setMaxWidth(250);
+        nameTitle.setPromptText("Nom");
 
         err = new Label("Dossier Introuvable");
         err.setFont(Font.font("Verdana", FontWeight.BOLD, FontPosture.REGULAR, 14));
