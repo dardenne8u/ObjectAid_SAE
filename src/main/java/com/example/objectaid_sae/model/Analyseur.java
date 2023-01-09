@@ -69,6 +69,10 @@ public class Analyseur {
         if(superClass != null) {
             link = introspection.getSimpleName() + " --|> " + superClass.getSimpleName();
             classe.addDependencies(link);
+            if(!superClass.getPackageName().contains(packageProjet)){
+                classe.addPackageExternes(superClass.getName());
+            }
+
         }
     }
 
