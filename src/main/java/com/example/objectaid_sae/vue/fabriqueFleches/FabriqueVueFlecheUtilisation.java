@@ -41,6 +41,7 @@ public class FabriqueVueFlecheUtilisation implements FabriqueVueFleche{
         res.setLayoutY(y2);
         res.setLayoutX(x2);
         res.getTransforms().add(r);
+        System.out.println(fleche.getDepart().getDependencies());
         return res;
     }
 }
