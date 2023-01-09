@@ -3,10 +3,7 @@ package com.example.objectaid_sae.model;
 import com.example.objectaid_sae.observateur.Observateur;
 import com.example.objectaid_sae.observateur.Sujet;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class Classe implements Sujet {
 
@@ -192,15 +189,44 @@ public class Classe implements Sujet {
 
         String s = "Classe{\n";
         //attributs :
+        List<String> listAtt = attributs.get(1);
+        Iterator<String> iterAtt1 = listAtt.iterator();
+        while (iterAtt1.hasNext()){
+            s += iterAtt1.next() + "\n";
+        }
+        List<String> listAt = attributs.get(2);
+        Iterator<String> iterAt2 = listAt.iterator();
+        while (iterAt2.hasNext()){
+            s += iterAt2.next() + "\n";
+        }
 
 
-        return "Classe{" +
-                "\n, attributs=" + attributs +
-                "\n, methodes=" + methodes +
-                "\n, constructeurs=" + constructeurs +
-                "\n, dependence=" + dependencies +
-                "\n, type='" + type + '\'' +
-                '}';
+        //constructeurs
+        Iterator<String> iterConst = constructeurs.iterator();
+        while(iterConst.hasNext()){
+            s+= iterConst.next() + "\n";
+        }
+
+        //methode
+        List<String> listmeth1 = methodes.get(1);
+        Iterator<String> iterMeth1 = listmeth1.iterator();
+        while (iterMeth1.hasNext()){
+            s += iterMeth1.next() + "\n";
+        }
+        List<String> listmeth2 = methodes.get(2);
+        Iterator<String> itermeth2 = listmeth2.iterator();
+        while (itermeth2.hasNext()){
+            s += itermeth2.next() + "\n";
+        }
+        s += "}\n";
+
+        Iterator<String> iterateur_dépendance = dependencies.iterator();
+        while (iterateur_dépendance.hasNext()){
+            s+= iterateur_dépendance.next() + "\n";
+        }
+
+
+        return s;
     }
 
     public List<String> getDependencies() {
