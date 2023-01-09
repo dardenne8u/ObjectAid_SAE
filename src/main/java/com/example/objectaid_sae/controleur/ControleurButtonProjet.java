@@ -1,5 +1,6 @@
 package com.example.objectaid_sae.controleur;
 
+import com.example.objectaid_sae.model.Model;
 import com.example.objectaid_sae.observateur.Observateur;
 import com.example.objectaid_sae.vue.VueCentre;
 import com.example.objectaid_sae.vue.VueNewClasse;
@@ -15,6 +16,10 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.stage.Window;
+
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.Writer;
 
 public class ControleurButtonProjet implements EventHandler<ActionEvent> {
 
@@ -62,10 +67,14 @@ public class ControleurButtonProjet implements EventHandler<ActionEvent> {
                 String string_changer_nom = ((TextField) src.getParent().getChildrenUnmodifiable().get(5)).getText();
 
                 if (string_enregistrer_img != null){
-                    this.saveImg(this.pane, string_enregistrer_img);
+                    //this.saveImg(this.pane, string_enregistrer_img);
                 }
                 if (string_enregistrer_uml != null){
-                    this.enregUML();
+                    try {
+                        this.enregUML(string_enregistrer_uml);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
 
@@ -75,7 +84,10 @@ public class ControleurButtonProjet implements EventHandler<ActionEvent> {
     }
 
 
-    public void enregUML(){
-
+    public void enregUML(String path) throws IOException {
+        FileWriter fileWriter = new FileWriter(path, true);
+        Model model = Model.getModel();
+        String string_uml_model = model.enregistrerUML();
+        System.out.println(string_uml_model);
     }
 }

@@ -76,4 +76,20 @@ public class Model implements Sujet {
     public void addFleche(Fleche f){
         fleches.add(f);
     }
+
+    public String enregistrerUML(){
+        String UML = "@startuml\n" +
+                "'https://plantuml.com/class-diagram\n" +
+                "left to right direction\n" +
+                "\n";
+        for(Classe classeC : this.classes){
+            String classeC_String = classeC.toString();
+            UML += classeC_String + "\n";
+        }
+
+        UML += "@enduml\n";
+
+        return UML;
+
+    }
 }
