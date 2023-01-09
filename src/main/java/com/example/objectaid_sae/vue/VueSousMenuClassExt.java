@@ -2,6 +2,7 @@ package com.example.objectaid_sae.vue;
 
 import com.example.objectaid_sae.model.Analyseur;
 import com.example.objectaid_sae.model.Classe;
+import com.example.objectaid_sae.model.Model;
 import com.example.objectaid_sae.observateur.Observateur;
 import com.example.objectaid_sae.observateur.Sujet;
 import javafx.scene.control.Button;
@@ -24,6 +25,7 @@ public class VueSousMenuClassExt extends VBox implements Observateur {
                         c = new Analyseur(packageExt).analyseClasse();
                         VueClasse vue = new VueClasse(c);
                         centre.getChildren().add(vue);
+                        Model.getModel().addClasse(c);
                     } catch (ClassNotFoundException e) {
                         System.out.println("Class not found : " + packageExt);
                     }
