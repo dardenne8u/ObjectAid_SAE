@@ -110,16 +110,15 @@ public class ControleurVueTemporaireClasse implements EventHandler<ActionEvent> 
             }
             else if(src.getText().equals("Classes externes")) {
                 final Pane pane = (Pane) src.getParent().getParent();
-                final VueSousMenuClassExt classExt= new VueSousMenuClassExt();
                 if( affichageCoteDroit(src)) {
-                    classExt.setLayoutX(src.getParent().getLayoutX() + src.getWidth());
+                    VueSousMenuClassExt.classeExt.setLayoutX(src.getParent().getLayoutX() + src.getWidth());
                 }else{
-                    classExt.setLayoutX(src.getParent().getLayoutX() - classExt.getWidth());
+                    VueSousMenuClassExt.classeExt.setLayoutX(src.getParent().getLayoutX() - VueSousMenuClassExt.classeExt.getWidth());
                 }
-                classExt.setLayoutY(src.getParent().getLayoutY());
-                classe.ajouterObservateur(classExt);
-                pane.getChildren().add(classExt);
-                classExt.notifier(classe);
+                VueSousMenuClassExt.classeExt.setLayoutY(src.getParent().getLayoutY());
+                classe.ajouterObservateur(VueSousMenuClassExt.classeExt);
+                pane.getChildren().add(VueSousMenuClassExt.classeExt);
+                VueSousMenuClassExt.classeExt.notifier(classe);
             }
             else{
                 VueCreation v;
