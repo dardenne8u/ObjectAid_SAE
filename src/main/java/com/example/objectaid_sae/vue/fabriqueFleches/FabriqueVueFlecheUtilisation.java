@@ -15,6 +15,7 @@ public class FabriqueVueFlecheUtilisation implements FabriqueVueFleche{
     public FabriqueVueFlecheUtilisation(Fleche f){
         fleche = f;
         fbpoly = new FabriquePoly4pts();
+        //if (true) throw new RuntimeException();
     }
     @Override
     public VueFleche fabriquer() {
@@ -27,18 +28,18 @@ public class FabriqueVueFlecheUtilisation implements FabriqueVueFleche{
         VueFleche res = new VueFleche();
         Polygon poly;
         poly = fbpoly.fabriquer();
-        res.getChildren().add(poly);
         FabriqueLignePleine fbLigne = new FabriqueLignePleine(0,0,0,len);
         Line l = fbLigne.fabriquer();
         res.getChildren().add(l);
+        res.getChildren().add(poly);
         Rotate r = new Rotate();
         r.setPivotX(0);
         r.setPivotY(0);
         r.setAngle(inclinaison);
-        (res.getChildren().get(0)).setRotate(45);
-        (res.getChildren().get(0)).setLayoutY(10);
+        poly.setRotate(45);
+        poly.setLayoutX(-10);
         res.setLayoutY(y2);
-        res.setLayoutX(y1);
+        res.setLayoutX(x2);
         res.getTransforms().add(r);
         return res;
     }

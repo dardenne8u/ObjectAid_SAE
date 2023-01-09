@@ -3,6 +3,9 @@ package com.example.objectaid_sae.vue;
 import com.example.objectaid_sae.controleur.ControleurCentreClique;
 import javafx.scene.layout.Pane;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class VueCentre extends Pane {
 
     public VueCentre() {
@@ -10,7 +13,9 @@ public class VueCentre extends Pane {
     }
 
     public void supprimerMenusTemp() {
-        getChildren().removeIf(n -> n.getClass() == VueCheckClass.class || n.getClass() == VueMenuTemporaire.class || n.getClass() == VueCreation.class || n.getClass() == VueAffichageGlobal.class);
+        Class[] menusTemps = {VueCheckClass.class, VueMenuTemporaire.class, VueCreation.class, VueAffichageGlobal.class};
+        ArrayList<Class> menus = new ArrayList<>(List.of(menusTemps));
+        getChildren().removeIf(n -> menus.contains(n.getClass()));
         VueMenuTemporaire.VUE_TEMP.setCacher(true);
         VueMenuTemporaire.VUE_TEMP.notifier(null);
     }

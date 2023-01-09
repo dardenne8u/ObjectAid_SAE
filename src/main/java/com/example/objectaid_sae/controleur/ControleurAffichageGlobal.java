@@ -1,10 +1,15 @@
 package com.example.objectaid_sae.controleur;
 
 import com.example.objectaid_sae.model.Classe;
+import com.example.objectaid_sae.model.Fleche;
 import com.example.objectaid_sae.model.Model;
 import com.example.objectaid_sae.vue.VueAffichageGlobal;
 import com.example.objectaid_sae.vue.VueCentre;
 import com.example.objectaid_sae.vue.VueCheckClass;
+import com.example.objectaid_sae.vue.fabriqueFleches.FabriqueVueFleche;
+import com.example.objectaid_sae.vue.fabriqueFleches.FabriqueVueFlecheExtends;
+import com.example.objectaid_sae.vue.fabriqueFleches.FabriqueVueFlecheImplement;
+import com.example.objectaid_sae.vue.fabriqueFleches.FabriqueVueFlecheUtilisation;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
@@ -28,10 +33,30 @@ public class ControleurAffichageGlobal implements EventHandler<ActionEvent> {
             double maxX = ((((Button) actionEvent.getSource()).getParent()).getScene().getWidth() / 5 - ((Pane) (((BorderPane) (((Button) actionEvent.getSource()).getParent()).getParent())).getLeft()).getWidth());
             vaff.setTranslateX(Math.max(0, maxX));
         } else{
+            VueCentre centre = (VueCentre) src.getParent().getParent();
             boolean value = txt.contains("afficher");
             if(txt.contains("attributs")) if(txt.contains("hérit")) for (Classe c : mod.getClasses()) c.setAfficheAttributsHerite(value);
                 else for (Classe c : mod.getClasses()) c.setAfficheAttributsDeclare(value);
             else if (txt.contains("hérit")) for (Classe c : mod.getClasses()) c.setAfficheMethodeHerite(value);
+            else if (txt.contains("dépen")) for (Fleche f : mod.getFleches()) {
+                f.setCache(!value);
+                if (value){
+                    FabriqueVueFleche fab;
+                    switch (f.getType()) {
+                        case "-->":
+                            fab = new FabriqueVueFlecheUtilisation(f);
+                            break;
+                        case "--|>":
+                            fab = new FabriqueVueFlecheExtends(f);
+                            break;
+                        default:
+                            fab = new FabriqueVueFlecheImplement(f);
+                            break;
+                    }
+                    centre.getChildren().add(fab.fabriquer());
+                }
+                else centre.supprimerFleches();
+            }
             else for (Classe c : mod.getClasses()) c.setAfficheMethodeDeclare(value);
 
         }

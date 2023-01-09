@@ -27,18 +27,18 @@ public class FabriqueVueFlecheImplement implements FabriqueVueFleche {
         VueFleche res = new VueFleche();
         Polygon poly;
         poly = fbpoly.fabriquer();
-        res.getChildren().add(poly);
         FabriqueLignePoint fbLigne = new FabriqueLignePoint(0,0,0,len);
         Line l = fbLigne.fabriquer();
+        res.getChildren().add(poly);
         res.getChildren().add(l);
         Rotate r = new Rotate();
         r.setPivotX(0);
         r.setPivotY(0);
         r.setAngle(inclinaison);
-        (res.getChildren().get(0)).setRotate(45);
-        (res.getChildren().get(0)).setLayoutY(10);
+        poly.setRotate(45);
+        poly.setLayoutY(10);
         res.setLayoutY(y2);
-        res.setLayoutX(y1);
+        res.setLayoutX(x2);
         res.getTransforms().add(r);
         return res;
     }
