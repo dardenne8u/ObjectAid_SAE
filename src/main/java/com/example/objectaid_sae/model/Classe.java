@@ -187,12 +187,12 @@ public class Classe implements Sujet {
     @Override
     public String toString() {
 
-        String s = "Classe{\n";
+        String s = this.type+"{\n";
         //attributs :
         List<String> listAtt = attributs.get(1);
         Iterator<String> iterAtt1 = listAtt.iterator();
         while (iterAtt1.hasNext()){
-            s += iterAtt1.next() + "\n";
+            s += iterAtt1.next() + "{\n";
         }
         List<String> listAt = attributs.get(2);
         Iterator<String> iterAt2 = listAt.iterator();
