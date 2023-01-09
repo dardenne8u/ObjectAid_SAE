@@ -6,6 +6,8 @@ import java.util.List;
 
 public class Analyseur {
 
+
+    public static String packageProjet;
     /**
      * Classe stockant les valeurs
      * de l'introspection
@@ -55,6 +57,12 @@ public class Analyseur {
         List<Class> interfaces = List.of(introspection.getInterfaces());
         for(Class inter : interfaces) {
             link = introspection.getSimpleName() + " ..|> " + inter.getSimpleName();
+            if(!inter.getPackageName().contains(packageProjet)){
+                System.out.println(inter.getPackageName());
+                System.out.println(packageProjet);
+                classe.addPackageExternes(inter.getName());
+            }
+
             classe.addDependencies(link);
         }
 
@@ -130,8 +138,12 @@ public class Analyseur {
 
     private boolean genLink(Field field) {
         Class type = field.getType();
+
         String typeName = type.getSimpleName();
         if(notClassicType(typeName)) return false;
+        if(!type.getPackageName().contains(packageProjet)) {
+            classe.addPackageExternes(type.getName());
+        }
         String cardinalite = " \"0..1\" ";
         if(type.isArray()) {
             cardinalite = " \"0..*\" ";

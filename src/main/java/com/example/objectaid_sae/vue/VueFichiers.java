@@ -1,6 +1,7 @@
 package com.example.objectaid_sae.vue;
 
 import com.example.objectaid_sae.controleur.ControleurFichierGlisse;
+import com.example.objectaid_sae.model.Analyseur;
 import com.example.objectaid_sae.model.Fichier;
 import com.example.objectaid_sae.observateur.Observateur;
 import com.example.objectaid_sae.observateur.Sujet;
@@ -11,7 +12,8 @@ import javafx.scene.control.TreeView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 
-import java.io.File;
+import java.io.*;
+import java.util.List;
 
 public class VueFichiers extends GridPane implements Observateur {
 
@@ -19,23 +21,39 @@ public class VueFichiers extends GridPane implements Observateur {
 
     public VueFichiers(String path) {
         File f = new File(path);
-        arbre = new TreeView<>(tree(f));
+        if (f.exists()) {
+            arbre = new TreeView<>(tree(f));
+            for(File file : f.listFiles()) {
+                if(file.getName().contains(".java")) {
+                    try {
+                        BufferedReader br = new BufferedReader(new FileReader(file));
+                        String line = br.readLine();
+                        if(line != null) {
+                            Analyseur.packageProjet = line.substring(line.indexOf(" ")+1);
+                        } else {
+                            Analyseur.packageProjet = "";
+                        }
+                    } catch (IOException e) {
+                        Analyseur.packageProjet = "";
+                    }
+                }
+            }
+        }
+
         getChildren().add(arbre);
         arbre.minHeightProperty().bind(heightProperty());
     }
 
     public TreeItem<HBox> tree(File file) {
         TreeItem<HBox> res = null;
-        if (file.exists()) {
-            res = creerItem(file);
-            if (file.isDirectory()) {
-                File[] files = file.listFiles();
-                for (int i = 0; i < files.length; i++) {
-                    if (files[i].isDirectory()) {
-                        res.getChildren().add(tree(files[i]));
-                    } else {
-                        res.getChildren().add(creerItem(files[i]));
-                    }
+        res = creerItem(file);
+        if (file.isDirectory()) {
+            File[] files = file.listFiles();
+            for (int i = 0; i < files.length; i++) {
+                if (files[i].isDirectory()) {
+                    res.getChildren().add(tree(files[i]));
+                } else {
+                    res.getChildren().add(creerItem(files[i]));
                 }
             }
         }

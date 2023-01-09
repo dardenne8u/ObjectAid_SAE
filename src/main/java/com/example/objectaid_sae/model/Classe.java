@@ -48,6 +48,8 @@ public class Classe implements Sujet {
      */
     private List<String> dependencies;
 
+    private List<String> packageClassExternes;
+
     //METHODES
 
 
@@ -64,6 +66,7 @@ public class Classe implements Sujet {
     }
 
     public Classe() {
+        this.packageClassExternes = new ArrayList<>();
         this.attributs = new HashMap<>();
         this.attributs.put(DECLARED, new ArrayList<>());
         this.attributs.put(HERITED, new ArrayList<>());
@@ -76,6 +79,16 @@ public class Classe implements Sujet {
         this.dependencies = new ArrayList<>();
 
         afficheAttributsDeclare = afficheAttributsHerite = afficheMethodeDeclare = afficheConstructeur = afficheMethodeHerite = true;
+    }
+
+
+    public void addPackageExternes(String packageExt) {
+        if(!this.packageClassExternes.contains(packageExt))
+            this.packageClassExternes.add(packageExt);
+    }
+
+    public List<String> getPackageExternes() {
+        return this.packageClassExternes;
     }
 
     public void addAttribut(int type, String attribut) {
