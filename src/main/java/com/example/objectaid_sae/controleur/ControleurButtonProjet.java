@@ -84,7 +84,7 @@ public class ControleurButtonProjet implements EventHandler<ActionEvent> {
                 File file_verif_img = new File(string_enregistrer_img);
                 if (file_verif_img.exists()){
                         if (string_nom != null){
-                        String img_nom = string_enregistrer_uml + "\\" + string_nom + ".png";
+                        String img_nom = string_enregistrer_img + "\\" + string_nom + ".png";
                             exit=true;
                             System.out.println("existant ! : " + img_nom);
                             try{saveImg(pane, img_nom);
