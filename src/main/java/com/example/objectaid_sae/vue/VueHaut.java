@@ -6,6 +6,7 @@ import com.example.objectaid_sae.controleur.ControleurButtonProjet;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.effect.DropShadow;
@@ -16,8 +17,11 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
+import javafx.stage.DirectoryChooser;
+import javafx.stage.FileChooser;
 
 import java.awt.event.MouseEvent;
+import java.io.File;
 import java.util.ArrayList;
 
 public class VueHaut extends GridPane {
@@ -80,10 +84,16 @@ public class VueHaut extends GridPane {
 
 
 
-        Button general = new Button("Général");
+        Button general = new Button("Changer Projet");
         general.setFont(Font.font(null, FontWeight.BOLD, 16));
         GridPane.setHgrow(general, Priority.ALWAYS);
         GridPane.setVgrow(general, Priority.ALWAYS);
+        general.setOnAction(event -> {
+            final BorderPane pane = (BorderPane) ((Node)event.getSource()).getParent().getParent();
+            DirectoryChooser chooser = new DirectoryChooser();
+            File selected = chooser.showDialog(null);
+            pane.setLeft(new VueFichiers(selected.getAbsolutePath()));
+        });
 
         setConstraints(general, 3, 2);
 
