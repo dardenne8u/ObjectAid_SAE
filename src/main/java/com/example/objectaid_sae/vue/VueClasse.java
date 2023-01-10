@@ -8,7 +8,10 @@ import com.example.objectaid_sae.observateur.Sujet;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
@@ -34,6 +37,25 @@ public class VueClasse extends VBox implements Observateur {
         notifier(classe);
     }
 
+    public String visibilite(String value){
+        String[] table = value.split(" ");
+        boolean pub = true;
+        boolean pri = false;
+        boolean pro = false;
+        for(int i=0; i<table.length; i++){
+            if( table[i].contains("-")){
+                pri=true;
+                pub=false;
+                break;
+            } else if (table[i].contains("#")) {
+                pub=false;
+                pro=true;
+                break;
+            }
+        }
+        if(pub)
+
+    }
 
     /**
      * methode mettant a jour l'affichage dans la vue
@@ -53,10 +75,40 @@ public class VueClasse extends VBox implements Observateur {
 
 
         // PREMIERE PARTIE : TITRE
-        Label titre = new Label(classe.getType());
+
+        String typeTitre = classe.getType();
+        String[] table = typeTitre.split(" ");
+        boolean inter = false;
+        boolean abst = false;
+        for (int i = 0; i<table.length; i++){
+            if (table[i].contains("abstract")){
+                abst = true;
+                break;
+            } else if (table[i].contains("interface")) {
+                inter = true;
+                break;
+            }
+        }
+        Image imgT;
+        if( inter){
+            imgT = new Image(getClass().getResource("/img/interface.png").toExternalForm());
+        } else if (abst) {
+            imgT = new Image(getClass().getResource("/img/Abstract.png").toExternalForm());
+        }else {
+            imgT = new Image(getClass().getResource("/img/Class.png").toExternalForm());
+        }
+        ImageView imgVTop = new ImageView(imgT);
+        imgVTop.setFitHeight(20);
+        imgVTop.setFitWidth(20);
+        imgVTop.setPreserveRatio(true);
+
+        HBox top = new HBox();
+        top.setPadding(new Insets(5, 0,0,5));
+        Label titre = new Label(" "+table[table.length-1]);
         titre.setPadding(new Insets(3.0));
         titre.setAlignment(Pos.CENTER);
-         this.getChildren().addAll(titre, this.separer());
+        top.getChildren().addAll(imgVTop, titre);
+         this.getChildren().addAll(top, this.separer());
 
          //DEUXIEME PARTIE : ATTRIBUTS
         Map<Integer, List<String>> attributsMap = classe.getAttributs();
