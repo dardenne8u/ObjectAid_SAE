@@ -93,4 +93,13 @@ public class Model implements Sujet {
         return UML;
 
     }
+
+    public List<Fleche> findFleche(Classe classe) {
+        List<Fleche> flechesList = new ArrayList<>();
+        for(Fleche fleche : this.fleches) {
+            if(fleche.getDepart().equals(classe) || fleche.getArrivee().equals(classe))
+                flechesList.add(fleche);
+        }
+        return flechesList;
+    }
 }
