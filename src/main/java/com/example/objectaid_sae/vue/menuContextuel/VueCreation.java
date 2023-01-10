@@ -1,4 +1,4 @@
-package com.example.objectaid_sae.vue;
+package com.example.objectaid_sae.vue.menuContextuel;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;

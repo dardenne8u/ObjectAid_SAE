@@ -2,9 +2,9 @@ package com.example.objectaid_sae.controleur;
 
 import com.example.objectaid_sae.model.Classe;
 import com.example.objectaid_sae.vue.VueCentre;
-import com.example.objectaid_sae.vue.VueCheckClass;
-import com.example.objectaid_sae.vue.VueCreation;
-import com.example.objectaid_sae.vue.VueSousMenuClassExt;
+import com.example.objectaid_sae.vue.menuContextuel.VueCheckClass;
+import com.example.objectaid_sae.vue.menuContextuel.VueCreation;
+import com.example.objectaid_sae.vue.menuContextuel.VueSousMenuClassExt;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Node;

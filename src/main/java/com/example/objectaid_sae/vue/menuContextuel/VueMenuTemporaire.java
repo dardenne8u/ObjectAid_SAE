@@ -1,4 +1,4 @@
-package com.example.objectaid_sae.vue;
+package com.example.objectaid_sae.vue.menuContextuel;
 
 import com.example.objectaid_sae.controleur.ControleurVueTemporaireClasse;
 import com.example.objectaid_sae.model.Classe;

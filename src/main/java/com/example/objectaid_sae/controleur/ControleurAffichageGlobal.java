@@ -5,7 +5,6 @@ import com.example.objectaid_sae.model.Fleche;
 import com.example.objectaid_sae.model.Model;
 import com.example.objectaid_sae.vue.VueAffichageGlobal;
 import com.example.objectaid_sae.vue.VueCentre;
-import com.example.objectaid_sae.vue.VueCheckClass;
 import com.example.objectaid_sae.vue.fabriqueFleches.FabriqueVueFleche;
 import com.example.objectaid_sae.vue.fabriqueFleches.FabriqueVueFlecheExtends;
 import com.example.objectaid_sae.vue.fabriqueFleches.FabriqueVueFlecheImplement;
@@ -13,7 +12,6 @@ import com.example.objectaid_sae.vue.fabriqueFleches.FabriqueVueFlecheUtilisatio
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 

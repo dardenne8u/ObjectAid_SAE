@@ -1,4 +1,4 @@
-package com.example.objectaid_sae.vue;
+package com.example.objectaid_sae.vue.menuContextuel;
 
 import com.example.objectaid_sae.model.Analyseur;
 import com.example.objectaid_sae.model.Classe;
@@ -6,6 +6,8 @@ import com.example.objectaid_sae.model.Fleche;
 import com.example.objectaid_sae.model.Model;
 import com.example.objectaid_sae.observateur.Observateur;
 import com.example.objectaid_sae.observateur.Sujet;
+import com.example.objectaid_sae.vue.VueCentre;
+import com.example.objectaid_sae.vue.VueClasse;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
