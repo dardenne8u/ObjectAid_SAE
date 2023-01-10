@@ -43,11 +43,9 @@ public class ControleurButtonNewClass implements EventHandler<ActionEvent> {
                 Parent temp = src.getParent();
                 while(!(temp instanceof BorderPane)) {
                     temp = temp.getParent();
-                    System.out.println(temp.getClass());
                 }
                 BorderPane borderPane = (BorderPane) temp;
                 stock = (VueCentre) borderPane.getCenter();
-                System.out.println(stock);
                 openSecondaryWindow();
             }
             if (src.getText().equals("Annuler")) {
@@ -58,6 +56,15 @@ public class ControleurButtonNewClass implements EventHandler<ActionEvent> {
                 VueNewClasse vnc = (VueNewClasse) ((Button) evt.getSource()).getParent();
                 if(!vnc.matchName()) return;
                 newClasse.setType(vnc.getTypeClass());
+                if(((CheckBox) src.getParent().getChildrenUnmodifiable().get(4)).isSelected()){
+
+                    newClasse.addDependencies((((TextField) src.getParent().getChildrenUnmodifiable().get(1)).getText())+" ..|> " +  (((TextField) src.getParent().getChildrenUnmodifiable().get(5)).getText()));
+                }
+
+                if(((CheckBox) src.getParent().getChildrenUnmodifiable().get(6)).isSelected()){
+
+                    newClasse.addDependencies((((TextField) src.getParent().getChildrenUnmodifiable().get(1)).getText())+" --|> " +  (((TextField) src.getParent().getChildrenUnmodifiable().get(7)).getText()));
+                }
                 VueClasse vC = new VueClasse(newClasse);
                 mod.addClasse(newClasse);
 
