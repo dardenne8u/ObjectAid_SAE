@@ -1,0 +1,36 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+
+
+ControleurClasseGlissee -> MouseEvent : getSceneX()
+activate MouseEvent
+ControleurClasseGlissee <-- MouseEvent : x
+deactivate MouseEvent
+
+ControleurClasseGlissee -> MouseEvent : getSceneY()
+activate MouseEvent
+ControleurClasseGlissee <-- MouseEvent : y
+deactivate MouseEvent
+
+ControleurClasseGlissee -> Classe : setX (x)
+activate Classe
+ControleurClasseGlissee <-- Classe
+deactivate Classe
+
+ControleurClasseGlissee -> Classe : setY(y)
+activate Classe
+ControleurClasseGlissee <-- Classe
+deactivate Classe
+
+ControleurClasseGlissee -> Classe : notifierObservateurs()
+activate Classe
+
+Classe -> VueClasse : notifier()
+activate VueClasse
+Classe <-- VueClasse
+deactivate VueClasse
+
+ControleurClasseGlissee <-- Classe
+deactivate Classe
+@enduml

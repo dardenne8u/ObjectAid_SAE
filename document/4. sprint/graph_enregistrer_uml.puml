@@ -1,0 +1,33 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+
+ControleurButtonProjet -> TextField1 : getText()
+activate TextField1
+ControleurButtonProjet <-- TextField1 : cheminDossier
+deactivate TextField1
+
+
+ControleurButtonProjet -> TextField2 : getText()
+activate TextField2
+ControleurButtonProjet <-- TextField2 : nom_Fichier
+deactivate TextField2
+
+ControleurButtonProjet -> Model : enregistrerUML()
+activate Model
+loop this.classe.hasNext()
+Model -> Classe : toString()
+Activate Classe
+Model <-- Classe : String_uml
+deactivate Classe
+end loop
+
+ControleurButtonProjet <-- Model : string_uml_complet
+deactivate Model
+
+ControleurButtonProjet -> FileWriter : write(string_uml_complet)
+activate FileWriter
+ControleurButtonProjet <-- FileWriter
+deactivate FileWriter
+@enduml

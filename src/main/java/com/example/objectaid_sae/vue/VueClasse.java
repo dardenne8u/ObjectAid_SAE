@@ -5,11 +5,13 @@ import com.example.objectaid_sae.controleur.ControleurClasseGlissee;
 import com.example.objectaid_sae.model.Classe;
 import com.example.objectaid_sae.observateur.Observateur;
 import com.example.objectaid_sae.observateur.Sujet;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 
 import java.util.List;
@@ -43,8 +45,8 @@ public class VueClasse extends VBox implements Observateur {
         this.getChildren().clear();
         this.setMaxWidth(200);
         this.setWidth(this.getMaxWidth());
-        this.setStyle("-fx-background-color:#D3D3D3");
-        this.setAlignment(Pos.CENTER);
+        this.setStyle("-fx-background-color:#f0a022");
+        this.setAlignment(Pos.CENTER_LEFT);
         this.setSpacing(8);
         setLayoutX(classe.getX());
         setLayoutY(classe.getY());
@@ -52,6 +54,8 @@ public class VueClasse extends VBox implements Observateur {
 
         // PREMIERE PARTIE : TITRE
         Label titre = new Label(classe.getType());
+        titre.setPadding(new Insets(3.0));
+        titre.setAlignment(Pos.CENTER);
          this.getChildren().addAll(titre, this.separer());
 
          //DEUXIEME PARTIE : ATTRIBUTS
@@ -65,6 +69,7 @@ public class VueClasse extends VBox implements Observateur {
         if(classe.isAfficheConstructeur()) {
             for(String constructeur: classe.getConstructeurs()) {
                 Label elem = new Label(constructeur);
+                elem.setPadding(new Insets(0, 0, 0, 3.0));
                 elem.setWrapText(true);
                 this.getChildren().add(elem);
             }
@@ -76,8 +81,8 @@ public class VueClasse extends VBox implements Observateur {
         if (classe.isAfficheMethodeHerite()) this.afficherContenant(methodesMap, Classe.HERITED);
         this.getChildren().add(this.separer());
         this.setWidth(this.getMaxWidth());
-        this.setStyle("-fx-background-color:#D3D3D3");
-        this.setAlignment(Pos.CENTER_LEFT);
+        //this.setStyle("-fx-background-color:#D3D3D3");
+
         setLayoutX(classe.getX() - getWidth()/2);
         setLayoutY(classe.getY() - getHeight()/2);
     }
@@ -99,6 +104,8 @@ public class VueClasse extends VBox implements Observateur {
            List<String> element = map.get(typeAttribut);
            for (String elemC : element) {
                Label elem = new Label(elemC);
+               elem.setPadding(new Insets(0, 0, 0, 3.0));
+               elem.setTextFill(Paint.valueOf("black"));
                elem.setWrapText(true);
                this.getChildren().add(elem);
            }
