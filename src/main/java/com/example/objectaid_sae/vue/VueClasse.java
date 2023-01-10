@@ -37,7 +37,7 @@ public class VueClasse extends VBox implements Observateur {
         notifier(classe);
     }
 
-    public String visibilite(String value){
+    /*public String visibilite(String value){
         String[] table = value.split(" ");
         boolean pub = true;
         boolean pri = false;
@@ -55,7 +55,7 @@ public class VueClasse extends VBox implements Observateur {
         }
         if(pub)
 
-    }
+    }*/
 
     /**
      * methode mettant a jour l'affichage dans la vue
@@ -133,10 +133,15 @@ public class VueClasse extends VBox implements Observateur {
         if (classe.isAfficheMethodeHerite()) this.afficherContenant(methodesMap, Classe.HERITED);
         this.getChildren().add(this.separer());
         this.setWidth(this.getMaxWidth());
-        //this.setStyle("-fx-background-color:#D3D3D3");
+
+        if (this.getHeight()> 300){
+            this.setHeight(300);
+        }
 
         setLayoutX(classe.getX() - getWidth()/2);
         setLayoutY(classe.getY() - getHeight()/2);
+
+
     }
 
     /**
