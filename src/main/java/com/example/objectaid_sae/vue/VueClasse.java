@@ -67,7 +67,7 @@ public class VueClasse extends VBox implements Observateur {
         this.getChildren().clear();
         this.setMaxWidth(200);
         this.setWidth(this.getMaxWidth());
-        this.setStyle("-fx-background-color:#f0a022");
+        this.setStyle("-fx-background-color:#b0c9cc");
         this.setAlignment(Pos.CENTER_LEFT);
         this.setSpacing(8);
         setLayoutX(classe.getX());

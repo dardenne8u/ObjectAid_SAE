@@ -9,8 +9,10 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
 
 import java.io.*;
 import java.util.List;
@@ -42,6 +44,7 @@ public class VueFichiers extends GridPane implements Observateur {
 
         getChildren().add(arbre);
         arbre.minHeightProperty().bind(heightProperty());
+
     }
 
     public TreeItem<HBox> tree(File file) {
@@ -83,5 +86,6 @@ public class VueFichiers extends GridPane implements Observateur {
     public void notifier(Sujet s) {
         Fichier f = (Fichier) s;
         arbre = new TreeView<>(tree(new File(f.getPathDepart())));
+
     }
 }

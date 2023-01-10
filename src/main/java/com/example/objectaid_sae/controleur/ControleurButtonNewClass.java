@@ -12,7 +12,9 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 public class ControleurButtonNewClass implements EventHandler<ActionEvent> {
@@ -35,6 +37,8 @@ public class ControleurButtonNewClass implements EventHandler<ActionEvent> {
         Model mod = Model.getModel();
         if (evt.getSource().getClass() == Button.class) {
             Button src = (Button) evt.getSource();
+            src.setEffect(new DropShadow(0.0, 2.0, 2.0, Color.TRANSPARENT));
+
             if (src.getText().equals("Nouvelle classe")) {
                 Parent temp = src.getParent();
                 while(!(temp instanceof BorderPane)) {
@@ -65,8 +69,11 @@ public class ControleurButtonNewClass implements EventHandler<ActionEvent> {
 
 
 
+
             }
+
         }
+
 
 
     }

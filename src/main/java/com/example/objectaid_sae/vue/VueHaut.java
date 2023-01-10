@@ -8,12 +8,15 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
 public class VueHaut extends GridPane {
@@ -34,7 +37,7 @@ public class VueHaut extends GridPane {
         ColumnConstraints column4 = new ColumnConstraints();
         column4.setHalignment(HPos.CENTER);
         getColumnConstraints().addAll(column1, column2, column3, column4); // each get 50% of width*/
-        setHgap(10); setVgap(10); setPadding(new Insets(0, 0, 10, 0));
+        setHgap(10); setVgap(10); setPadding(new Insets(0, 10, 10, 0));
 
 
         Pane paneTitre = new Pane();
@@ -55,7 +58,6 @@ public class VueHaut extends GridPane {
         nouvelleClasse.setFont(Font.font(null, FontWeight.BOLD, 16));
         nouvelleClasse.setOnAction(new ControleurButtonNewClass());
         nouvelleClasse.setMaxWidth(150);
-        nouvelleClasse.setMaxHeight(Double.MAX_VALUE);
         GridPane.setVgrow(nouvelleClasse, Priority.ALWAYS);
         GridPane.setHgrow(nouvelleClasse,Priority.ALWAYS);
         setConstraints(nouvelleClasse, 3, 1);
@@ -65,18 +67,15 @@ public class VueHaut extends GridPane {
         prj.setFont(Font.font(null, FontWeight.BOLD, 16));
         GridPane.setHgrow(prj, Priority.ALWAYS);
         GridPane.setVgrow(prj, Priority.ALWAYS);
-        prj.setMaxWidth(nouvelleClasse.getMaxWidth());
-        prj.setMaxHeight(Double.MAX_VALUE);
+
         setConstraints(prj, 2, 1);
 
 
         Button aff = new Button("Affichage");
         aff.setFont(Font.font(null, FontWeight.BOLD, 16));
         aff.setOnAction(new ControleurAffichageGlobal());
-        GridPane.setHgrow(aff, Priority.ALWAYS);
-        GridPane.setVgrow(aff, Priority.ALWAYS);
-        aff.setMaxWidth(nouvelleClasse.getMaxWidth());
-        aff.setMaxHeight(Double.MAX_VALUE);
+
+
         setConstraints(aff, 2, 2);
 
 
@@ -85,8 +84,7 @@ public class VueHaut extends GridPane {
         general.setFont(Font.font(null, FontWeight.BOLD, 16));
         GridPane.setHgrow(general, Priority.ALWAYS);
         GridPane.setVgrow(general, Priority.ALWAYS);
-        general.setMaxWidth(nouvelleClasse.getMaxWidth());
-        general.setMaxHeight(Double.MAX_VALUE);
+
         setConstraints(general, 3, 2);
 
 
@@ -99,7 +97,12 @@ public class VueHaut extends GridPane {
 
         for (Button but : buttons){
             but.setStyle("-fx-background-color:#00727a; -fx-border-color: #024438");
+            but.setEffect(new DropShadow(10.0, 1.0, 1.0, Color.valueOf("83420CFF")));
+            but.setMaxWidth(nouvelleClasse.getMaxWidth());
+            but.setMaxHeight(30);
         }
+
+        this.setEffect(new DropShadow());
 
         getChildren().addAll(prj,aff,general,nouvelleClasse);
 
