@@ -52,6 +52,8 @@ public class Classe implements Sujet {
 
     private List<String> packageClassExternes;
 
+    private String packageName;
+
     //METHODES
 
 
@@ -68,6 +70,7 @@ public class Classe implements Sujet {
     }
 
     public Classe() {
+        this.packageName = "";
         this.packageClassExternes = new ArrayList<>();
         this.attributs = new HashMap<>();
         this.attributs.put(DECLARED, new ArrayList<>());
@@ -82,6 +85,14 @@ public class Classe implements Sujet {
 
         afficheAttributsDeclare = afficheMethodeDeclare = afficheConstructeur = true;
         afficheAttributsHerite = afficheMethodeHerite = false;
+    }
+
+    public String getPackageName() {
+        return this.packageName;
+    }
+
+    public void setPackageName(String name) {
+        this.packageName = name;
     }
 
 

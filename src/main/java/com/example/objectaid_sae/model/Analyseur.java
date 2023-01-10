@@ -42,6 +42,7 @@ public class Analyseur {
         genConstructeurs();
         genClassSignature();
         genImplementAndExtendsDependencies();
+        classe.setPackageName(introspection.getPackageName());
         return this.classe;
     }
 
