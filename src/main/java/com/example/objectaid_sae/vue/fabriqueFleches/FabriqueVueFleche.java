@@ -2,15 +2,12 @@ package com.example.objectaid_sae.vue.fabriqueFleches;
 
 import com.example.objectaid_sae.model.Fleche;
 import com.example.objectaid_sae.vue.VueCentre;
-import com.example.objectaid_sae.vue.VueClasse;
 import com.example.objectaid_sae.vue.VueFleche;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Polygon;
 import javafx.scene.transform.Rotate;
-
-import javax.swing.*;
 
 public abstract class FabriqueVueFleche {
 

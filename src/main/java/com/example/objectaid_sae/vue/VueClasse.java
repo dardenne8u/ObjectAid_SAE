@@ -23,12 +23,12 @@ public class VueClasse extends VBox implements Observateur {
 
     private ControleurClasseGlissee controleurClasseGlissee;
 
-    private static final ImageView imgClasse = new ImageView(new Image(VueClasse.class.getResource("/img/Class.png").toExternalForm()));
-    private static final ImageView imgAbstract = new ImageView(new Image(VueClasse.class.getResource("/img/Class.png").toExternalForm()));
-    private static final ImageView imgInterface = new ImageView(new Image(VueClasse.class.getResource("/img/Class.png").toExternalForm()));
-    private static final ImageView imgPublic = new ImageView(new Image(VueClasse.class.getResource("/img/plus.png").toExternalForm()));
-    private static final ImageView imgPrivate = new ImageView(new Image(VueClasse.class.getResource("/img/moin.png").toExternalForm()));
-    private static final ImageView imgProtected = new ImageView(new Image(VueClasse.class.getResource("/img/pr.png").toExternalForm()));
+    private static final Image imgClasse = new Image(VueClasse.class.getResource("/img/Class.png").toExternalForm());
+    private static final Image imgAbstract = new Image(VueClasse.class.getResource("/img/Class.png").toExternalForm());
+    private static final Image imgInterface = new Image(VueClasse.class.getResource("/img/Class.png").toExternalForm());
+    private static final Image imgPublic = new Image(VueClasse.class.getResource("/img/plus.png").toExternalForm());
+    private static final Image imgPrivate = new Image(VueClasse.class.getResource("/img/moin.png").toExternalForm());
+    private static final Image imgProtected = new Image(VueClasse.class.getResource("/img/pr.png").toExternalForm());
 
     /**
      * Constructeur creant une VueClasse et la liant aux controleurs associes
@@ -64,13 +64,13 @@ public class VueClasse extends VBox implements Observateur {
         ImageView iv;
         Label txt = new Label(value);
         if (pub) {
-            iv = imgPublic;
+            iv = new ImageView(imgPublic);
             if (value.contains("+")) txt = new Label(value.replace("+", ""));
         } else if (pri) {
-            iv = imgPrivate;
+            iv = new ImageView(imgPrivate);
             txt = new Label(value.replace("-", ""));
         } else {
-            iv = imgProtected;
+            iv = new ImageView(imgProtected);
             txt = new Label(value.replace("#", ""));
         }
         txt.setWrapText(true);
@@ -118,9 +118,9 @@ public class VueClasse extends VBox implements Observateur {
             }
         }
         ImageView imgVTop;
-        if (inter) imgVTop = imgInterface;
-        else if (abst) imgVTop = imgAbstract;
-        else imgVTop = imgClasse;
+        if (inter) imgVTop = new ImageView(imgInterface);
+        else if (abst) imgVTop = new ImageView(imgAbstract);
+        else imgVTop = new ImageView(imgClasse);
         imgVTop.setFitHeight(20);
         imgVTop.setFitWidth(20);
         imgVTop.setPreserveRatio(true);
