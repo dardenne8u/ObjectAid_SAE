@@ -57,6 +57,18 @@ public class ControleurAffichageGlobal implements EventHandler<ActionEvent> {
             }
             else for (Classe c : mod.getClasses()) c.setAfficheMethodeDeclare(value);
 
+
+            String[] split = txt.split(" ");
+            if(split[0].equals("afficher")){
+                split[0] = "masquer";
+            } else {
+                split[0] = "afficher";
+            }
+            String nouveauText = "";
+            for (int i = 0; i<split.length; i++){
+                nouveauText += split[i]+ " ";
+            }
+            src.setText(nouveauText);
         }
     }
 }

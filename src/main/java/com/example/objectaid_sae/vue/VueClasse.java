@@ -14,7 +14,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 
 import java.util.List;
@@ -87,8 +86,9 @@ public class VueClasse extends VBox implements Observateur {
         this.getChildren().clear();
         this.setMaxWidth(200);
         this.setWidth(this.getMaxWidth());
-        this.setStyle("-fx-background-color:#b0c9cc");
+        this.setStyle("-fx-background-color:#b0c9cc; -fx-border-color: black");
         this.setAlignment(Pos.CENTER_LEFT);
+
         this.setSpacing(8);
         setLayoutX(classe.getX());
         setLayoutY(classe.getY());
@@ -152,7 +152,7 @@ public class VueClasse extends VBox implements Observateur {
         Map<Integer, List<String>> methodesMap = classe.getMethodes();
         if (classe.isAfficheMethodeDeclare()) this.afficherContenant(methodesMap, Classe.DECLARED);
         if (classe.isAfficheMethodeHerite()) this.afficherContenant(methodesMap, Classe.HERITED);
-        this.getChildren().add(this.separer());
+        //this.getChildren().add(this.separer());
         this.setWidth(this.getMaxWidth());
 
         if (this.getHeight()> 300){
@@ -168,7 +168,7 @@ public class VueClasse extends VBox implements Observateur {
      * @return le rectangle de séparation
      */
     public Rectangle separer(){
-        Rectangle rec = new Rectangle(150, 2, Color.BLACK);
+        Rectangle rec = new Rectangle(150, 1, Color.BLACK);
         rec.setWidth(this.getWidth());
         return rec;
     }

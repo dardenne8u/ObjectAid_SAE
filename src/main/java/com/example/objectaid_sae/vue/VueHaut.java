@@ -13,6 +13,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 
@@ -55,7 +56,6 @@ public class VueHaut extends GridPane {
 
 
         Button nouvelleClasse = new Button("Nouvelle classe");
-        nouvelleClasse.setFont(Font.font(null, FontWeight.BOLD, 16));
         nouvelleClasse.setOnAction(new ControleurButtonNewClass());
         nouvelleClasse.setMaxWidth(150);
         GridPane.setVgrow(nouvelleClasse, Priority.ALWAYS);
@@ -96,10 +96,12 @@ public class VueHaut extends GridPane {
         buttons.add(prj); buttons.add(aff); buttons.add(general); buttons.add(nouvelleClasse);
 
         for (Button but : buttons){
-            but.setStyle("-fx-background-color:#00727a; -fx-border-color: #024438");
+            but.setStyle("-fx-background-color:#00727a");
             but.setEffect(new DropShadow(10.0, 1.0, 1.0, Color.valueOf("83420CFF")));
             but.setMaxWidth(nouvelleClasse.getMaxWidth());
             but.setMaxHeight(30);
+            but.setFont(Font.font("Helvetica", FontWeight.BOLD, 14));
+            but.setTextFill(Paint.valueOf("white"));
         }
 
         this.setEffect(new DropShadow());
