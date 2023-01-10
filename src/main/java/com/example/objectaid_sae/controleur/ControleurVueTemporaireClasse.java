@@ -41,7 +41,9 @@ public class ControleurVueTemporaireClasse implements EventHandler<ActionEvent> 
             return false;
         }
         // La chaîne doit être au format "nom(arg1: type1, arg2: type2, ...): typeRetour"
-        String pattern = "^\\s*[+# -]\\s*[a-zA-Z0-9_]+\\s*\\(([a-zA-Z0-9_]+\\s*:\\s*[a-zA-Z0-9_]+\\s*,\\s*)*([a-zA-Z0-9_]+\\s*:\\s*[a-zA-Z0-9_]+)\\s*\\)\\s*:\\s*[a-zA-Z0-9_]+\\s*$";
+
+        // (^[+# -])?\\s[a-z_][a-zA-Z0-9_]\\(([a-zA-Z0-9])|[a-zA-Z0-9]\\s:[a-zA-Z0-9_]+
+        String pattern = "(^[+# -]\\s?)?[a-z][\\w -]+\\(((\\w+,?\\s?)?)+\\)\\s?:\\s?\\w+";
         return methode.matches(pattern);
     }
 
@@ -75,6 +77,7 @@ public class ControleurVueTemporaireClasse implements EventHandler<ActionEvent> 
                         ((Pane) (src.getParent().getParent())).getChildren().remove(src.getParent());
                     }
                 }
+               classe.notifierObservateurs();
             }
             else if (src.getText().contains("Afficher")) {
                 VueCheckClass ch = new VueCheckClass(this);

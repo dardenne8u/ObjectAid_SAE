@@ -37,7 +37,8 @@ public class VueClasse extends VBox implements Observateur {
         notifier(classe);
     }
 
-    /*public String visibilite(String value){
+    public HBox visibilite(String value){
+        HBox boite = new HBox();
         String[] table = value.split(" ");
         boolean pub = true;
         boolean pri = false;
@@ -53,9 +54,28 @@ public class VueClasse extends VBox implements Observateur {
                 break;
             }
         }
-        if(pub)
+        Image img;
+        Label txt = new Label(value);
+        if(pub){
+            img = new Image(getClass().getResource("/img/plus.png").toExternalForm());
+            if (value.contains("+"))txt = new Label(value.replace("+", ""));
+        }else if(pri){
+            img = new Image(getClass().getResource("/img/moin.png").toExternalForm());
+            txt = new Label(value.replace("-", ""));
+        }else {
+            img = new Image(getClass().getResource("/img/pr.png").toExternalForm());
+            txt = new Label(value.replace("#", ""));
+        }
+        txt.setWrapText(true);
+        txt.setPadding(new Insets(0, 0, 0, 3.0));
+        ImageView  iv = new ImageView(img);
+        iv.setFitHeight(10);
+        iv.setFitWidth(10);
+        iv.setPreserveRatio(true);
+        boite.getChildren().addAll(iv, txt);
 
-    }*/
+        return boite;
+    }
 
     /**
      * methode mettant a jour l'affichage dans la vue
@@ -120,10 +140,11 @@ public class VueClasse extends VBox implements Observateur {
         //TROISIEME PARTIE : METHODES ET CONSTRUCTEURS
         if(classe.isAfficheConstructeur()) {
             for(String constructeur: classe.getConstructeurs()) {
-                Label elem = new Label(constructeur);
-                elem.setPadding(new Insets(0, 0, 0, 3.0));
-                elem.setWrapText(true);
-                this.getChildren().add(elem);
+               HBox box =  visibilite(constructeur);
+               // Label elem = new Label(constructeur);
+              box.setPadding(new Insets(0, 0, 0, 3.0));
+               // elem.setWrapText(true);
+                this.getChildren().add(box);
             }
         }
 
@@ -140,8 +161,6 @@ public class VueClasse extends VBox implements Observateur {
 
         setLayoutX(classe.getX() - getWidth()/2);
         setLayoutY(classe.getY() - getHeight()/2);
-
-
     }
 
     /**
@@ -160,10 +179,11 @@ public class VueClasse extends VBox implements Observateur {
 
            List<String> element = map.get(typeAttribut);
            for (String elemC : element) {
-               Label elem = new Label(elemC);
+               HBox elem = visibilite(elemC);
+               //Label elem = new Label(elemC);
                elem.setPadding(new Insets(0, 0, 0, 3.0));
-               elem.setTextFill(Paint.valueOf("black"));
-               elem.setWrapText(true);
+              // elem.setTextFill(Paint.valueOf("black"));
+              // elem.setWrapText(true);
                this.getChildren().add(elem);
            }
 
