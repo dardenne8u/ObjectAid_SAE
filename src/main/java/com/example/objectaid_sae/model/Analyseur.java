@@ -108,7 +108,7 @@ public class Analyseur {
 
         if(Modifier.isStatic(code)) res += " {static}";
         else if (Modifier.isAbstract(code)) res += " {abstract}";
-        return res;
+        return res + " ";
     }
 
     /**
@@ -158,13 +158,13 @@ public class Analyseur {
         if(!type.getPackageName().contains(packageProjet)) {
             classe.addPackageExternes(type.getName());
         }
-        String cardinalite = " \"0..1\" ";
+        String cardinalite = " \"0..1\"";
 
         if(type.isArray()) { // verification si l'attribut est un tableau -> []
-            cardinalite = " \"0..*\" ";
+            cardinalite = " \"0..*\"";
             typeName = typeName.substring(0, typeName.lastIndexOf("["));
         } else if (isContainsMoreThanOneValue(typeName)) { // verifie si l'attribut est une Collection
-            cardinalite  = " \"0..*\" ";
+            cardinalite  = " \"0..*\"";
             typeName = field.getGenericType().getTypeName();
             // typeName = Collection<package.ClassName>
             typeName = typeName.substring(typeName.lastIndexOf(".")+1, typeName.length()-1);
@@ -172,7 +172,7 @@ public class Analyseur {
             if(notClassicType(typeName)) return false; // lien non genere
         }
 
-        String link = introspection.getSimpleName() + " -->" + cardinalite + typeName + " : " + getSignature(field.getModifiers()) + " " +field.getName();
+        String link = introspection.getSimpleName() + " -->" + cardinalite + typeName + " : " + getSignature(field.getModifiers()) +field.getName();
         classe.addDependencies(link);
         return true;
     }
@@ -268,6 +268,7 @@ public class Analyseur {
     }
 
     public static void main(String[] args) throws ClassNotFoundException {
+        Analyseur.packageProjet = "com.example.objectaid_sae";
         System.out.println(
         new Analyseur("com.example.objectaid_sae.tests.classTest").analyseClasse());
 
