@@ -2,6 +2,7 @@ package com.example.objectaid_sae.vue;
 
 import com.example.objectaid_sae.controleur.ControleurFichierGlisse;
 import com.example.objectaid_sae.model.Analyseur;
+import com.example.objectaid_sae.model.Classe;
 import com.example.objectaid_sae.model.Fichier;
 import com.example.objectaid_sae.observateur.Observateur;
 import com.example.objectaid_sae.observateur.Sujet;
@@ -79,6 +80,38 @@ public class VueFichiers extends GridPane implements Observateur {
         TreeItem<HBox> res = new TreeItem<HBox>(box);
         res.setExpanded(true);
         return res;
+    }
+
+    public HBox findBoxRelativeToClasse(Classe classe) {
+        return parcoursArbre(classe, arbre.getRoot());
+    }
+
+    private HBox parcoursArbre(Classe classe, TreeItem<HBox> tree) {
+        String path = classe.getPackageName();
+        String nom = classe.getType();
+        nom = nom.substring(nom.lastIndexOf(" ")+1);
+        path = path.replace(".", "\\");
+        if(tree.isLeaf()) {
+            String temp = ((Label) tree.getValue().getChildrenUnmodifiable().get(2)).getText();
+            if(temp.contains(nom) && temp.contains(path))
+                return tree.getValue();
+            else
+                return null;
+        }
+        for(TreeItem<HBox>  branch : tree.getChildren()) {
+            if(branch.isLeaf()) {
+                String temp = ((Label) tree.getValue().getChildrenUnmodifiable().get(2)).getText();
+                if(temp.contains(nom) && temp.contains(path))
+                    return tree.getValue();
+                else
+                    return null;
+            } else {
+                HBox temp = parcoursArbre(classe, branch);
+                if(temp != null)
+                    return temp;
+            }
+        }
+        return null;
     }
 
 
