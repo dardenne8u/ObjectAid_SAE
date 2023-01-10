@@ -1,10 +1,7 @@
 package com.example.objectaid_sae.vue;
 
 import com.example.objectaid_sae.controleur.ControleurCentreClique;
-import com.example.objectaid_sae.vue.menuContextuel.VueCheckClass;
-import com.example.objectaid_sae.vue.menuContextuel.VueCreation;
-import com.example.objectaid_sae.vue.menuContextuel.VueMenuTemporaire;
-import com.example.objectaid_sae.vue.menuContextuel.VueSousMenuClassExt;
+import com.example.objectaid_sae.vue.menuContextuel.*;
 import javafx.scene.layout.Pane;
 
 import java.util.ArrayList;
@@ -17,7 +14,7 @@ public class VueCentre extends Pane {
     }
 
     public void supprimerMenusTemp() {
-        Class[] menusTemps = {VueCheckClass.class, VueMenuTemporaire.class, VueCreation.class, VueAffichageGlobal.class, VueSousMenuClassExt.class};
+        Class[] menusTemps = {VueCheckClass.class, VueMenuTemporaire.class, VueCreation.class, VueAffichageGlobal.class, VueSousMenuClassExt.class, VueDependences.class};
         ArrayList<Class> menus = new ArrayList<>(List.of(menusTemps));
         getChildren().removeIf(n -> menus.contains(n.getClass()));
         VueMenuTemporaire.VUE_TEMP.setCacher(true);
