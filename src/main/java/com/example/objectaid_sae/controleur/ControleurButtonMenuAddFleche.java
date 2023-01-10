@@ -35,8 +35,6 @@ public class ControleurButtonMenuAddFleche implements EventHandler {
         link += " "+ type +" " + nomFin;
         System.out.println(link);
         depart.addDependencies(link);
-        Fleche dep = new Fleche(depart, arriver, type);
-        Model.getModel().addFleche(dep);
         Fleche.creerFleches(depart,(VueCentre) btn.getParent().getParent());
      }
 }

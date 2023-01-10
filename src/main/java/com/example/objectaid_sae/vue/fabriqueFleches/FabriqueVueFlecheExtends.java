@@ -39,7 +39,7 @@ public class FabriqueVueFlecheExtends extends FabriqueVueFleche{
         double offsetC1 = getOffset(inclinaison,widthC1,  heightC1);
         double offsetC2 = getOffset(inclinaison,widthC2,heightC2);
         FabriqueLignePleine fbLigne = new FabriqueLignePleine(0,0,0,len-(offsetC1 + offsetC2));
-        return build(fbLigne, fbpoly,inclinaison,offsetC2,x2,y2);
+        return build(fbLigne, fbpoly,inclinaison,offsetC2,x2,y2,len);
     }
 
 }

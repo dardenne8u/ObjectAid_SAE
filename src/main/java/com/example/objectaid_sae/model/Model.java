@@ -75,6 +75,7 @@ public class Model implements Sujet {
     }
 
     public void addFleche(Fleche f){
+        if(f != null)
         fleches.add(f);
     }
 

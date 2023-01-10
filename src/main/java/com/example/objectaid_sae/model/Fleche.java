@@ -1,24 +1,22 @@
 package com.example.objectaid_sae.model;
 
-import com.example.objectaid_sae.observateur.Observateur;
-import com.example.objectaid_sae.observateur.Sujet;
 import com.example.objectaid_sae.vue.VueCentre;
 import com.example.objectaid_sae.vue.fabriqueFleches.FabriqueVueFleche;
 import com.example.objectaid_sae.vue.fabriqueFleches.FabriqueVueFlecheExtends;
 import com.example.objectaid_sae.vue.fabriqueFleches.FabriqueVueFlecheImplement;
 import com.example.objectaid_sae.vue.fabriqueFleches.FabriqueVueFlecheUtilisation;
 
-import java.util.ArrayList;
-import java.util.List;
-
-public class Fleche implements Sujet {
+public class Fleche {
 
     //ATTRIBUTS
-    private String type;
+    private String type, nom;
     private Classe arrivee;
     private Classe depart;
     private boolean cache;
-    private List<Observateur> observateurs;
+
+    private String[] cardinalites;
+
+    FabriqueVueFleche fabrique;
 
     //CONSTRUCTEURS
 
@@ -31,12 +29,14 @@ public class Fleche implements Sujet {
      * @param fin   la classe de fin
      * @param type  le type de fleche
      */
-    public Fleche(Classe debut, Classe fin, String type) {
+    public Fleche(Classe debut, Classe fin, String type, String nom, VueCentre centre) {
         this.type = type;
         this.arrivee = fin;
         this.depart = debut;
         this.cache = false;
-        observateurs = new ArrayList<>();
+        this.nom = nom;
+        this.cardinalites = new String[]{"", ""};
+        setFabrique(centre);
     }
 
     //METHODES
@@ -49,42 +49,33 @@ public class Fleche implements Sujet {
             for (String dep : cl.getDependencies()){
                 if(dep.contains(nom)){
                     Fleche f;
-                    FabriqueVueFleche fab;
                     if(dep.contains(".|>")) {
-                        f = new Fleche(cl, c, "..|>");
-                        fab = new FabriqueVueFlecheImplement(f,centre);
+                        f = new Fleche(cl, c, "..|>", "implement",centre);
                     }
                     else if(dep.contains("-|>")) {
-                        f = new Fleche(cl, c, "--|>");
-                        fab = new FabriqueVueFlecheExtends(f,centre);
+                        f = new Fleche(cl, c, "--|>", "extend",centre);
                     }
                     else {
-                        f = new Fleche(cl, c, "-->");
-                        fab = new FabriqueVueFlecheUtilisation(f,centre);
+                        f = new Fleche(cl, c, "-->", dep.substring(dep.lastIndexOf(":")),centre);
                     }
                     mod.addFleche(f);
-                    centre.getChildren().add(fab.fabriquer());
+                    centre.getChildren().add(f.getFabrique().fabriquer());
                 }
                 for(String dep2 : c.getDependencies()){
                     String temp = cl.getType().substring(cl.getType().lastIndexOf(" ")+1);
-                    System.out.println(temp);
                     if(dep2.contains(temp)){
                         Fleche f;
-                        FabriqueVueFleche fab;
                         if(dep.contains(".|>")) {
-                            f = new Fleche(c, cl, "..|>");
-                            fab = new FabriqueVueFlecheImplement(f,centre);
+                            f = new Fleche(c, cl, "..|>", "",centre);
                         }
                         else if(dep.contains("-|>")) {
-                            f = new Fleche(c, cl, "--|>");
-                            fab = new FabriqueVueFlecheExtends (f,centre);
+                            f = new Fleche(c, cl, "--|>", "",centre);
                         }
                         else {
-                            f = new Fleche(c, cl, "-->");
-                            fab = new FabriqueVueFlecheUtilisation(f,centre);
+                            f = new Fleche(c, cl, "-->", dep2.substring(dep2.lastIndexOf(":")),centre);
                         }
                         mod.addFleche(f);
-                        centre.getChildren().add(fab.fabriquer());
+                        centre.getChildren().add(f.getFabrique().fabriquer());
                     }
                 }
             }
@@ -131,13 +122,27 @@ public class Fleche implements Sujet {
         this.cache = cache;
     }
 
-    @Override
-    public void ajouterObservateur(Observateur o) {
-        observateurs.add(o);
+    public String[] getCardinalites() {
+        return cardinalites;
     }
 
-    @Override
-    public void notifierObservateurs() {
-        for(Observateur o : observateurs)o.notifier(this);
+    public String getNom() {
+        return nom;
+    }
+
+    public void setCardinalites(String[] cardinalites) {
+        this.cardinalites = cardinalites;
+    }
+
+    private void setFabrique(VueCentre centre){
+        switch (type){
+            case "-->" : fabrique = new FabriqueVueFlecheUtilisation(this ,centre);break;
+            case "--|>": fabrique = new FabriqueVueFlecheExtends(this,centre); break;
+            default: fabrique = new FabriqueVueFlecheImplement(this, centre); break;
+        }
+    }
+
+    public FabriqueVueFleche getFabrique() {
+        return fabrique;
     }
 }

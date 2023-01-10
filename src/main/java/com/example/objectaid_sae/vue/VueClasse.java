@@ -23,11 +23,19 @@ public class VueClasse extends VBox implements Observateur {
 
     private ControleurClasseGlissee controleurClasseGlissee;
 
+    private static final ImageView imgClasse = new ImageView(new Image(VueClasse.class.getResource("/img/Class.png").toExternalForm()));
+    private static final ImageView imgAbstract = new ImageView(new Image(VueClasse.class.getResource("/img/Class.png").toExternalForm()));
+    private static final ImageView imgInterface = new ImageView(new Image(VueClasse.class.getResource("/img/Class.png").toExternalForm()));
+    private static final ImageView imgPublic = new ImageView(new Image(VueClasse.class.getResource("/img/plus.png").toExternalForm()));
+    private static final ImageView imgPrivate = new ImageView(new Image(VueClasse.class.getResource("/img/moin.png").toExternalForm()));
+    private static final ImageView imgProtected = new ImageView(new Image(VueClasse.class.getResource("/img/pr.png").toExternalForm()));
+
     /**
      * Constructeur creant une VueClasse et la liant aux controleurs associes
+     *
      * @param classe, le sujet de la classe a afficher
      */
-    public VueClasse (Classe classe){
+    public VueClasse(Classe classe) {
         this.controleurClasseGlissee = new ControleurClasseGlissee(classe);
         this.addEventHandler(MouseEvent.MOUSE_CLICKED, new ControleurClasseCliquer(classe));
         this.addEventHandler(MouseEvent.MOUSE_CLICKED, controleurClasseGlissee);
@@ -36,38 +44,37 @@ public class VueClasse extends VBox implements Observateur {
         notifier(classe);
     }
 
-    public HBox visibilite(String value){
+    public HBox visibilite(String value) {
         HBox boite = new HBox();
         String[] table = value.split(" ");
         boolean pub = true;
         boolean pri = false;
         boolean pro = false;
-        for(int i=0; i<table.length; i++){
-            if( table[i].contains("-")){
-                pri=true;
-                pub=false;
+        for (int i = 0; i < table.length; i++) {
+            if (table[i].contains("-")) {
+                pri = true;
+                pub = false;
                 break;
             } else if (table[i].contains("#")) {
-                pub=false;
-                pro=true;
+                pub = false;
+                pro = true;
                 break;
             }
         }
-        Image img;
+        ImageView iv;
         Label txt = new Label(value);
-        if(pub){
-            img = new Image(getClass().getResource("/img/plus.png").toExternalForm());
-            if (value.contains("+"))txt = new Label(value.replace("+", ""));
-        }else if(pri){
-            img = new Image(getClass().getResource("/img/moin.png").toExternalForm());
+        if (pub) {
+            iv = imgPublic;
+            if (value.contains("+")) txt = new Label(value.replace("+", ""));
+        } else if (pri) {
+            iv = imgPrivate;
             txt = new Label(value.replace("-", ""));
-        }else {
-            img = new Image(getClass().getResource("/img/pr.png").toExternalForm());
+        } else {
+            iv = imgProtected;
             txt = new Label(value.replace("#", ""));
         }
         txt.setWrapText(true);
         txt.setPadding(new Insets(0, 0, 0, 3.0));
-        ImageView  iv = new ImageView(img);
         iv.setFitHeight(10);
         iv.setFitWidth(10);
         iv.setPreserveRatio(true);
@@ -78,6 +85,7 @@ public class VueClasse extends VBox implements Observateur {
 
     /**
      * methode mettant a jour l'affichage dans la vue
+     *
      * @param s, la classe a afficher
      */
     @Override
@@ -100,8 +108,8 @@ public class VueClasse extends VBox implements Observateur {
         String[] table = typeTitre.split(" ");
         boolean inter = false;
         boolean abst = false;
-        for (int i = 0; i<table.length; i++){
-            if (table[i].contains("abstract")){
+        for (int i = 0; i < table.length; i++) {
+            if (table[i].contains("abstract")) {
                 abst = true;
                 break;
             } else if (table[i].contains("interface")) {
@@ -109,41 +117,36 @@ public class VueClasse extends VBox implements Observateur {
                 break;
             }
         }
-        Image imgT;
-        if( inter){
-            imgT = new Image(getClass().getResource("/img/interface.png").toExternalForm());
-        } else if (abst) {
-            imgT = new Image(getClass().getResource("/img/Abstract.png").toExternalForm());
-        }else {
-            imgT = new Image(getClass().getResource("/img/Class.png").toExternalForm());
-        }
-        ImageView imgVTop = new ImageView(imgT);
+        ImageView imgVTop;
+        if (inter) imgVTop = imgInterface;
+        else if (abst) imgVTop = imgAbstract;
+        else imgVTop = imgClasse;
         imgVTop.setFitHeight(20);
         imgVTop.setFitWidth(20);
         imgVTop.setPreserveRatio(true);
 
         HBox top = new HBox();
-        top.setPadding(new Insets(5, 0,0,5));
-        Label titre = new Label(" "+table[table.length-1]);
+        top.setPadding(new Insets(5, 0, 0, 5));
+        Label titre = new Label(" " + table[table.length - 1]);
         titre.setPadding(new Insets(3.0));
         titre.setAlignment(Pos.CENTER);
         top.getChildren().addAll(imgVTop, titre);
-         this.getChildren().addAll(top, this.separer());
+        this.getChildren().addAll(top, this.separer());
 
-         //DEUXIEME PARTIE : ATTRIBUTS
+        //DEUXIEME PARTIE : ATTRIBUTS
         Map<Integer, List<String>> attributsMap = classe.getAttributs();
-        if (classe.isAfficheAttributsDeclare()) this.afficherContenant(attributsMap, Classe.DECLARED );
-        if (classe.isAfficheAttributsHerite()) this.afficherContenant(attributsMap, Classe.HERITED );
+        if (classe.isAfficheAttributsDeclare()) this.afficherContenant(attributsMap, Classe.DECLARED);
+        if (classe.isAfficheAttributsHerite()) this.afficherContenant(attributsMap, Classe.HERITED);
         this.getChildren().add(this.separer());
 
 
         //TROISIEME PARTIE : METHODES ET CONSTRUCTEURS
-        if(classe.isAfficheConstructeur()) {
-            for(String constructeur: classe.getConstructeurs()) {
-               HBox box =  visibilite(constructeur);
-               // Label elem = new Label(constructeur);
-              box.setPadding(new Insets(0, 0, 0, 3.0));
-               // elem.setWrapText(true);
+        if (classe.isAfficheConstructeur()) {
+            for (String constructeur : classe.getConstructeurs()) {
+                HBox box = visibilite(constructeur);
+                // Label elem = new Label(constructeur);
+                box.setPadding(new Insets(0, 0, 0, 3.0));
+                // elem.setWrapText(true);
                 this.getChildren().add(box);
             }
         }
@@ -155,44 +158,45 @@ public class VueClasse extends VBox implements Observateur {
         //this.getChildren().add(this.separer());
         this.setWidth(this.getMaxWidth());
 
-        if (this.getHeight()> 300){
+        if (this.getHeight() > 300) {
             this.setHeight(300);
         }
 
-        setLayoutX(classe.getX() - getWidth()/2);
-        setLayoutY(classe.getY() - getHeight()/2);
+        setLayoutX(classe.getX() - getWidth() / 2);
+        setLayoutY(classe.getY() - getHeight() / 2);
     }
 
     /**
      * methode creant un rectangle fin de séparation
+     *
      * @return le rectangle de séparation
      */
-    public Rectangle separer(){
+    public Rectangle separer() {
         Rectangle rec = new Rectangle(150, 1, Color.BLACK);
         rec.setWidth(this.getWidth());
         return rec;
     }
 
 
-    public void afficherContenant(Map<Integer, List<String>> map, int typeAttribut){
-       if (map != null) {
+    public void afficherContenant(Map<Integer, List<String>> map, int typeAttribut) {
+        if (map != null) {
 
-           List<String> element = map.get(typeAttribut);
-           for (String elemC : element) {
-               HBox elem = visibilite(elemC);
-               //Label elem = new Label(elemC);
-               elem.setPadding(new Insets(0, 0, 0, 3.0));
-              // elem.setTextFill(Paint.valueOf("black"));
-              // elem.setWrapText(true);
-               this.getChildren().add(elem);
-           }
+            List<String> element = map.get(typeAttribut);
+            for (String elemC : element) {
+                HBox elem = visibilite(elemC);
+                //Label elem = new Label(elemC);
+                elem.setPadding(new Insets(0, 0, 0, 3.0));
+                // elem.setTextFill(Paint.valueOf("black"));
+                // elem.setWrapText(true);
+                this.getChildren().add(elem);
+            }
 
-       }
+        }
     }
 
     @Override
     public boolean equals(Object obj) {
-        if (obj.getClass()!= getClass()) return false;
+        if (obj.getClass() != getClass()) return false;
         return (((VueClasse) obj).controleurClasseGlissee.getClasse().getType().equals(controleurClasseGlissee.getClasse().getType()));
     }
 }

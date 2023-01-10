@@ -52,25 +52,10 @@ public class ControleurClasseGlissee implements EventHandler<MouseEvent> {
         s.setX(mouseX);
         s.setY(mouseY);
         s.notifierObservateurs();
-
         // actualisation des fleches
         center.supprimerFleches();
         for (Fleche f : Model.getModel().getFleches()) {
-            if (!f.isCache()) {
-                    FabriqueVueFleche fab;
-                    switch (f.getType()) {
-                        case "-->":
-                            fab = new FabriqueVueFlecheUtilisation(f,center);
-                            break;
-                        case "--|>":
-                            fab = new FabriqueVueFlecheExtends(f, center);
-                            break;
-                        default:
-                            fab = new FabriqueVueFlecheImplement(f,center);
-                            break;
-                    }
-                center.getChildren().add(fab.fabriquer());
-            }
+            if (!f.isCache()) center.getChildren().add(f.getFabrique().fabriquer());
         }
     }
 

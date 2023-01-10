@@ -45,21 +45,7 @@ public class ControleurAffichageGlobal implements EventHandler<ActionEvent> {
             else if (txt.contains("hérit")) for (Classe c : mod.getClasses()) c.setAfficheMethodeHerite(value);
             else if (txt.contains("dépen")) for (Fleche f : mod.getFleches()) {
                 f.setCache(!value);
-                if (value){
-                    FabriqueVueFleche fab;
-                    switch (f.getType()) {
-                        case "-->":
-                            fab = new FabriqueVueFlecheUtilisation(f,centre);
-                            break;
-                        case "--|>":
-                            fab = new FabriqueVueFlecheExtends(f,centre);
-                            break;
-                        default:
-                            fab = new FabriqueVueFlecheImplement(f,centre);
-                            break;
-                    }
-                    centre.getChildren().add(fab.fabriquer());
-                }
+                if (value) centre.getChildren().add(f.getFabrique().fabriquer());
                 else centre.supprimerFleches();
             }
             else for (Classe c : mod.getClasses()) c.setAfficheMethodeDeclare(value);
