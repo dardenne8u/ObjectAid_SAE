@@ -5,6 +5,8 @@ import com.example.objectaid_sae.model.Fleche;
 import com.example.objectaid_sae.model.Model;
 import com.example.objectaid_sae.vue.VueAffichageGlobal;
 import com.example.objectaid_sae.vue.VueCentre;
+import com.example.objectaid_sae.vue.VueFichiers;
+import com.example.objectaid_sae.vue.VueHaut;
 import com.example.objectaid_sae.vue.fabriqueFleches.FabriqueVueFleche;
 import com.example.objectaid_sae.vue.fabriqueFleches.FabriqueVueFlecheExtends;
 import com.example.objectaid_sae.vue.fabriqueFleches.FabriqueVueFlecheImplement;
@@ -24,12 +26,17 @@ public class ControleurAffichageGlobal implements EventHandler<ActionEvent> {
         String txt = src.getText();
         if(txt.contains("Affichage")) {
             VueCentre centre = (VueCentre) (((BorderPane) (((Button) actionEvent.getSource()).getParent()).getParent())).getCenter();
+            VueHaut haut= (VueHaut) (((BorderPane) (((Button) actionEvent.getSource()).getParent()).getParent())).getTop();
+            VueFichiers gauche = (VueFichiers) (((BorderPane) (((Button) actionEvent.getSource()).getParent()).getParent())).getLeft();
+
+            Button afficher = (Button) haut.getChildren().get(2);
             VueAffichageGlobal vaff = new VueAffichageGlobal(this);
             centre.supprimerMenusTemp();
             centre.getChildren().add(vaff);
             vaff.setLayoutY(0);
-            double maxX = ((((Button) actionEvent.getSource()).getParent()).getScene().getWidth() / 5 - ((Pane) (((BorderPane) (((Button) actionEvent.getSource()).getParent()).getParent())).getLeft()).getWidth());
-            vaff.setTranslateX(Math.max(0, maxX));
+           /* double maxX = ((((Button) actionEvent.getSource()).getParent()).getScene().getWidth() / 5 - ((Pane) (((BorderPane) (((Button) actionEvent.getSource()).getParent()).getParent())).getLeft()).getWidth());
+            vaff.setTranslateX(Math.max(afficher.getLayoutX(), maxX));*/
+            vaff.setLayoutX(afficher.getLayoutX()-gauche.getWidth());
         } else{
             VueCentre centre = (VueCentre) src.getParent().getParent();
             boolean value = txt.contains("afficher");
