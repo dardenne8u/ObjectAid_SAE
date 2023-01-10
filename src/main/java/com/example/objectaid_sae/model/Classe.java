@@ -80,7 +80,8 @@ public class Classe implements Sujet {
         this.observateurs = new ArrayList<>();
         this.dependencies = new ArrayList<>();
 
-        afficheAttributsDeclare = afficheAttributsHerite = afficheMethodeDeclare = afficheConstructeur = afficheMethodeHerite = true;
+        afficheAttributsDeclare = afficheMethodeDeclare = afficheConstructeur = true;
+        afficheAttributsHerite = afficheMethodeHerite = false;
     }
 
 

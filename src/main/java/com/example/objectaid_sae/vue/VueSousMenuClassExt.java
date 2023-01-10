@@ -35,6 +35,11 @@ public class VueSousMenuClassExt extends VBox implements Observateur {
                     try {
                         c = new Analyseur(packageExt).analyseClasse();
                         VueClasse vue = new VueClasse(c);
+                        c.setAfficheAttributsDeclare(false);
+                        c.setAfficheMethodeDeclare(false);
+                        c.setAfficheAttributsHerite(false);
+                        c.setAfficheConstructeur(false);
+                        c.setAfficheMethodeHerite(false);
                         centre.getChildren().add(vue);
                         Fleche.creerFleches(c, (VueCentre) centre);
                         Model.getModel().addClasse(c);
