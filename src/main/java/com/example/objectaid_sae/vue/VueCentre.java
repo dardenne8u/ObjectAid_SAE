@@ -1,7 +1,9 @@
 package com.example.objectaid_sae.vue;
 
 import com.example.objectaid_sae.controleur.ControleurCentreClique;
+import com.example.objectaid_sae.model.Classe;
 import com.example.objectaid_sae.vue.menuContextuel.*;
+import javafx.scene.Node;
 import javafx.scene.layout.Pane;
 
 import java.util.ArrayList;
@@ -23,5 +25,19 @@ public class VueCentre extends Pane {
 
     public void supprimerFleches(){
         getChildren().removeIf(n -> n.getClass() == VueFleche.class);
+    }
+
+    public VueClasse findVueClasse(Classe classe) {
+        VueClasse res = null;
+        for(Node node : this.getChildren()) {
+            if(node instanceof VueClasse) {
+                VueClasse v = (VueClasse) node;
+                if(v.isForClasse(classe)) {
+                    res = v;
+                    break;
+                }
+            }
+        }
+        return res;
     }
 }
