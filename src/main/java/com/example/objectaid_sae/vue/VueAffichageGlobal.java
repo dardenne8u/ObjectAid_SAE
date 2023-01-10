@@ -2,17 +2,19 @@ package com.example.objectaid_sae.vue;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.Priority;
 
 public class VueAffichageGlobal extends GridPane {
 
     public VueAffichageGlobal(EventHandler<ActionEvent> handler){
-
 
 
 
