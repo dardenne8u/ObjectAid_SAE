@@ -168,7 +168,11 @@ public class VueClasse extends VBox implements Observateur {
            }
 
        }
+    }
 
-
+    @Override
+    public boolean equals(Object obj) {
+        if (obj.getClass()!= getClass()) return false;
+        return (((VueClasse) obj).controleurClasseGlissee.getClasse().getType().equals(controleurClasseGlissee.getClasse().getType()));
     }
 }

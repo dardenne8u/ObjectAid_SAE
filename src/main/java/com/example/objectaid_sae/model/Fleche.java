@@ -52,15 +52,15 @@ public class Fleche implements Sujet {
                     FabriqueVueFleche fab;
                     if(dep.contains(".|>")) {
                         f = new Fleche(cl, c, "..|>");
-                        fab = new FabriqueVueFlecheImplement(f);
+                        fab = new FabriqueVueFlecheImplement(f,centre);
                     }
                     else if(dep.contains("-|>")) {
                         f = new Fleche(cl, c, "--|>");
-                        fab = new FabriqueVueFlecheExtends(f);
+                        fab = new FabriqueVueFlecheExtends(f,centre);
                     }
                     else {
                         f = new Fleche(cl, c, "-->");
-                        fab = new FabriqueVueFlecheUtilisation(f);
+                        fab = new FabriqueVueFlecheUtilisation(f,centre);
                     }
                     mod.addFleche(f);
                     centre.getChildren().add(fab.fabriquer());
@@ -73,15 +73,15 @@ public class Fleche implements Sujet {
                         FabriqueVueFleche fab;
                         if(dep.contains(".|>")) {
                             f = new Fleche(c, cl, "..|>");
-                            fab = new FabriqueVueFlecheImplement(f);
+                            fab = new FabriqueVueFlecheImplement(f,centre);
                         }
                         else if(dep.contains("-|>")) {
                             f = new Fleche(c, cl, "--|>");
-                            fab = new FabriqueVueFlecheExtends (f);
+                            fab = new FabriqueVueFlecheExtends (f,centre);
                         }
                         else {
                             f = new Fleche(c, cl, "-->");
-                            fab = new FabriqueVueFlecheUtilisation(f);
+                            fab = new FabriqueVueFlecheUtilisation(f,centre);
                         }
                         mod.addFleche(f);
                         centre.getChildren().add(fab.fabriquer());

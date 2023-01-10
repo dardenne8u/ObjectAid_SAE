@@ -17,7 +17,6 @@ import javafx.scene.input.MouseEvent;
 public class ControleurClasseGlissee implements EventHandler<MouseEvent> {
 
     Classe s;
-    private double width;
 
     /**
      * contructeur creant un controleur pour glisser la classe passee en parametre
@@ -57,25 +56,25 @@ public class ControleurClasseGlissee implements EventHandler<MouseEvent> {
         // actualisation des fleches
         center.supprimerFleches();
         for (Fleche f : Model.getModel().getFleches()) {
-            FabriqueVueFleche fab;
-            switch (f.getType()) {
-                case "-->":
-                    fab = new FabriqueVueFlecheUtilisation(f);
-                    break;
-                case "--|>":
-                    fab = new FabriqueVueFlecheExtends(f);
-                    break;
-                default:
-                    fab = new FabriqueVueFlecheImplement(f);
-                    break;
+            if (!f.isCache()) {
+                    FabriqueVueFleche fab;
+                    switch (f.getType()) {
+                        case "-->":
+                            fab = new FabriqueVueFlecheUtilisation(f,center);
+                            break;
+                        case "--|>":
+                            fab = new FabriqueVueFlecheExtends(f, center);
+                            break;
+                        default:
+                            fab = new FabriqueVueFlecheImplement(f,center);
+                            break;
+                    }
+                center.getChildren().add(fab.fabriquer());
             }
-            center.getChildren().add(fab.fabriquer());
         }
     }
 
-
-    public void set(double w) {
-        this.width = w;
+    public Classe getClasse() {
+        return s;
     }
-
 }

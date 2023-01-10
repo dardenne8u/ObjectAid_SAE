@@ -13,7 +13,7 @@ public class FabriquePolyNoir implements FabriquePolygone{
                 20.0, 0.0,
 
         });
-        poly.setFill(Paint.valueOf("black"));
+        poly.setFill(Paint.valueOf("white"));
         poly.setStroke(Paint.valueOf("black"));
         return poly;
     }

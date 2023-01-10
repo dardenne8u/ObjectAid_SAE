@@ -42,13 +42,13 @@ public class ControleurAffichageGlobal implements EventHandler<ActionEvent> {
                     FabriqueVueFleche fab;
                     switch (f.getType()) {
                         case "-->":
-                            fab = new FabriqueVueFlecheUtilisation(f);
+                            fab = new FabriqueVueFlecheUtilisation(f,centre);
                             break;
                         case "--|>":
-                            fab = new FabriqueVueFlecheExtends(f);
+                            fab = new FabriqueVueFlecheExtends(f,centre);
                             break;
                         default:
-                            fab = new FabriqueVueFlecheImplement(f);
+                            fab = new FabriqueVueFlecheImplement(f,centre);
                             break;
                     }
                     centre.getChildren().add(fab.fabriquer());
