@@ -4,6 +4,7 @@ import com.example.objectaid_sae.model.Classe;
 import com.example.objectaid_sae.vue.VueCentre;
 import com.example.objectaid_sae.vue.menuContextuel.VueCheckClass;
 import com.example.objectaid_sae.vue.menuContextuel.VueCreation;
+import com.example.objectaid_sae.vue.menuContextuel.VueDependences;
 import com.example.objectaid_sae.vue.menuContextuel.VueSousMenuClassExt;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -110,7 +111,7 @@ public class ControleurVueTemporaireClasse implements EventHandler<ActionEvent> 
             }
             else if(src.getText().equals("Classes externes")) {
                 final Pane pane = (Pane) src.getParent().getParent();
-
+                if (MenuTemp != null) ((Pane) (src.getParent().getParent())).getChildren().remove(MenuTemp);
                 VueSousMenuClassExt.classeExt.setLayoutY(src.getParent().getLayoutY());
                 classe.ajouterObservateur(VueSousMenuClassExt.classeExt);
                 pane.getChildren().add(VueSousMenuClassExt.classeExt);
@@ -120,6 +121,21 @@ public class ControleurVueTemporaireClasse implements EventHandler<ActionEvent> 
                 }else{
                     VueSousMenuClassExt.classeExt.setLayoutX(src.getParent().getLayoutX() - VueSousMenuClassExt.classeExt.getWidth());
                 }
+                MenuTemp = VueSousMenuClassExt.classeExt;
+            }
+            else if (src.getText().equals("Nouvelle dépendance")) {
+                final Pane pane = (Pane) src.getParent().getParent();
+                if (MenuTemp != null) ((Pane) (src.getParent().getParent())).getChildren().remove(MenuTemp);
+                VueDependences.vueDependences.setLayoutY(src.getParent().getLayoutY());
+                classe.ajouterObservateur(VueDependences.vueDependences);
+                pane.getChildren().add(VueDependences.vueDependences);
+                VueDependences.vueDependences.notifier(classe);
+                if( affichageCoteDroit(src)) {
+                    VueDependences.vueDependences.setLayoutX(src.getParent().getLayoutX() + src.getWidth());
+                }else{
+                    VueDependences.vueDependences.setLayoutX(src.getParent().getLayoutX() - VueDependences.vueDependences.getWidth());
+                }
+                MenuTemp = VueDependences.vueDependences;
             }
             else{
                 VueCreation v;

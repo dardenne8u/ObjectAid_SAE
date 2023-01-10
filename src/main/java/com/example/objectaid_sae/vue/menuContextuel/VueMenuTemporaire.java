@@ -37,6 +37,11 @@ public class VueMenuTemporaire extends VBox implements Observateur {
             this.getChildren().addAll(classExternes);
             classExternes.setOnAction(cont);
 
+            Button nouvDependance = new Button("Nouvelle dépendance");
+            nouvDependance.setMinWidth(this.getWidth());
+            this.getChildren().addAll(nouvDependance);
+            nouvDependance.setOnAction(cont);
+
 
             // creation d'attribut ou methode
 
