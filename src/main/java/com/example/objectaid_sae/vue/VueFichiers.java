@@ -91,18 +91,20 @@ public class VueFichiers extends GridPane implements Observateur {
         String nom = classe.getType();
         nom = nom.substring(nom.lastIndexOf(" ")+1);
         path = path.replace(".", "\\");
+        path += "\\" + nom;
         if(tree.isLeaf()) {
             String temp = ((Label) tree.getValue().getChildrenUnmodifiable().get(2)).getText();
-            if(temp.contains(nom) && temp.contains(path))
+            if(temp.contains(path))
                 return tree.getValue();
             else
                 return null;
         }
+
         for(TreeItem<HBox>  branch : tree.getChildren()) {
             if(branch.isLeaf()) {
-                String temp = ((Label) tree.getValue().getChildrenUnmodifiable().get(2)).getText();
-                if(temp.contains(nom) && temp.contains(path))
-                    return tree.getValue();
+                String temp = ((Label) branch.getValue().getChildrenUnmodifiable().get(2)).getText();
+                if(temp.contains(path))
+                    return branch.getValue();
                 else
                     return null;
             } else {
