@@ -4,20 +4,25 @@ import com.example.objectaid_sae.model.Fleche;
 import com.example.objectaid_sae.vue.VueCentre;
 import com.example.objectaid_sae.vue.VueClasse;
 import com.example.objectaid_sae.vue.VueFleche;
+import javafx.scene.paint.Paint;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Polygon;
 import javafx.scene.transform.Rotate;
 
 public class FabriqueVueFlecheUtilisation extends FabriqueVueFleche{
+    private static Polygon genererPointe(){
+        Polygon poly = new Polygon(0.0, 0.0, 0.0, 20.0, 2.0, 2.0, 20.0, 0.0);
+        poly.setFill(Paint.valueOf("black"));
+        poly.setStroke(Paint.valueOf("black"));
+        return poly;
+    }
 
-    FabriquePoly4pts fbpoly;
-
-
-
+    private static Line genererLigne(double len){
+        return  new Line(0, 0, 0, len);
+    }
     public FabriqueVueFlecheUtilisation(Fleche f, VueCentre centre){
         super(f,centre);
-        fbpoly = new FabriquePoly4pts();
-
+        System.out.println("utilisation");
     }
     @Override
     public VueFleche fabriquer() {
@@ -36,7 +41,6 @@ public class FabriqueVueFlecheUtilisation extends FabriqueVueFleche{
         double inclinaison = Math.atan2(y2 - y1, x2 - x1)* 180/Math.PI + 90;
         double offsetC1 = getOffset(inclinaison,widthC1,  heightC1);
         double offsetC2 = getOffset(inclinaison,widthC2,heightC2);
-        FabriqueLignePleine fbLigne = new FabriqueLignePleine(0,0,0,len-(offsetC1 + offsetC2));
-        return build(fbLigne, fbpoly,inclinaison,offsetC2,x2,y2,len);
+        return build(genererLigne(len-(offsetC1 + offsetC2)), genererPointe() ,inclinaison,offsetC2,x2,y2,len);
     }
 }

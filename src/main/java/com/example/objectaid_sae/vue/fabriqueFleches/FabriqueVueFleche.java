@@ -20,11 +20,8 @@ public abstract class FabriqueVueFleche {
 
     public abstract VueFleche fabriquer();
 
-    protected VueFleche build(FabriqueLigne fbLigne, FabriquePolygone fbpoly, double inclinaison, double offset, double x, double y, double len){
+    protected VueFleche build(Line l, Polygon poly, double inclinaison, double offset, double x, double y, double len){
         VueFleche res = new VueFleche();
-        Polygon poly;
-        poly = fbpoly.fabriquer();
-        Line l = fbLigne.fabriquer();
         Rotate r = new Rotate();
         Label name = new Label(fleche.getCardinalites()[0] + fleche.getNom() + fleche.getCardinalites()[1]);
         r.setPivotX(0);
@@ -47,12 +44,12 @@ public abstract class FabriqueVueFleche {
     }
     protected double getOffset(double angle, double width, double height){
         double breakpoint = Math.sqrt((width*width)/4 + (height*height)/4);
-        System.out.println("breakpoint " + breakpoint);
-        double cos = Math.cos(Math.abs(((angle-90)%180)/(180/Math.PI)));
+        double absAngle = Math.abs((angle - 90 % 180) / (180 / Math.PI));
+        double cos = Math.cos(absAngle);
         double offset;
         if (cos != 0) offset = Math.abs((width/2)/cos);
-        else offset =  Math.abs(height/2/Math.sin(Math.abs((angle-90%180)/(180/Math.PI))));
-        if (offset > breakpoint) offset = Math.abs(height/2/Math.sin(Math.abs((angle-90%180)/(180/Math.PI))));
+        else offset =  Math.abs(height/2/Math.sin(absAngle));
+        if (offset > breakpoint) offset = Math.abs(height/2/Math.sin(absAngle));
         return offset;
     }
 }

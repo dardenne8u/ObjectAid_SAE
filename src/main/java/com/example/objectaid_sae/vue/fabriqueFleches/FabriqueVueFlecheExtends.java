@@ -8,18 +8,26 @@ import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Paint;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Polygon;
 import javafx.scene.transform.Rotate;
 
 public class FabriqueVueFlecheExtends extends FabriqueVueFleche{
 
-    FabriquePolyNoir fbpoly;
+    private static Polygon genererPointe(){
+        Polygon poly = new Polygon(0.0, 0.0, 0.0, 20.0, 20.0, 0.0);
+        poly.setFill(Paint.valueOf("white"));
+        poly.setStroke(Paint.valueOf("black"));
+        return poly;
+    }
 
-
+    private static Line genererLigne(double len){
+        return  new Line(0, 0, 0, len);
+    }
     public FabriqueVueFlecheExtends(Fleche f, VueCentre centre){
         super(f,centre);
-        fbpoly = new FabriquePolyNoir();
+        System.out.println("extend");
     }
     @Override
     public VueFleche fabriquer() {
@@ -38,8 +46,7 @@ public class FabriqueVueFlecheExtends extends FabriqueVueFleche{
         double inclinaison = Math.atan2(y2 - y1, x2 - x1)* 180/Math.PI + 90;
         double offsetC1 = getOffset(inclinaison,widthC1,  heightC1);
         double offsetC2 = getOffset(inclinaison,widthC2,heightC2);
-        FabriqueLignePleine fbLigne = new FabriqueLignePleine(0,0,0,len-(offsetC1 + offsetC2));
-        return build(fbLigne, fbpoly,inclinaison,offsetC2,x2,y2,len);
+        return build(genererLigne(len-(offsetC1 + offsetC2)), genererPointe() ,inclinaison,offsetC2,x2,y2,len);
     }
 
 }
