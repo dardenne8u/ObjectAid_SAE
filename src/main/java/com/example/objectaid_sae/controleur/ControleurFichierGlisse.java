@@ -20,6 +20,8 @@ import javafx.scene.layout.Pane;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class ControleurFichierGlisse implements EventHandler<MouseEvent> {
@@ -27,6 +29,7 @@ public class ControleurFichierGlisse implements EventHandler<MouseEvent> {
     private MouseEvent mouseEvent;
     private Pane centre;
     private TreeItem<HBox> treeActuel;
+
     public void afficherDossier(String abs, CheckBox cb, Model mod) {
         File file = new File(abs);
         if (file.isDirectory()) {
@@ -42,14 +45,14 @@ public class ControleurFichierGlisse implements EventHandler<MouseEvent> {
     }
 
 
-    public void afficherUneClasse(String abs, CheckBox cb, Model mod){
+    public void afficherUneClasse(String abs, CheckBox cb, Model mod) {
         try {
-            String nom = abs.substring(abs.lastIndexOf("\\")+1, abs.lastIndexOf("."));
+            String nom = abs.substring(abs.lastIndexOf("\\") + 1, abs.lastIndexOf("."));
             BufferedReader r = new BufferedReader(new FileReader(abs));
             String line = r.readLine();
             while (!line.contains("package ")) line = r.readLine();
             line = line.split("package ")[1].split(";")[0];
-            Classe c = new Analyseur(line + "."+ nom).analyseClasse();
+            Classe c = new Analyseur(line + "." + nom).analyseClasse();
             VueClasse vue = new VueClasse(c);
             cb.setSelected(true);
             centre.getChildren().add(vue);
@@ -71,6 +74,32 @@ public class ControleurFichierGlisse implements EventHandler<MouseEvent> {
         }
     }
 
+    private void recupChildrenBranch(TreeItem<HBox> branche) {
+        for (TreeItem<HBox> leaf : branche.getChildren()) {
+            final HBox box = leaf.getValue();
+            final CheckBox check = (CheckBox) box.getChildrenUnmodifiable().get(0);
+            check.setSelected(true);
+        }
+    }
+
+    private TreeItem<HBox> trouverTIWithPath(String abPath, TreeItem<HBox> tree) {
+        for (TreeItem<HBox> branch : tree.getChildren()) {
+            if (!branch.isLeaf()) {
+                String temp = ((Label) branch.getValue().getChildrenUnmodifiable().get(2)).getText();
+                System.out.println("temp : " + temp);
+                System.out.println("abPath : " + abPath);
+                if (temp.equals(abPath)) {
+                    return branch;
+                }
+                TreeItem<HBox> foundTree = trouverTIWithPath(abPath, branch);
+                if (foundTree != null) {
+                    return foundTree;
+                }
+            }
+        }
+        return null;
+    }
+
     @Override
     public void handle(MouseEvent mouseEvent) {
         Model mod = Model.getModel();
@@ -84,15 +113,20 @@ public class ControleurFichierGlisse implements EventHandler<MouseEvent> {
         this.mouseEvent = mouseEvent;
         if (center.contains(mouseEvent.getSceneX(), mouseEvent.getSceneY()) && !source.contains(mouseEvent.getSceneX(), mouseEvent.getSceneY())) {
             HBox h = (HBox) mouseEvent.getSource();
-            System.out.println(h.getParent().getClass().getSimpleName());
+            //System.out.println(h.getParent().getClass().getSimpleName());
             CheckBox cb = (CheckBox) h.getChildren().get(0);
             if (cb.isSelected()) return;
             Label l = (Label) h.getChildren().get(2);
             String abs = l.getText();
             if (abs.contains(".java")) {
                 afficherUneClasse(abs, cb, mod);
-            }else{
+            } else {
                 afficherDossier(abs, cb, mod);
+                TreeView t = (TreeView) h.getParent().getParent().getParent().getParent().getParent();
+                //System.out.println(   h.getParent().getParent().getParent().getParent().getParent());
+                String path = ((Label) h.getChildren().get(2)).getText();
+                recupChildrenBranch(trouverTIWithPath(path, t.getRoot()));
+
             }
         }
     }
