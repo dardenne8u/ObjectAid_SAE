@@ -52,7 +52,8 @@ public class ControleurFichierGlisse implements EventHandler<MouseEvent> {
             Classe c = new Analyseur(line + "."+ nom).analyseClasse();
             VueClasse vue = new VueClasse(c);
             cb.setSelected(true);
-            centre.getChildren().add(vue);
+            VueCentre centre = (VueCentre) this.centre;
+            centre.content.getChildren().add(vue);
             // definition de la position x
             double mouseX = mouseEvent.getSceneX() - centre.getLayoutX();
             mouseX = Math.max(vue.getWidth()/2,mouseX); // minimum

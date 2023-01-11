@@ -33,7 +33,7 @@ public class ControleurClasseGlissee implements EventHandler<MouseEvent> {
     public void handle(MouseEvent mouseEvent) {
         if (mouseEvent.getButton() == MouseButton.SECONDARY) return;
         final VueClasse vue = (VueClasse) mouseEvent.getSource();
-        final VueCentre center = (VueCentre) vue.getParent();
+        final VueCentre center = (VueCentre) vue.getParent().getParent();
 
         if (mouseEvent.getEventType() == MouseEvent.MOUSE_DRAGGED)
             //suppression des menus temporaires
