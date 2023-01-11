@@ -14,7 +14,7 @@ public class HelloApplication extends Application {
     @Override
     public void start(Stage stage){
         BorderPane bp = new BorderPane();
-        Scene scene = new Scene(bp, 800, 600);
+        Scene scene = new Scene(bp, 1000, 800);
         stage.setTitle("ObjectAid SAE");
         stage.setScene(scene);
         Pane pane = new VueCentre();
