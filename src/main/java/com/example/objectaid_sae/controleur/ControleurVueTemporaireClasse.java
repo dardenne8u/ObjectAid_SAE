@@ -17,6 +17,11 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.stage.FileChooser;
+
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 
 public class ControleurVueTemporaireClasse implements EventHandler<ActionEvent> {
 
@@ -85,7 +90,6 @@ public class ControleurVueTemporaireClasse implements EventHandler<ActionEvent> 
                 ((Pane) (src.getParent().getParent())).getChildren().add(ch);
                 for (Node node : ch.getChildren()) {
                     CheckBox check = (CheckBox) node;
-                    System.out.println(classe);
                     switch (check.getText()) {
                         case "attributs declarés":
                             check.setSelected(classe.isAfficheAttributsDeclare());
@@ -102,7 +106,7 @@ public class ControleurVueTemporaireClasse implements EventHandler<ActionEvent> 
                         case "constructeur":
                             check.setSelected(classe.isAfficheConstructeur());
                             break;
-                        case "dépendances" :
+                        case "dépendances":
                             check.setSelected(classe.isAfficheDependances());
                             break;
                     }
@@ -147,6 +151,16 @@ public class ControleurVueTemporaireClasse implements EventHandler<ActionEvent> 
                 for (Fleche f : Model.getModel().getFleches()) {
                     if (f.isAffiche()) vc.getChildren().add(f.getFabrique().fabriquer());
                 }
+            } else if (src.getText().equals("Générer squelette")) {
+                FileChooser chooser = new FileChooser();
+                File file = chooser.showOpenDialog(null);
+                if (file == null) return;
+                try {
+                    if (!file.exists()) file.createNewFile();
+                    BufferedWriter bw = new BufferedWriter(new FileWriter(file));
+                    bw.write(classe.genSquelette());
+                    bw.close();
+                } catch(Exception ignored) {}
             } else {
                 VueCreation v;
                 if (src.getText().contains("methode")) v = new VueCreation("methode", this);
@@ -181,7 +195,7 @@ public class ControleurVueTemporaireClasse implements EventHandler<ActionEvent> 
                 case "constructeur":
                     classe.setAfficheConstructeur(src.isSelected());
                     break;
-                default:
+                case "dépendances":
                     classe.setAfficheDependances(src.isSelected());
                     System.out.println("dep");
                     Fleche.actualiserFleches((VueCentre) src.getParent().getParent());

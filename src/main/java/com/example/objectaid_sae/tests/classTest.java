@@ -33,4 +33,5 @@ public class classTest extends AbstractTest implements InterfaceTest{
     public String methodeDeclare(){
         return attributDeclare;
     }
+    public static void nothing(){}
 }

@@ -42,6 +42,11 @@ public class VueMenuTemporaire extends VBox implements Observateur {
             this.getChildren().addAll(nouvDependance);
             nouvDependance.setOnAction(cont);
 
+            Button genSquelette = new Button("Générer squelette");
+            genSquelette.setMinWidth(this.getWidth());
+            this.getChildren().addAll(genSquelette);
+            genSquelette.setOnAction(cont);
+
 
             // creation d'attribut ou methode
 
