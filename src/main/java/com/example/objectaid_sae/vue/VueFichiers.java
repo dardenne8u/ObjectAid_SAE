@@ -105,8 +105,6 @@ public class VueFichiers extends GridPane implements Observateur {
                 String temp = ((Label) branch.getValue().getChildrenUnmodifiable().get(2)).getText();
                 if(temp.contains(path))
                     return branch.getValue();
-                else
-                    return null;
             } else {
                 HBox temp = parcoursArbre(classe, branch);
                 if(temp != null)

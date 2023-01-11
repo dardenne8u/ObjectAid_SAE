@@ -133,15 +133,14 @@ public class ControleurVueTemporaireClasse implements EventHandler<ActionEvent> 
                 }
                 MenuTemp = VueDependences.vueDependences;
             } else if (src.getText().equals("Supprimer la classe")) {
-                Model.getModel().getClasses().remove(this);
+                Model.getModel().getClasses().remove(classe);
+                Model.getModel().getFleches().removeAll(Model.getModel().findFleche(classe));
                 VueCentre vc = (VueCentre) src.getParent().getParent();
                 VueFichiers vf = (VueFichiers) ((BorderPane) vc.getParent()).getLeft();
                 HBox treeI = vf.findBoxRelativeToClasse(classe);
-                System.out.println(treeI);
                 if (treeI != null) ((CheckBox) treeI.getChildrenUnmodifiable().get(0)).setSelected(false);
                 vc.getChildren().remove(vc.findVueClasse(classe));
-
-
+                vc.supprimerMenusTemp();
             } else {
                 VueCreation v;
                 if (src.getText().contains("methode")) v = new VueCreation("methode", this);
