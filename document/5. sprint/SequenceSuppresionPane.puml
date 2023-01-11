@@ -1,0 +1,21 @@
+@startuml
+actor utilisateur
+participant "cont : ControleurVueTemporaireClasse" as cont
+participant "model : Model" as model
+participant "tree : VueFichier" as tree
+
+utilisateur -> cont : clique sur le bouton "supprimer la classe"
+activate cont
+
+    cont -> model : remove(Classe)
+    cont -> tree : tree.findBoxRelativeToClasse(classe)
+    activate tree
+    alt HBox find
+        cont <-- tree : HBox
+    else HBox not find
+        cont <-- tree : null
+    end
+
+utilisateur <-- cont : visuel actualiser, classe supprimer
+deactivate cont
+@enduml
