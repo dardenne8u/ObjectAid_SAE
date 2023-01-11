@@ -6,10 +6,8 @@ import com.example.objectaid_sae.controleur.ControleurButtonProjet;
 import com.example.objectaid_sae.model.Model;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -18,11 +16,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
-import javafx.stage.DirectoryChooser;
-import javafx.stage.FileChooser;
 
-import java.awt.event.MouseEvent;
-import java.io.File;
 import java.util.ArrayList;
 
 public class VueHaut extends GridPane {
@@ -42,7 +36,7 @@ public class VueHaut extends GridPane {
         column3.setHalignment(HPos.CENTER);
         ColumnConstraints column4 = new ColumnConstraints();
         column4.setHalignment(HPos.CENTER);
-        getColumnConstraints().addAll(column1, column2, column3, column4); // each get 50% of width*/
+        getColumnConstraints().addAll(column1, column2, column3, column4); // each get 50% of width
         setHgap(10); setVgap(10); setPadding(new Insets(0, 10, 10, 0));
 
 

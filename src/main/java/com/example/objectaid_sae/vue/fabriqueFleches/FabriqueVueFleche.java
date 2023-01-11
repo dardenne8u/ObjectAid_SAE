@@ -9,6 +9,8 @@ import javafx.scene.shape.Line;
 import javafx.scene.shape.Polygon;
 import javafx.scene.transform.Rotate;
 
+import java.util.Arrays;
+
 public abstract class FabriqueVueFleche {
 
     protected Fleche fleche;
@@ -23,23 +25,25 @@ public abstract class FabriqueVueFleche {
     protected VueFleche build(Line l, Polygon poly, double inclinaison, double offset, double x, double y, double len){
         VueFleche res = new VueFleche();
         Rotate r = new Rotate();
-        Label name = new Label(fleche.getCardinalites()[0] + fleche.getNom() + fleche.getCardinalites()[1]);
+        Label name = new Label(fleche.getNom());
+        Label card = new Label(fleche.getCardinalites());
+        card.setTranslateX(15);
+        card.setTranslateY(offset);
         r.setPivotX(0);
         r.setPivotY(0);
         r.setAngle(inclinaison);
         l.setTranslateY(offset);
         poly.setRotate(45);
+        poly.setTranslateY(offset+5);
         poly.setTranslateX(-10);
-        poly.setTranslateY(offset);
+        card.setRotate(-inclinaison);
         name.setRotate(-inclinaison);
         name.setAlignment(Pos.CENTER);
-        res.getChildren().add(poly);
-        res.getChildren().add(l);
+        res.getChildren().addAll(poly,l,name,card);
         res.setTranslateY(y);
         res.setTranslateX(x);
         name.setTranslateY(len/2);
         res.getTransforms().add(r);
-        res.getChildren().add(name);
         return res;
     }
     protected double getOffset(double angle, double width, double height){

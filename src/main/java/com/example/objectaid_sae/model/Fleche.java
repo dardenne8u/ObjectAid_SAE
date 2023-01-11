@@ -6,13 +6,13 @@ import com.example.objectaid_sae.vue.fabriqueFleches.*;
 public class Fleche {
 
     //ATTRIBUTS
-    private String type, nom;
-    private Classe arrivee;
-    private Classe depart;
+    private final String type, nom;
+    private final Classe arrivee;
+    private final Classe depart;
 
-    private String[] cardinalites;
+    private String cardinalites;
 
-    FabriqueVueFleche fabrique;
+    private FabriqueVueFleche fabrique;
 
     //CONSTRUCTEURS
 
@@ -30,7 +30,7 @@ public class Fleche {
         this.arrivee = fin;
         this.depart = debut;
         this.nom = nom;
-        this.cardinalites = new String[]{"", ""};
+        this.cardinalites = "";
         setFabrique(centre);
     }
 
@@ -43,11 +43,14 @@ public class Fleche {
         nom = nom.substring(nom.lastIndexOf(" ")).replace(" ","");
         for (Classe cl : mod.getClasses()) {
             for (String dep : cl.getDependencies()) {
-                if (dep.contains(nom)) {
+                if (dep.contains(" " + nom + " ")) {
                     Fleche f;
                     if (dep.contains(".|>")) f = new Fleche(cl, c, "..|>", "", centre);
                     else if (dep.contains("-|>")) f = new Fleche(cl, c, "--|>", "", centre);
-                    else if (dep.contains("->"))f = new Fleche(cl, c, "-->", dep.substring(dep.lastIndexOf(":")), centre);
+                    else if (dep.contains("->")) {
+                        f = new Fleche(cl, c, "-->", dep.substring(dep.lastIndexOf(":")), centre);
+                        f.cardinalites = dep.split("\"")[1];
+                    }
                     else f = new Fleche(cl,c,"..>","", centre);
                     mod.addFleche(f);
                     centre.getChildren().add(f.getFabrique().fabriquer());
@@ -55,11 +58,14 @@ public class Fleche {
             }
             for (String dep2 : c.getDependencies()) {
                 String temp = cl.getType().substring(cl.getType().lastIndexOf(" ") + 1);
-                if (dep2.contains(temp)) {
+                if (dep2.contains(" " +temp + " ")){
                     Fleche f;
                     if (dep2.contains(".|>")) f = new Fleche(c, cl, "..|>", "", centre);
                     else if (dep2.contains("-|>")) f = new Fleche(c, cl, "--|>", "", centre);
-                    else if (dep2.contains("->"))f = new Fleche(c, cl, "-->", dep2.substring(dep2.lastIndexOf(":")), centre);
+                    else if (dep2.contains("->")){
+                        f = new Fleche(c, cl, "-->", dep2.substring(dep2.lastIndexOf(":")), centre);
+                        f.cardinalites = dep2.split("\"")[1];
+                    }
                     else f = new Fleche(c,cl,"..>","", centre);
                     mod.addFleche(f);
                     centre.getChildren().add(f.getFabrique().fabriquer());
@@ -108,12 +114,10 @@ public class Fleche {
      * @return true si la fleche est cachee.
      */
     public boolean isAffiche() {
-        System.out.println(depart);
-        System.out.println(depart.isAfficheDependances());
         return this.depart.isAfficheDependances();
     }
 
-    public String[] getCardinalites() {
+    public String getCardinalites() {
         return cardinalites;
     }
 
@@ -121,7 +125,7 @@ public class Fleche {
         return nom;
     }
 
-    public void setCardinalites(String[] cardinalites) {
+    public void setCardinalites(String cardinalites) {
         this.cardinalites = cardinalites;
     }
 

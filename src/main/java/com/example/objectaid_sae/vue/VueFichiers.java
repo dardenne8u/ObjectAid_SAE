@@ -10,13 +10,13 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
-import javafx.scene.effect.DropShadow;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.paint.Color;
 
-import java.io.*;
-import java.util.List;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 
 public class VueFichiers extends GridPane implements Observateur {
 
@@ -49,7 +49,7 @@ public class VueFichiers extends GridPane implements Observateur {
     }
 
     public TreeItem<HBox> tree(File file) {
-        TreeItem<HBox> res = null;
+        TreeItem<HBox> res;
         res = creerItem(file);
         if (file.isDirectory()) {
             File[] files = file.listFiles();

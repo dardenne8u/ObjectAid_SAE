@@ -66,7 +66,9 @@ public class ControleurFichierGlisse implements EventHandler<MouseEvent> {
             mouseY = Math.max(100,mouseY -100); // minimum
             c.setX(mouseX);
             c.setY(mouseY);
-            vue.notifier(c);
+            vue.setLayoutX(mouseX- vue.getWidth()/2);
+            System.out.println(vue.getHeight());
+            vue.setLayoutY(mouseY+vue.getHeight());
             Fleche.creerFleches(c, (VueCentre) centre);
             mod.addClasse(c);
         } catch (Exception e) {
