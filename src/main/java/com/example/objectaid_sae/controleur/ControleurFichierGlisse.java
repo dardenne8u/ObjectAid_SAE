@@ -75,19 +75,27 @@ public class ControleurFichierGlisse implements EventHandler<MouseEvent> {
     }
 
     private void recupChildrenBranch(TreeItem<HBox> branche) {
-        for (TreeItem<HBox> leaf : branche.getChildren()) {
-            final HBox box = leaf.getValue();
+        if(branche!=null){
+        for (TreeItem<HBox> other : branche.getChildren()) {
+            final HBox box = other.getValue();
             final CheckBox check = (CheckBox) box.getChildrenUnmodifiable().get(0);
             check.setSelected(true);
+            if (!other.isLeaf()) recupChildrenBranch(other);
         }
+        }
+    }
+
+    private void toutCocher(TreeView tv){
+        TreeItem<HBox> ti = tv.getRoot();
+        recupChildrenBranch(ti);
     }
 
     private TreeItem<HBox> trouverTIWithPath(String abPath, TreeItem<HBox> tree) {
         for (TreeItem<HBox> branch : tree.getChildren()) {
             if (!branch.isLeaf()) {
                 String temp = ((Label) branch.getValue().getChildrenUnmodifiable().get(2)).getText();
-                System.out.println("temp : " + temp);
-                System.out.println("abPath : " + abPath);
+              //  System.out.println("temp : " + temp);
+               // System.out.println("abPath : " + abPath);
                 if (temp.equals(abPath)) {
                     return branch;
                 }
@@ -125,8 +133,13 @@ public class ControleurFichierGlisse implements EventHandler<MouseEvent> {
                 TreeView t = (TreeView) h.getParent().getParent().getParent().getParent().getParent();
                 //System.out.println(   h.getParent().getParent().getParent().getParent().getParent());
                 String path = ((Label) h.getChildren().get(2)).getText();
-                recupChildrenBranch(trouverTIWithPath(path, t.getRoot()));
-
+                TreeItem treeItem = trouverTIWithPath(path, t.getRoot());
+                if (treeItem == t.getRoot()) {
+                    recupChildrenBranch(trouverTIWithPath(path, t.getRoot()));
+                }
+                else {
+                    toutCocher(t);
+                }
             }
         }
     }
