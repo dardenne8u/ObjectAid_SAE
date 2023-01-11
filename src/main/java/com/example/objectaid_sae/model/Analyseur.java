@@ -165,7 +165,9 @@ public class Analyseur {
             cardinalite = " \"0..*\"";
             typeName = typeName.substring(0, typeName.lastIndexOf("["));
         } else if (isContainsMoreThanOneValue(typeName)) { // verifie si l'attribut est une Collection
+            classe.addDependencies(introspection.getSimpleName() + " ..>" + cardinalite + typeName);
             cardinalite  = " \"0..*\"";
+
             typeName = field.getGenericType().getTypeName();
             // typeName = Collection<package.ClassName>
             typeName = typeName.substring(typeName.lastIndexOf(".")+1, typeName.length()-1);
