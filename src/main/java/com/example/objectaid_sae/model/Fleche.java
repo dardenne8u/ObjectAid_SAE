@@ -109,11 +109,8 @@ public class Fleche {
      * @return true si la fleche est cachee.
      */
     public boolean isCache() {
-        return this.cache;
-    }
-
-    public void setCache(boolean cache) {
-        this.cache = cache;
+        System.out.println(depart);
+        return !this.depart.isAfficheDependances();
     }
 
     public String[] getCardinalites() {

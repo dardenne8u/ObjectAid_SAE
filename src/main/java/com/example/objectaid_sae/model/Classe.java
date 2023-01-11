@@ -24,6 +24,7 @@ public class Classe implements Sujet {
     private boolean afficheMethodeDeclare;
     private boolean afficheMethodeHerite;
     private boolean afficheConstructeur;
+    private boolean afficheDependances;
     /**
      * liste des attributs et methodes de la classe. 1 si declare, 2 si herite
      */
@@ -83,7 +84,7 @@ public class Classe implements Sujet {
         this.observateurs = new ArrayList<>();
         this.dependencies = new ArrayList<>();
 
-        afficheAttributsDeclare = afficheMethodeDeclare = afficheConstructeur = true;
+        afficheAttributsDeclare = afficheMethodeDeclare = afficheConstructeur = afficheDependances = true;
         afficheAttributsHerite = afficheMethodeHerite = false;
     }
 
@@ -266,5 +267,13 @@ public class Classe implements Sujet {
     public void setAfficheConstructeur(boolean selected) {
         this.afficheConstructeur = selected;
         this.notifierObservateurs();
+    }
+
+    public boolean isAfficheDependances() {
+        return afficheDependances;
+    }
+
+    public void setAfficheDependances(boolean afficheDependances) {
+        this.afficheDependances = afficheDependances;
     }
 }

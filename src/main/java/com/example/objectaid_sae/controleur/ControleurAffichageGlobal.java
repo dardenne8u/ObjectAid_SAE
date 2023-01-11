@@ -24,9 +24,9 @@ public class ControleurAffichageGlobal implements EventHandler<ActionEvent> {
         Model mod = Model.getModel();
         Button src = (Button) actionEvent.getSource();
         String txt = src.getText();
-        if(txt.contains("Affichage")) {
+        if (txt.contains("Affichage")) {
             VueCentre centre = (VueCentre) (((BorderPane) (((Button) actionEvent.getSource()).getParent()).getParent())).getCenter();
-            VueHaut haut= (VueHaut) (((BorderPane) (((Button) actionEvent.getSource()).getParent()).getParent())).getTop();
+            VueHaut haut = (VueHaut) (((BorderPane) (((Button) actionEvent.getSource()).getParent()).getParent())).getTop();
             VueFichiers gauche = (VueFichiers) (((BorderPane) (((Button) actionEvent.getSource()).getParent()).getParent())).getLeft();
 
             Button afficher = (Button) haut.getChildren().get(2);
@@ -34,32 +34,33 @@ public class ControleurAffichageGlobal implements EventHandler<ActionEvent> {
             centre.supprimerMenusTemp();
             centre.getChildren().add(vaff);
             vaff.setLayoutY(0);
-           /* double maxX = ((((Button) actionEvent.getSource()).getParent()).getScene().getWidth() / 5 - ((Pane) (((BorderPane) (((Button) actionEvent.getSource()).getParent()).getParent())).getLeft()).getWidth());
-            vaff.setTranslateX(Math.max(afficher.getLayoutX(), maxX));*/
-            vaff.setLayoutX(afficher.getLayoutX()-gauche.getWidth());
-        } else{
+            vaff.setLayoutX(afficher.getLayoutX() - gauche.getWidth());
+        } else {
             VueCentre centre = (VueCentre) src.getParent().getParent();
             boolean value = txt.contains("afficher");
-            if(txt.contains("attributs")) if(txt.contains("hérit")) for (Classe c : mod.getClasses()) c.setAfficheAttributsHerite(value);
+            if (txt.contains("attributs"))
+                if (txt.contains("hérit")) for (Classe c : mod.getClasses()) c.setAfficheAttributsHerite(value);
                 else for (Classe c : mod.getClasses()) c.setAfficheAttributsDeclare(value);
             else if (txt.contains("hérit")) for (Classe c : mod.getClasses()) c.setAfficheMethodeHerite(value);
-            else if (txt.contains("dépen")) for (Fleche f : mod.getFleches()) {
-                f.setCache(!value);
-                if (value) centre.getChildren().add(f.getFabrique().fabriquer());
-                else centre.supprimerFleches();
+            else if (txt.contains("dépen")) {
+                for (Classe c : mod.getClasses()) c.setAfficheDependances(value);
+                centre.supprimerFleches();
+                for (Fleche f : Model.getModel().getFleches()) {
+                    if (!f.isCache()) centre.getChildren().add(f.getFabrique().fabriquer());
+                }
             }
             else for (Classe c : mod.getClasses()) c.setAfficheMethodeDeclare(value);
 
 
             String[] split = txt.split(" ");
-            if(split[0].equals("afficher")){
+            if (split[0].equals("afficher")) {
                 split[0] = "masquer";
             } else {
                 split[0] = "afficher";
             }
             String nouveauText = "";
-            for (int i = 0; i<split.length; i++){
-                nouveauText += split[i]+ " ";
+            for (int i = 0; i < split.length; i++) {
+                nouveauText += split[i] + " ";
             }
             src.setText(nouveauText);
         }

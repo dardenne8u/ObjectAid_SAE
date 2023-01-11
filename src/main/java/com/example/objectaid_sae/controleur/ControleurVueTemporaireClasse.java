@@ -53,7 +53,6 @@ public class ControleurVueTemporaireClasse implements EventHandler<ActionEvent> 
         VueCentre pane = (VueCentre) n.getParent().getParent();
         double wp = pane.getWidth();
         double x = n.getParent().getLayoutX();
-        System.out.println("wp : " + wp + "\nx : " + x);
         if (x >= wp / 2) return false;
         return true;
     }
@@ -69,7 +68,6 @@ public class ControleurVueTemporaireClasse implements EventHandler<ActionEvent> 
                     if (estMethode(nom)) classe.getMethodes().get(Classe.DECLARED).add(nom);
                 } else {
                     if (estAttribut(nom)) {
-                        System.out.println("ceci est un attribut");
                         classe.getAttributs().get(Classe.DECLARED).add(nom);
                         ((Pane) (src.getParent().getParent())).getChildren().remove(src.getParent());
                     }
@@ -77,7 +75,6 @@ public class ControleurVueTemporaireClasse implements EventHandler<ActionEvent> 
                 classe.notifierObservateurs();
             } else if (src.getText().contains("Afficher")) {
                 VueCheckClass ch = new VueCheckClass(this);
-                System.out.println("vue check");
                 if (MenuTemp != null) ((Pane) (src.getParent().getParent())).getChildren().remove(MenuTemp);
                 if (affichageCoteDroit(src)) {
                     ch.setLayoutX(src.getParent().getLayoutX() + src.getWidth());
@@ -103,6 +100,9 @@ public class ControleurVueTemporaireClasse implements EventHandler<ActionEvent> 
                             break;
                         case "constructeur":
                             check.setSelected(classe.isAfficheConstructeur());
+                            break;
+                        case "dépendances" :
+                            check.setSelected(classe.isAfficheDependances());
                             break;
                     }
                 }
@@ -179,6 +179,9 @@ public class ControleurVueTemporaireClasse implements EventHandler<ActionEvent> 
                     break;
                 case "constructeur":
                     classe.setAfficheConstructeur(src.isSelected());
+                    break;
+                case "dépendances" :
+                    classe.setAfficheDependances(src.isSelected());
                     break;
             }
         }
