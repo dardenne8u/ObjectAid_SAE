@@ -92,7 +92,8 @@ public class VueHaut extends GridPane {
             final BorderPane pane = (BorderPane) ((Node)event.getSource()).getParent().getParent();
             DirectoryChooser chooser = new DirectoryChooser();
             File selected = chooser.showDialog(null);
-            pane.setLeft(new VueFichiers(selected.getAbsolutePath()));
+            if(selected != null)
+                pane.setLeft(new VueFichiers(selected.getAbsolutePath()));
         });
 
         setConstraints(general, 3, 2);
