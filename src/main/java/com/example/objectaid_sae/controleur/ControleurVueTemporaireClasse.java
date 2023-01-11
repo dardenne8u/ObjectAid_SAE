@@ -1,7 +1,9 @@
 package com.example.objectaid_sae.controleur;
 
 import com.example.objectaid_sae.model.Classe;
+import com.example.objectaid_sae.model.Model;
 import com.example.objectaid_sae.vue.VueCentre;
+import com.example.objectaid_sae.vue.VueFichiers;
 import com.example.objectaid_sae.vue.menuContextuel.VueCheckClass;
 import com.example.objectaid_sae.vue.menuContextuel.VueCreation;
 import com.example.objectaid_sae.vue.menuContextuel.VueDependences;
@@ -9,10 +11,9 @@ import com.example.objectaid_sae.vue.menuContextuel.VueSousMenuClassExt;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
-import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
@@ -24,7 +25,6 @@ public class ControleurVueTemporaireClasse implements EventHandler<ActionEvent> 
     public ControleurVueTemporaireClasse(Classe classe) {
         this.classe = classe;
     }
-
 
 
     public boolean estAttribut(String attribut) {
@@ -48,13 +48,12 @@ public class ControleurVueTemporaireClasse implements EventHandler<ActionEvent> 
     }
 
 
-
-    public boolean affichageCoteDroit(Node n){
+    public boolean affichageCoteDroit(Node n) {
         VueCentre pane = (VueCentre) n.getParent().getParent();
         double wp = pane.getWidth();
-        double x =  n.getParent().getLayoutX();
+        double x = n.getParent().getLayoutX();
         System.out.println("wp : " + wp + "\nx : " + x);
-        if(x >= wp/2 )return false;
+        if (x >= wp / 2) return false;
         return true;
     }
 
@@ -66,28 +65,27 @@ public class ControleurVueTemporaireClasse implements EventHandler<ActionEvent> 
             if (src.getText().contains("Valider")) {
                 String nom = ((TextField) (src.getParent().getChildrenUnmodifiable().get(1))).getText();
                 if (((Label) (src.getParent().getChildrenUnmodifiable().get(0))).getText().contains("methode")) {
-                    if (estMethode(nom)) classe.getMethodes().get(Classe.DECLARED).add(nom);}
-                else {
+                    if (estMethode(nom)) classe.getMethodes().get(Classe.DECLARED).add(nom);
+                } else {
                     if (estAttribut(nom)) {
                         System.out.println("ceci est un attribut");
                         classe.getAttributs().get(Classe.DECLARED).add(nom);
                         ((Pane) (src.getParent().getParent())).getChildren().remove(src.getParent());
                     }
                 }
-               classe.notifierObservateurs();
-            }
-            else if (src.getText().contains("Afficher")) {
+                classe.notifierObservateurs();
+            } else if (src.getText().contains("Afficher")) {
                 VueCheckClass ch = new VueCheckClass(this);
                 System.out.println("vue check");
                 if (MenuTemp != null) ((Pane) (src.getParent().getParent())).getChildren().remove(MenuTemp);
-                if( affichageCoteDroit(src)) {
+                if (affichageCoteDroit(src)) {
                     ch.setLayoutX(src.getParent().getLayoutX() + src.getWidth());
-                }else{
+                } else {
                     ch.setLayoutX(src.getParent().getLayoutX() - ch.getWidth());
                 }
                 ch.setLayoutY(src.getParent().getLayoutY());
                 ((Pane) (src.getParent().getParent())).getChildren().add(ch);
-                for(Node node : ch.getChildren()) {
+                for (Node node : ch.getChildren()) {
                     CheckBox check = (CheckBox) node;
                     switch (check.getText()) {
                         case "attributs declarés":
@@ -108,42 +106,49 @@ public class ControleurVueTemporaireClasse implements EventHandler<ActionEvent> 
                     }
                 }
                 MenuTemp = ch;
-            }
-            else if(src.getText().equals("Classes externes")) {
+            } else if (src.getText().equals("Classes externes")) {
                 final Pane pane = (Pane) src.getParent().getParent();
                 if (MenuTemp != null) ((Pane) (src.getParent().getParent())).getChildren().remove(MenuTemp);
                 VueSousMenuClassExt.classeExt.setLayoutY(src.getParent().getLayoutY());
                 classe.ajouterObservateur(VueSousMenuClassExt.classeExt);
                 pane.getChildren().add(VueSousMenuClassExt.classeExt);
                 VueSousMenuClassExt.classeExt.notifier(classe);
-                if( affichageCoteDroit(src)) {
+                if (affichageCoteDroit(src)) {
                     VueSousMenuClassExt.classeExt.setLayoutX(src.getParent().getLayoutX() + src.getWidth());
-                }else{
+                } else {
                     VueSousMenuClassExt.classeExt.setLayoutX(src.getParent().getLayoutX() - VueSousMenuClassExt.classeExt.getWidth());
                 }
                 MenuTemp = VueSousMenuClassExt.classeExt;
-            }
-            else if (src.getText().equals("Nouvelle dépendance")) {
+            } else if (src.getText().equals("Nouvelle dépendance")) {
                 final Pane pane = (Pane) src.getParent().getParent();
                 if (MenuTemp != null) ((Pane) (src.getParent().getParent())).getChildren().remove(MenuTemp);
                 VueDependences.vueDependences.setLayoutY(src.getParent().getLayoutY());
                 classe.ajouterObservateur(VueDependences.vueDependences);
                 pane.getChildren().add(VueDependences.vueDependences);
                 VueDependences.vueDependences.notifier(classe);
-                if( affichageCoteDroit(src)) {
+                if (affichageCoteDroit(src)) {
                     VueDependences.vueDependences.setLayoutX(src.getParent().getLayoutX() + src.getWidth());
-                }else{
+                } else {
                     VueDependences.vueDependences.setLayoutX(src.getParent().getLayoutX() - VueDependences.vueDependences.getWidth());
                 }
                 MenuTemp = VueDependences.vueDependences;
-            }
-            else{
+            } else if (src.getText().equals("Supprimer la classe")) {
+                Model.getModel().getClasses().remove(this);
+                VueCentre vc = (VueCentre) src.getParent().getParent();
+                VueFichiers vf = (VueFichiers) ((BorderPane) vc.getParent()).getLeft();
+                HBox treeI = vf.findBoxRelativeToClasse(classe);
+                System.out.println(treeI);
+                if (treeI != null) ((CheckBox) treeI.getChildrenUnmodifiable().get(0)).setSelected(false);
+                vc.getChildren().remove(vc.findVueClasse(classe));
+
+
+            } else {
                 VueCreation v;
                 if (src.getText().contains("methode")) v = new VueCreation("methode", this);
                 else v = new VueCreation("attribut", this);
-                if( affichageCoteDroit(src)) {
+                if (affichageCoteDroit(src)) {
                     v.setLayoutX(src.getParent().getLayoutX() + src.getWidth());
-                }else{
+                } else {
                     v.setLayoutX(src.getParent().getLayoutX() - v.getWidth());
                 }
                 ((Pane) (src.getParent().getParent())).getChildren().add(v);

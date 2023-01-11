@@ -52,6 +52,14 @@ public class VueMenuTemporaire extends VBox implements Observateur {
             newAttribut.setOnAction(cont);
             newAttribut.setMinWidth(this.getWidth());
             getChildren().addAll( newAttribut, newMethode);
+
+
+            // supression de classe
+
+            Button supr = new Button("Supprimer la classe");
+            supr.setMinWidth(this.getWidth());
+            supr.setOnAction(cont);
+            getChildren().add(supr);
         } else {
             this.getChildren().clear();
         }
