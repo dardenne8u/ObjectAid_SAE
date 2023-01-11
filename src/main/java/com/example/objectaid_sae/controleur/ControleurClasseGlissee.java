@@ -47,7 +47,7 @@ public class ControleurClasseGlissee implements EventHandler<MouseEvent> {
         // definition de la position y
         double mouseY = mouseEvent.getSceneY() - center.getLayoutY();
         mouseY = Math.min((center.getLayoutY() + center.getHeight() - vue.getHeight()/2 - 53), mouseY); // maximum
-        mouseY = Math.max(vue.getHeight()/2, (center.getLayoutY() + mouseY)); // minimum
+        mouseY = Math.max(vue.getHeight()/2, mouseY); // minimum
 
         s.setX(mouseX);
         s.setY(mouseY);

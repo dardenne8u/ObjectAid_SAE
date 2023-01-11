@@ -56,11 +56,11 @@ public class ControleurFichierGlisse implements EventHandler<MouseEvent> {
             // definition de la position x
             double mouseX = mouseEvent.getSceneX() - centre.getLayoutX();
             mouseX = Math.max(vue.getWidth()/2,mouseX); // minimum
-            mouseX = Math.min((centre.getWidth() - vue.getWidth()/2), mouseX); // maximum
+            mouseX = Math.min((centre.getWidth()+ centre.getLayoutX() - vue.getWidth()/2), mouseX); // maximum
             // definition de la position y
             double mouseY = mouseEvent.getSceneY() - centre.getLayoutY();
-            mouseY = Math.min((centre.getLayoutY() + centre.getHeight() - vue.getHeight()/2 - 150), mouseY); // maximum
-            mouseY = Math.max(vue.getHeight()/2, (centre.getLayoutY() + mouseY)); // minimum
+            mouseY = Math.min((centre.getLayoutY() + centre.getHeight() - vue.getHeight()/2 - 53), mouseY); // maximum
+            mouseY = Math.max(100,mouseY -100); // minimum
             c.setX(mouseX);
             c.setY(mouseY);
             vue.notifier(c);

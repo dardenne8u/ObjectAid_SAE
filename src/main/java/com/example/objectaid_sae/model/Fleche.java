@@ -54,9 +54,9 @@ public class Fleche {
                     Fleche f;
                     System.out.println(dep);
                     if (dep.contains(".|>")) {
-                        f = new Fleche(cl, c, "..|>", "implement", centre);
+                        f = new Fleche(cl, c, "..|>", "", centre);
                     } else if (dep.contains("-|>")) {
-                        f = new Fleche(cl, c, "--|>", "extend", centre);
+                        f = new Fleche(cl, c, "--|>", "", centre);
                     } else {
                         f = new Fleche(cl, c, "-->", dep.substring(dep.lastIndexOf(":")), centre);
                     }
