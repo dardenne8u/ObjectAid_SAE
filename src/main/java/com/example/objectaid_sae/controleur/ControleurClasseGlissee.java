@@ -53,10 +53,7 @@ public class ControleurClasseGlissee implements EventHandler<MouseEvent> {
         s.setY(mouseY);
         s.notifierObservateurs();
         // actualisation des fleches
-        center.supprimerFleches();
-        for (Fleche f : Model.getModel().getFleches()) {
-            if (!f.isCache()) center.getChildren().add(f.getFabrique().fabriquer());
-        }
+        Fleche.actualiserFleches(center);
     }
 
     public Classe getClasse() {

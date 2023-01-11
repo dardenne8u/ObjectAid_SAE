@@ -7,15 +7,10 @@ import com.example.objectaid_sae.vue.VueAffichageGlobal;
 import com.example.objectaid_sae.vue.VueCentre;
 import com.example.objectaid_sae.vue.VueFichiers;
 import com.example.objectaid_sae.vue.VueHaut;
-import com.example.objectaid_sae.vue.fabriqueFleches.FabriqueVueFleche;
-import com.example.objectaid_sae.vue.fabriqueFleches.FabriqueVueFlecheExtends;
-import com.example.objectaid_sae.vue.fabriqueFleches.FabriqueVueFlecheImplement;
-import com.example.objectaid_sae.vue.fabriqueFleches.FabriqueVueFlecheUtilisation;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.Pane;
 
 public class ControleurAffichageGlobal implements EventHandler<ActionEvent> {
 
@@ -46,7 +41,7 @@ public class ControleurAffichageGlobal implements EventHandler<ActionEvent> {
                 for (Classe c : mod.getClasses()) c.setAfficheDependances(value);
                 centre.supprimerFleches();
                 for (Fleche f : Model.getModel().getFleches()) {
-                    if (!f.isCache()) centre.getChildren().add(f.getFabrique().fabriquer());
+                    if (f.isAffiche()) centre.getChildren().add(f.getFabrique().fabriquer());
                 }
             }
             else for (Classe c : mod.getClasses()) c.setAfficheMethodeDeclare(value);

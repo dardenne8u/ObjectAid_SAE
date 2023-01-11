@@ -85,12 +85,10 @@ public class ControleurFichierGlisse implements EventHandler<MouseEvent> {
         }
     }
 
-    private void toutCocher(TreeView tv){
-        TreeItem<HBox> ti = tv.getRoot();
-        recupChildrenBranch(ti);
-    }
-
     private TreeItem<HBox> trouverTIWithPath(String abPath, TreeItem<HBox> tree) {
+         String verif = ((Label) tree.getValue().getChildrenUnmodifiable().get(2)).getText();
+         if(verif.equals(abPath))return tree;
+
         for (TreeItem<HBox> branch : tree.getChildren()) {
             if (!branch.isLeaf()) {
                 String temp = ((Label) branch.getValue().getChildrenUnmodifiable().get(2)).getText();
@@ -133,13 +131,7 @@ public class ControleurFichierGlisse implements EventHandler<MouseEvent> {
                 TreeView t = (TreeView) h.getParent().getParent().getParent().getParent().getParent();
                 //System.out.println(   h.getParent().getParent().getParent().getParent().getParent());
                 String path = ((Label) h.getChildren().get(2)).getText();
-                TreeItem treeItem = trouverTIWithPath(path, t.getRoot());
-                if (treeItem == t.getRoot()) {
-                    recupChildrenBranch(trouverTIWithPath(path, t.getRoot()));
-                }
-                else {
-                    toutCocher(t);
-                }
+                recupChildrenBranch(trouverTIWithPath(path, t.getRoot()));
             }
         }
     }

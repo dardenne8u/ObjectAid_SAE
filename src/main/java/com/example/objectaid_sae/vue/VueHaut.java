@@ -3,6 +3,7 @@ package com.example.objectaid_sae.vue;
 import com.example.objectaid_sae.controleur.ControleurAffichageGlobal;
 import com.example.objectaid_sae.controleur.ControleurButtonNewClass;
 import com.example.objectaid_sae.controleur.ControleurButtonProjet;
+import com.example.objectaid_sae.model.Model;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -84,15 +85,15 @@ public class VueHaut extends GridPane {
 
 
 
-        Button general = new Button("Changer Projet");
+        Button general = new Button("Tout supprimer");
         general.setFont(Font.font(null, FontWeight.BOLD, 16));
         GridPane.setHgrow(general, Priority.ALWAYS);
         GridPane.setVgrow(general, Priority.ALWAYS);
         general.setOnAction(event -> {
-            final BorderPane pane = (BorderPane) ((Node)event.getSource()).getParent().getParent();
-            DirectoryChooser chooser = new DirectoryChooser();
-            File selected = chooser.showDialog(null);
-            pane.setLeft(new VueFichiers(selected.getAbsolutePath()));
+            BorderPane pane = (BorderPane) ((Node)event.getSource()).getParent().getParent();
+            ((VueCentre)(pane.getCenter())).getChildren().clear();
+            pane.setLeft(new VueFichiers("./src/main/java/com/example/objectaid_sae"));
+            Model.resetModel();
         });
 
         setConstraints(general, 3, 2);

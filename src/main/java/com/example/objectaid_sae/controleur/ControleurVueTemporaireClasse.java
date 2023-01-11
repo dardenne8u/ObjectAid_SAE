@@ -85,6 +85,7 @@ public class ControleurVueTemporaireClasse implements EventHandler<ActionEvent> 
                 ((Pane) (src.getParent().getParent())).getChildren().add(ch);
                 for (Node node : ch.getChildren()) {
                     CheckBox check = (CheckBox) node;
+                    System.out.println(classe);
                     switch (check.getText()) {
                         case "attributs declarés":
                             check.setSelected(classe.isAfficheAttributsDeclare());
@@ -144,7 +145,7 @@ public class ControleurVueTemporaireClasse implements EventHandler<ActionEvent> 
                 vc.supprimerMenusTemp();
                 vc.supprimerFleches();
                 for (Fleche f : Model.getModel().getFleches()) {
-                    if (!f.isCache()) vc.getChildren().add(f.getFabrique().fabriquer());
+                    if (f.isAffiche()) vc.getChildren().add(f.getFabrique().fabriquer());
                 }
             } else {
                 VueCreation v;
@@ -180,8 +181,10 @@ public class ControleurVueTemporaireClasse implements EventHandler<ActionEvent> 
                 case "constructeur":
                     classe.setAfficheConstructeur(src.isSelected());
                     break;
-                case "dépendances" :
+                default:
                     classe.setAfficheDependances(src.isSelected());
+                    System.out.println("dep");
+                    Fleche.actualiserFleches((VueCentre) src.getParent().getParent());
                     break;
             }
         }

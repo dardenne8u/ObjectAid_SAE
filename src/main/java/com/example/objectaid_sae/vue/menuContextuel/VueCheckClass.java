@@ -16,10 +16,11 @@ public class VueCheckClass extends VBox {
         CheckBox metdec = new CheckBox("méthodes déclarées");
         CheckBox mether = new CheckBox("méthodes héritées");
         CheckBox constructeur = new CheckBox("constructeur");
-        //CheckBox dependances = new CheckBox("dépendances");
+        CheckBox dependances = new CheckBox("dépendances");
         this.setWidth(130);
         this.setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)));
-        getChildren().addAll(attdec,atther,metdec,mether, constructeur/*, dependances*/);
+        getChildren().addAll(attdec,atther,metdec,mether, constructeur, dependances);
+        dependances.setOnAction(handler);
         constructeur.setOnAction(handler);
         attdec.setOnAction(handler);
         atther.setOnAction(handler);

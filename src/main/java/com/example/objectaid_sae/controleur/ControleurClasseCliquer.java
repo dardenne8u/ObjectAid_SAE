@@ -39,7 +39,6 @@ public class ControleurClasseCliquer implements EventHandler<MouseEvent> {
 
             temp.setLayoutX(mouseEvent.getSceneX() - pane.getLayoutX());
             temp.setLayoutY(mouseEvent.getSceneY() - pane.getLayoutY());
-            System.out.println("Source : " + vue);
         }
         if (mouseEvent.getSource() instanceof VueMenuTemporaire){
             classe.setAfficheAttributsHerite(true);
