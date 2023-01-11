@@ -49,6 +49,12 @@ public class VueDependences extends VBox implements Observateur {
         this.getChildren().addAll(ext, imp, use);
     }
 
+    public void clear() {
+        this.sujet = null;
+        this.classeSelection = null;
+        this.classeChoisie = false;
+    }
+
     public Classe getClasseChoisie() {
         return this.classeSelection;
     }
