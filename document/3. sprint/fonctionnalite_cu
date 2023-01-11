@@ -2,7 +2,7 @@
 Bouton qui permet de créer une nouvelle classe. Une nouvelle fenêtre d'affiche,
 un formulaire à remplir (Nom et état de la classe)
 
-2. générer un diagramme UML d'un package (Nathanael)
+2. générer un diagramme UML d'un package (Nathan)
 Permet de glisser-déposer un dossier entier et d'en afficher toutes les classes.
 
 3. Affichage des opérations générales applicables à toutes les classes (Nathanael)
