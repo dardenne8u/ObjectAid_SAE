@@ -10,8 +10,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 
 public class VueNewClasse extends GridPane {
-    private CheckBox abstr, impl, exte, pub, pro, pri, inter;
-    private TextField impleName, nameField,extName;
+    private CheckBox abstr, impl, exte, pub, pro, pri, inter, pack;
+    private TextField impleName, nameField,extName, packName;
 
 
     public VueNewClasse(ControleurButtonNewClass cont) {
@@ -85,6 +85,21 @@ public class VueNewClasse extends GridPane {
             }
         });
 
+        pack = new CheckBox("Nom du package");
+        packName = new TextField();
+        packName.setDisable(true);
+        pack.setOnAction(event ->{
+            if(pack.isSelected()){
+                packName.setDisable(false);
+                packName.clear();
+        }else{
+                packName.setDisable(true);
+                packName.clear();
+            }
+
+        });
+
+
 
         // Ajout des éléments au GridPane
         add(name, 0, 0);
@@ -100,8 +115,11 @@ public class VueNewClasse extends GridPane {
         add(pri,0,6);
         add(pro,0,7);
 
-        add(annuler, 0, 8);
-        add(valider, 1, 8);
+        add(annuler, 0, 9);
+        add(valider, 1, 9);
+
+        add(pack, 0, 8);
+        add(packName, 1, 8);
 
     }
 

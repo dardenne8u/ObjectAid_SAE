@@ -26,7 +26,7 @@ public class ControleurButtonNewClass implements EventHandler<ActionEvent> {
             secondaryStage.setTitle("Nouvelle Classe");
             //button.setOnAction(event -> secondaryStage.close());
             VueNewClasse root = new VueNewClasse(this);
-            Scene scene = new Scene(root, 350, 270);
+            Scene scene = new Scene(root, 350, 300);
             secondaryStage.setScene(scene);
             secondaryStage.setResizable(false);
             secondaryStage.show();
@@ -53,6 +53,9 @@ public class ControleurButtonNewClass implements EventHandler<ActionEvent> {
             }
             if (src.getText().equals("Valider")) {
                 Classe newClasse= new Classe();
+                if (((CheckBox) src.getParent().getChildrenUnmodifiable().get(13)).isSelected()){
+                    newClasse.setPackageName(((TextField) src.getParent().getChildrenUnmodifiable().get(14)).getText());
+                }
                 VueNewClasse vnc = (VueNewClasse) ((Button) evt.getSource()).getParent();
                 if(!vnc.matchName()) return;
                 newClasse.setType(vnc.getTypeClass());
