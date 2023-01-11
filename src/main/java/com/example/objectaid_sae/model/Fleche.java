@@ -1,10 +1,7 @@
 package com.example.objectaid_sae.model;
 
 import com.example.objectaid_sae.vue.VueCentre;
-import com.example.objectaid_sae.vue.fabriqueFleches.FabriqueVueFleche;
-import com.example.objectaid_sae.vue.fabriqueFleches.FabriqueVueFlecheExtends;
-import com.example.objectaid_sae.vue.fabriqueFleches.FabriqueVueFlecheImplement;
-import com.example.objectaid_sae.vue.fabriqueFleches.FabriqueVueFlecheUtilisation;
+import com.example.objectaid_sae.vue.fabriqueFleches.*;
 
 public class Fleche {
 
@@ -45,7 +42,7 @@ public class Fleche {
     public static void creerFleches(Classe c, VueCentre centre) {
         Model mod = Model.getModel();
         String nom = c.getType();
-        nom = nom.substring(nom.lastIndexOf(" "));
+        nom = nom.substring(nom.lastIndexOf(" ")).replace(" ","");
         for (Classe cl : mod.getClasses()) {
             System.out.println("recherche pour : " + cl.getType());
             for (String dep : cl.getDependencies()) {
@@ -53,13 +50,10 @@ public class Fleche {
                 if (dep.contains(nom)) {
                     Fleche f;
                     System.out.println(dep);
-                    if (dep.contains(".|>")) {
-                        f = new Fleche(cl, c, "..|>", "", centre);
-                    } else if (dep.contains("-|>")) {
-                        f = new Fleche(cl, c, "--|>", "", centre);
-                    } else {
-                        f = new Fleche(cl, c, "-->", dep.substring(dep.lastIndexOf(":")), centre);
-                    }
+                    if (dep.contains(".|>")) f = new Fleche(cl, c, "..|>", "", centre);
+                    else if (dep.contains("-|>")) f = new Fleche(cl, c, "--|>", "", centre);
+                    else if (dep.contains("->"))f = new Fleche(cl, c, "-->", dep.substring(dep.lastIndexOf(":")), centre);
+                    else f = new Fleche(cl,c,"..>","", centre);
                     mod.addFleche(f);
                     centre.getChildren().add(f.getFabrique().fabriquer());
                 }
@@ -71,13 +65,10 @@ public class Fleche {
                 if (dep2.contains(temp)) {
                     System.out.println(dep2);
                     Fleche f;
-                    if (dep2.contains(".|>")) {
-                        f = new Fleche(c, cl, "..|>", "", centre);
-                    } else if (dep2.contains("-|>")) {
-                        f = new Fleche(c, cl, "--|>", "", centre);
-                    } else {
-                        f = new Fleche(c, cl, "-->", dep2.substring(dep2.lastIndexOf(":")), centre);
-                    }
+                    if (dep2.contains(".|>")) f = new Fleche(c, cl, "..|>", "", centre);
+                    else if (dep2.contains("-|>")) f = new Fleche(c, cl, "--|>", "", centre);
+                    else if (dep2.contains("->"))f = new Fleche(c, cl, "-->", dep2.substring(dep2.lastIndexOf(":")), centre);
+                    else f = new Fleche(c,cl,"..>","", centre);
                     mod.addFleche(f);
                     centre.getChildren().add(f.getFabrique().fabriquer());
                 }
@@ -144,6 +135,9 @@ public class Fleche {
                 break;
             case "--|>":
                 fabrique = new FabriqueVueFlecheExtends(this, centre);
+                break;
+            case "..>" :
+                fabrique = new FabriqueFlecheAsso(this,centre);
                 break;
             default:
                 fabrique = new FabriqueVueFlecheImplement(this, centre);
