@@ -1,6 +1,7 @@
 package com.example.objectaid_sae.controleur;
 
 import com.example.objectaid_sae.model.Classe;
+import com.example.objectaid_sae.model.Fleche;
 import com.example.objectaid_sae.model.Model;
 import com.example.objectaid_sae.vue.VueCentre;
 import com.example.objectaid_sae.vue.VueFichiers;
@@ -141,6 +142,10 @@ public class ControleurVueTemporaireClasse implements EventHandler<ActionEvent> 
                 if (treeI != null) ((CheckBox) treeI.getChildrenUnmodifiable().get(0)).setSelected(false);
                 vc.getChildren().remove(vc.findVueClasse(classe));
                 vc.supprimerMenusTemp();
+                vc.supprimerFleches();
+                for (Fleche f : Model.getModel().getFleches()) {
+                    if (!f.isCache()) vc.getChildren().add(f.getFabrique().fabriquer());
+                }
             } else {
                 VueCreation v;
                 if (src.getText().contains("methode")) v = new VueCreation("methode", this);
