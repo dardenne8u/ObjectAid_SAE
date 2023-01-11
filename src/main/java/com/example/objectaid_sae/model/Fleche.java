@@ -9,7 +9,6 @@ public class Fleche {
     private String type, nom;
     private Classe arrivee;
     private Classe depart;
-    private boolean cache;
 
     private String[] cardinalites;
 
@@ -30,7 +29,6 @@ public class Fleche {
         this.type = type;
         this.arrivee = fin;
         this.depart = debut;
-        this.cache = false;
         this.nom = nom;
         this.cardinalites = new String[]{"", ""};
         setFabrique(centre);
@@ -44,12 +42,9 @@ public class Fleche {
         String nom = c.getType();
         nom = nom.substring(nom.lastIndexOf(" ")).replace(" ","");
         for (Classe cl : mod.getClasses()) {
-            System.out.println("recherche pour : " + cl.getType());
             for (String dep : cl.getDependencies()) {
-                System.out.println(dep);
                 if (dep.contains(nom)) {
                     Fleche f;
-                    System.out.println(dep);
                     if (dep.contains(".|>")) f = new Fleche(cl, c, "..|>", "", centre);
                     else if (dep.contains("-|>")) f = new Fleche(cl, c, "--|>", "", centre);
                     else if (dep.contains("->"))f = new Fleche(cl, c, "-->", dep.substring(dep.lastIndexOf(":")), centre);
@@ -58,12 +53,9 @@ public class Fleche {
                     centre.getChildren().add(f.getFabrique().fabriquer());
                 }
             }
-            System.out.println("recherche pour : " + nom);
             for (String dep2 : c.getDependencies()) {
                 String temp = cl.getType().substring(cl.getType().lastIndexOf(" ") + 1);
-                System.out.println(dep2);
                 if (dep2.contains(temp)) {
-                    System.out.println(dep2);
                     Fleche f;
                     if (dep2.contains(".|>")) f = new Fleche(c, cl, "..|>", "", centre);
                     else if (dep2.contains("-|>")) f = new Fleche(c, cl, "--|>", "", centre);
@@ -73,6 +65,13 @@ public class Fleche {
                     centre.getChildren().add(f.getFabrique().fabriquer());
                 }
             }
+        }
+    }
+
+    public static void actualiserFleches(VueCentre centre){
+        centre.supprimerFleches();
+        for (Fleche f : Model.getModel().getFleches()){
+            if (f.isAffiche()) centre.getChildren().add(f.fabrique.fabriquer());
         }
     }
 
@@ -108,9 +107,10 @@ public class Fleche {
      *
      * @return true si la fleche est cachee.
      */
-    public boolean isCache() {
+    public boolean isAffiche() {
         System.out.println(depart);
-        return !this.depart.isAfficheDependances();
+        System.out.println(depart.isAfficheDependances());
+        return this.depart.isAfficheDependances();
     }
 
     public String[] getCardinalites() {

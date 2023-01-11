@@ -24,8 +24,8 @@ public class VueClasse extends VBox implements Observateur {
     private ControleurClasseGlissee controleurClasseGlissee;
 
     private static final Image imgClasse = new Image(VueClasse.class.getResource("/img/Class.png").toExternalForm());
-    private static final Image imgAbstract = new Image(VueClasse.class.getResource("/img/Class.png").toExternalForm());
-    private static final Image imgInterface = new Image(VueClasse.class.getResource("/img/Class.png").toExternalForm());
+    private static final Image imgAbstract = new Image(VueClasse.class.getResource("/img/Abstract.png").toExternalForm());
+    private static final Image imgInterface = new Image(VueClasse.class.getResource("/img/Interface.png").toExternalForm());
     private static final Image imgPublic = new Image(VueClasse.class.getResource("/img/plus.png").toExternalForm());
     private static final Image imgPrivate = new Image(VueClasse.class.getResource("/img/moin.png").toExternalForm());
     private static final Image imgProtected = new Image(VueClasse.class.getResource("/img/pr.png").toExternalForm());
@@ -38,7 +38,6 @@ public class VueClasse extends VBox implements Observateur {
     public VueClasse(Classe classe) {
         this.controleurClasseGlissee = new ControleurClasseGlissee(classe);
         this.addEventHandler(MouseEvent.MOUSE_CLICKED, new ControleurClasseCliquer(classe));
-        this.addEventHandler(MouseEvent.MOUSE_CLICKED, controleurClasseGlissee);
         this.addEventHandler(MouseEvent.MOUSE_DRAGGED, controleurClasseGlissee);
         classe.ajouterObservateur(this);
         notifier(classe);

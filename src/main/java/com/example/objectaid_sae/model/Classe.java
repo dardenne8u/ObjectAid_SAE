@@ -215,7 +215,7 @@ public class Classe implements Sujet {
         }
     }
 
-    @Override
+    /*@Override
     public String toString() {
 
         String s = this.type+"{\n";
@@ -258,7 +258,7 @@ public class Classe implements Sujet {
 
 
         return s;
-    }
+    }*/
 
     public List<String> getDependencies() {
         return dependencies;
