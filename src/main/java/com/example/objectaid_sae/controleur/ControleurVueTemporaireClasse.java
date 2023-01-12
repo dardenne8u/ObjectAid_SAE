@@ -157,6 +157,7 @@ public class ControleurVueTemporaireClasse implements EventHandler<ActionEvent> 
                 File file = chooser.showDialog(null);
                 String nomClasse = classe.getType().substring(classe.getType().lastIndexOf(" "));
                 if (file == null) return;
+                if(!file.isDirectory()) return;
                 file = new File(file.getAbsolutePath() + "\\" + nomClasse + ".java");
                 try {
                     if (!file.exists()) file.createNewFile();
