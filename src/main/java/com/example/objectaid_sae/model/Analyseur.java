@@ -7,7 +7,7 @@ import java.util.List;
 public class Analyseur {
 
 
-    public static String packageProjet;
+    public static String packageProjet = "";
     /**
      * Classe stockant les valeurs
      * de l'introspection
@@ -58,6 +58,7 @@ public class Analyseur {
         List<Class> interfaces = List.of(introspection.getInterfaces());
         for(Class inter : interfaces) {
             link = introspection.getSimpleName() + " ..|> " + inter.getSimpleName();
+            System.out.println(inter.getPackageName());
             if(!inter.getPackageName().contains(packageProjet)){
                 classe.addPackageExternes(inter.getName());
             }
@@ -108,7 +109,7 @@ public class Analyseur {
         else res += "+";
 
         if(Modifier.isStatic(code)) res += " {static}";
-        else if (Modifier.isAbstract(code)) res += " {abstract}";
+        else if (Modifier.isAbstract(code) && !Modifier.isInterface(introspection.getModifiers())) res += " {abstract}";
         return res + " ";
     }
 
@@ -135,7 +136,7 @@ public class Analyseur {
         Class type;
         for (Field f : fields) {
             type = f.getType();
-            if(type.getSimpleName().matches("^[A-Z][A-z]+"))
+            if(type.getSimpleName().matches("^[A-Z]([A-z]+)?"))
                 if(genLink(f))
                     continue;
             res = getSignature(f.getModifiers());
@@ -174,7 +175,6 @@ public class Analyseur {
             // typeName = ClassName
             if(notClassicType(typeName)) return false; // lien non genere
         }
-
         String link = introspection.getSimpleName() + " -->" + cardinalite + typeName + " : " + getSignature(field.getModifiers()) +field.getName();
         classe.addDependencies(link);
         return true;
@@ -272,8 +272,16 @@ public class Analyseur {
 
     public static void main(String[] args) throws ClassNotFoundException {
         Analyseur.packageProjet = "com.example.objectaid_sae";
-        System.out.println(
-        new Analyseur("com.example.objectaid_sae.model.Classe").analyseClasse().genSquelette());
+        String[] temp = new String[] {
+                "pkg.A",
+                "pkg.B",
+                "pkg.C",
+                "pkg.D",
+                "pkg.E",
+                "pkg.F"
+        };
+        for(String line : List.of(temp))
+            System.out.println(new Analyseur(line).analyseClasse());
 
     }
 
