@@ -15,15 +15,15 @@ public class TestClasse {
     @Test
     public void testSetX() {
         Classe c = new Classe();
-        c.setX(100);
-        assertEquals(100, c.getX(), 0.01);
+        c.setX(100.0);
+        assertEquals(100.0, c.getX(), 0.01);
     }
 
     @Test
     public void testSetY() {
         Classe c = new Classe();
-        c.setY(200);
-        assertEquals(200, c.getY(), 0.01);
+        c.setY(200.0);
+        assertEquals(200.0, c.getY(), 0.01);
     }
 
     @Test
