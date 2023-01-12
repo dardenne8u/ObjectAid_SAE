@@ -2,14 +2,27 @@
 actor utilisateur
 participant "cont : ControleurVueTemporaireClasse" as cont
 participant "vue : VueDependances" as vue
-
+participant "contDep : ControleurButtonMenuAddFleche" as contDep
+participant "classe : Classe" as classe
+participant "model: Model" as mod
 utilisateur -> cont : Clique sur le bouton "ajouter dependance"
 activate cont
 
     cont -> vue : notifier(Sujet s)
     activate vue
-    vue -> vue : vueChoisirClasse
-    vue -> vue : vueChoisirFleche
+    vue -> vue : vueChoisirClasse()
+    utilisateur -> contDep : clique sur la classe
+    activate contDep
+    contDep -> vue : vueChoisirFleche()
+    deactivate contDep
+    utilisateur -> contDep : clique sur la relation
+    activate contDep
+    contDep -> classe : addDependances(String)
+    create "f : Fleche" as f
+    contDep -> f : new
+    contDep -> mod : addFleche(f)
+    contDep --> vue
+    deactivate contDep
     cont <-- vue
     deactivate vue
 
