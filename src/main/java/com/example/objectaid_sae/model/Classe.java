@@ -279,7 +279,8 @@ public class Classe implements Sujet {
 
     public String genSquelette() {
         String squelette = "";
-        squelette += "package " + this.packageName + ";\n\n";
+        if(!packageName.equals(""))
+            squelette += "package " + this.packageName + ";\n\n";
         squelette += genSqueletteSignature() + " { \n";
         squelette += genSqueletteAttributs();
         squelette += genSqueletteAvecLink() + "\n";

@@ -17,6 +17,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 
 import java.io.BufferedWriter;
@@ -152,9 +153,11 @@ public class ControleurVueTemporaireClasse implements EventHandler<ActionEvent> 
                     if (f.isAffiche()) vc.getChildren().add(f.getFabrique().fabriquer());
                 }
             } else if (src.getText().equals("Générer squelette")) {
-                FileChooser chooser = new FileChooser();
-                File file = chooser.showOpenDialog(null);
+                DirectoryChooser chooser = new DirectoryChooser();
+                File file = chooser.showDialog(null);
+                String nomClasse = classe.getType().substring(classe.getType().lastIndexOf(" "));
                 if (file == null) return;
+                file = new File(file.getAbsolutePath() + "\\" + nomClasse + ".java");
                 try {
                     if (!file.exists()) file.createNewFile();
                     BufferedWriter bw = new BufferedWriter(new FileWriter(file));
