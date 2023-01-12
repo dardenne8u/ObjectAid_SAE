@@ -74,7 +74,6 @@ public class ControleurButtonNewClass implements EventHandler<ActionEvent> {
                 mod.addClasse(newClasse);
                 stock.getChildren().add(vC);
                 Fleche.creerFleches(newClasse, stock);
-                System.out.println(newClasse.toString());
                 stock = null;
                 newClasse.notifierObservateurs();
                 ((Stage) src.getScene().getWindow()).close();

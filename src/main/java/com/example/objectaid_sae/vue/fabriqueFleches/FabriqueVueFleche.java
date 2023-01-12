@@ -27,7 +27,7 @@ public abstract class FabriqueVueFleche {
 
     public abstract VueFleche fabriquer();
 
-    protected VueFleche build(Line l, Polygon poly, double inclinaison, double offset, double x, double y, double len){
+    protected VueFleche build(Line l, Polygon poly, double inclinaison, double offset, double x, double y, double len, double decall){
         VueFleche res = new VueFleche();
         Rotate r = new Rotate();
         Label name = new Label(fleche.getNom());
@@ -38,27 +38,31 @@ public abstract class FabriqueVueFleche {
         r.setPivotY(0);
         r.setAngle(inclinaison);
         l.setTranslateY(offset);
+        l.setTranslateX(decall);
         poly.setRotate(45);
         poly.setTranslateY(offset+5);
-        poly.setTranslateX(-10);
+        poly.setTranslateX(-10 + decall);
         card.setRotate(-inclinaison);
         name.setRotate(-inclinaison);
         name.setAlignment(Pos.CENTER);
         res.getChildren().addAll(poly,l,name,card);
-        res.setTranslateY(y /*+ fleche.getOffsetLateral()*/);
-        res.setTranslateX(x /*+ fleche.getOffsetLateral()*/);
+        res.setTranslateY(y);
+        res.setTranslateX(x);
         name.setTranslateY(len/2);
         res.getTransforms().add(r);
         return res;
     }
-    protected double getOffset(double angle, double width, double height){
-        double breakpoint = Math.sqrt((width*width)/4 + (height*height)/4) /*- fleche.getOffsetLateral()*/;
-        double absAngle = Math.abs((angle - 90 % 180) / (180 / Math.PI));
+    protected double getOffset(double angle, double width, double height, double decallage){
+        double breakpoint = Math.sqrt((width*width)/4 + (height*height)/4) - decallage;
+        double absAngle = Math.abs((angle) % 180) / (180 / Math.PI);
         double cos = Math.cos(absAngle);
+        double sin = Math.sin(absAngle);
+        decallage = Math.abs(decallage)*-1;
+        System.out.println("angle :" + absAngle + " sin :" + sin + " cos :" + cos);
         double offset;
-        if (cos != 0) offset = Math.abs((width/2)/cos);
-        else offset =  Math.abs(height/2/Math.sin(absAngle));
-        if (offset > breakpoint) offset = Math.abs(height/2/Math.sin(absAngle));
+        if (cos != 0) offset = Math.abs(((width/2)+decallage)/cos) - 2*Math.abs(sin*decallage);
+        else offset =  Math.abs(((height/2))/Math.sin(absAngle)) + 2*Math.abs(cos*decallage);
+        if (offset > breakpoint) offset = Math.abs(((height/2))/Math.sin(absAngle))+ 2*Math.abs(sin*decallage);
         return offset;
     }
 
@@ -70,9 +74,10 @@ public abstract class FabriqueVueFleche {
         double heightC1 = vc1.getHeight();
         double heightC2 = vc2.getHeight();
         double len = Math.sqrt(Math.pow((x1-x2),2)+Math.pow(((y1+vc1.getHeight()/2)-(y2+ vc2.getHeight()/2)),2));
-        double inclinaison = Math.atan2((y2 + vc2.getHeight()/2) - (y1+vc1.getHeight()/2), x2 - x1)* 180/Math.PI + 90;
-        double offsetC1 = getOffset(inclinaison,widthC1,heightC1);
-        double offsetC2 = getOffset(inclinaison,widthC2,heightC2);
-        return build(genererLigne(len-(offsetC1 + offsetC2)), genererPointe() ,inclinaison,offsetC2,x2 + widthC2/2,y2 + heightC2/2,len);
+        double inclinaison = Math.atan2((y2 + vc2.getHeight()/2) - (y1+vc1.getHeight()/2), x2 - x1)* 180/Math.PI;
+        double decallage = fleche.getOffsetLateral();
+        double offsetC1 = getOffset(inclinaison,widthC1,heightC1, decallage);
+        double offsetC2 = getOffset(inclinaison,widthC2,heightC2, decallage);
+        return build(genererLigne(len-(offsetC1 + offsetC2)), genererPointe() ,inclinaison+90,offsetC2,x2 + widthC2/2,y2 + heightC2/2,len, decallage);
     }
 }

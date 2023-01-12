@@ -11,7 +11,7 @@ public class Fleche {
     private final Classe depart;
 
     private String cardinalites;
-    private int offsetLateral;
+    private double offsetLateral;
 
     private FabriqueVueFleche fabrique;
 
@@ -33,7 +33,8 @@ public class Fleche {
         this.nom = nom;
         this.cardinalites = "";
         setFabrique(centre);
-        offsetLateral = (int) Math.pow(-1,Math.floor(Model.getModel().getAToB(depart,arrivee).size()/2))*10;
+        int nbAutresFleches = Model.getModel().getAToB(depart,arrivee).size() + Model.getModel().getAToB(arrivee,depart).size();
+        offsetLateral = Math.pow(-1,nbAutresFleches+1)*10*nbAutresFleches;
     }
 
     //METHODES
@@ -45,7 +46,6 @@ public class Fleche {
         nom = nom.substring(nom.lastIndexOf(" ")).replace(" ","");
         for (Classe cl : mod.getClasses()) {
             for (String dep : cl.getDependencies()) {
-                System.out.println(dep);
                 if (dep.contains(" " + nom)) {
                     Fleche f;
                     if (dep.contains(".|>")) f = new Fleche(cl, c, "..|>", "", centre);
@@ -60,7 +60,6 @@ public class Fleche {
                 }
             }
             for (String dep2 : c.getDependencies()) {
-                System.out.println(dep2);
                 String temp = cl.getType().substring(cl.getType().lastIndexOf(" ") + 1);
                 if (dep2.contains(" " +temp)){
                     Fleche f;
@@ -150,7 +149,7 @@ public class Fleche {
         return fabrique;
     }
 
-    public int getOffsetLateral() {
+    public double getOffsetLateral() {
         return offsetLateral;
     }
 }

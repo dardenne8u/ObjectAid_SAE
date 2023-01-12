@@ -132,7 +132,6 @@ public class ControleurButtonProjet implements EventHandler<ActionEvent> {
 
         Model model = Model.getModel();
         String string_uml_model = model.enregistrerUML();
-        System.out.println(string_uml_model);
         fileWriter.write(string_uml_model);
         fileWriter.close();
     }

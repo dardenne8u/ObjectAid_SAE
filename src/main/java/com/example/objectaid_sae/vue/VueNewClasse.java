@@ -133,8 +133,6 @@ public class VueNewClasse extends GridPane {
         else if(abstr.isSelected()) res += "abstract class ";
         else res += "class ";
         res += nameField.getText();
-
-        System.out.println(res);
         return res;
     }
 
