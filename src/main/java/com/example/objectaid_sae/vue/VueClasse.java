@@ -157,13 +157,12 @@ public class VueClasse extends VBox implements Observateur {
         //this.getChildren().add(this.separer());
         this.setWidth(this.getMaxWidth());
 
-        /*
         if (this.getHeight() > 300) {
             this.setHeight(300);
         }
-         */
-        setLayoutX(classe.getX() - getWidth() / 2);
-        setLayoutY(classe.getY() - getHeight() / 2);
+
+        setLayoutX(classe.getX());
+        setLayoutY(classe.getY());
     }
 
     /**

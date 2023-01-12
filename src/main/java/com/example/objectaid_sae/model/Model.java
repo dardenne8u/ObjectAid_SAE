@@ -103,4 +103,13 @@ public class Model implements Sujet {
         }
         return flechesList;
     }
+
+    public List<Fleche> getAToB(Classe dep, Classe arr){
+        List<Fleche> flechesList = new ArrayList<>();
+        for(Fleche fleche : this.fleches) {
+            if(fleche.getDepart().equals(dep) && fleche.getArrivee().equals(arr))
+                flechesList.add(fleche);
+        }
+        return flechesList;
+    }
 }

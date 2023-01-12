@@ -62,7 +62,6 @@ public class ControleurButtonProjet implements EventHandler<ActionEvent> {
     public void handle(ActionEvent evt) {
         if (evt.getSource().getClass() == Button.class) {
             Button src = (Button) evt.getSource();
-            System.out.println(src.getText());
             if (src.getText().equals("Projet")) {
                 BorderPane borderPane = (BorderPane) src.getParent().getParent();
                 pane = (VueCentre) borderPane.getCenter();
@@ -86,7 +85,6 @@ public class ControleurButtonProjet implements EventHandler<ActionEvent> {
                         if (string_nom != null){
                         String img_nom = string_enregistrer_img + "\\" + string_nom + ".png";
                             exit=true;
-                            System.out.println("existant ! : " + img_nom);
                             try{saveImg(pane, img_nom);
 
                     } catch (IOException e) {
@@ -94,7 +92,6 @@ public class ControleurButtonProjet implements EventHandler<ActionEvent> {
                             }
                         }
                 }else {
-                    System.out.println("inexistant");
                     ((Label) src.getParent().getChildrenUnmodifiable().get(8)).setVisible(true);
                     exit = false;
                 }
@@ -107,7 +104,6 @@ public class ControleurButtonProjet implements EventHandler<ActionEvent> {
                     if (string_nom != null){
                         String uml_nom = string_enregistrer_uml + "\\" + string_nom;
                         exit=true;
-                        System.out.println("existant ! : " + uml_nom);
                     try {
                         this.enregUML(uml_nom);
                     } catch (IOException e) {
@@ -115,8 +111,7 @@ public class ControleurButtonProjet implements EventHandler<ActionEvent> {
                     }
                     }
                 } else {
-                    System.out.println("inexistant");
-                    ((Label) src.getParent().getChildrenUnmodifiable().get(8)).setVisible(true);
+                    src.getParent().getChildrenUnmodifiable().get(8).setVisible(true);
                     exit=false;
                 }
                     if(exit)((Stage) src.getScene().getWindow()).close();

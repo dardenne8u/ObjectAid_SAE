@@ -197,7 +197,6 @@ public class ControleurVueTemporaireClasse implements EventHandler<ActionEvent> 
                     break;
                 case "dépendances":
                     classe.setAfficheDependances(src.isSelected());
-                    System.out.println("dep");
                     Fleche.actualiserFleches((VueCentre) src.getParent().getParent());
                     break;
             }

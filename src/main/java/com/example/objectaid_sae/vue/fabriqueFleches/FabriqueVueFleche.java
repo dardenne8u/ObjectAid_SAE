@@ -40,14 +40,14 @@ public abstract class FabriqueVueFleche {
         name.setRotate(-inclinaison);
         name.setAlignment(Pos.CENTER);
         res.getChildren().addAll(poly,l,name,card);
-        res.setTranslateY(y);
-        res.setTranslateX(x);
+        res.setTranslateY(y + fleche.getOffsetLateral());
+        res.setTranslateX(x + fleche.getOffsetLateral());
         name.setTranslateY(len/2);
         res.getTransforms().add(r);
         return res;
     }
     protected double getOffset(double angle, double width, double height){
-        double breakpoint = Math.sqrt((width*width)/4 + (height*height)/4);
+        double breakpoint = Math.sqrt((width*width)/4 + (height*height)/4) - fleche.getOffsetLateral();
         double absAngle = Math.abs((angle - 90 % 180) / (180 / Math.PI));
         double cos = Math.cos(absAngle);
         double offset;

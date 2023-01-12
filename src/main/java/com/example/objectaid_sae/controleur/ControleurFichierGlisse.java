@@ -58,17 +58,14 @@ public class ControleurFichierGlisse implements EventHandler<MouseEvent> {
             centre.getChildren().add(vue);
             // definition de la position x
             double mouseX = mouseEvent.getSceneX() - centre.getLayoutX();
-            mouseX = Math.max(vue.getWidth()/2,mouseX); // minimum
-            mouseX = Math.min((centre.getWidth()+ centre.getLayoutX() - vue.getWidth()/2), mouseX); // maximum
+            mouseX = Math.max(0,mouseX); // minimum
+            mouseX = Math.min((centre.getWidth()+ centre.getLayoutX()), mouseX); // maximum
             // definition de la position y
             double mouseY = mouseEvent.getSceneY() - centre.getLayoutY();
-            mouseY = Math.min((centre.getLayoutY() + centre.getHeight() - vue.getHeight()/2 - 53), mouseY); // maximum
+            mouseY = Math.min((centre.getLayoutY() + centre.getHeight() - vue.getHeight() - 53), mouseY); // maximum
             mouseY = Math.max(100,mouseY -100); // minimum
             c.setX(mouseX);
             c.setY(mouseY);
-            vue.setLayoutX(mouseX- vue.getWidth()/2);
-            System.out.println(vue.getHeight());
-            vue.setLayoutY(mouseY+vue.getHeight());
             Fleche.creerFleches(c, (VueCentre) centre);
             mod.addClasse(c);
         } catch (Exception e) {
@@ -94,8 +91,6 @@ public class ControleurFichierGlisse implements EventHandler<MouseEvent> {
         for (TreeItem<HBox> branch : tree.getChildren()) {
             if (!branch.isLeaf()) {
                 String temp = ((Label) branch.getValue().getChildrenUnmodifiable().get(2)).getText();
-              //  System.out.println("temp : " + temp);
-               // System.out.println("abPath : " + abPath);
                 if (temp.equals(abPath)) {
                     return branch;
                 }
@@ -121,7 +116,6 @@ public class ControleurFichierGlisse implements EventHandler<MouseEvent> {
         this.mouseEvent = mouseEvent;
         if (center.contains(mouseEvent.getSceneX(), mouseEvent.getSceneY()) && !source.contains(mouseEvent.getSceneX(), mouseEvent.getSceneY())) {
             HBox h = (HBox) mouseEvent.getSource();
-            //System.out.println(h.getParent().getClass().getSimpleName());
             CheckBox cb = (CheckBox) h.getChildren().get(0);
             if (cb.isSelected()) return;
             Label l = (Label) h.getChildren().get(2);
@@ -131,7 +125,6 @@ public class ControleurFichierGlisse implements EventHandler<MouseEvent> {
             } else {
                 afficherDossier(abs, cb, mod);
                 TreeView t = (TreeView) h.getParent().getParent().getParent().getParent().getParent();
-                //System.out.println(   h.getParent().getParent().getParent().getParent().getParent());
                 String path = ((Label) h.getChildren().get(2)).getText();
                 recupChildrenBranch(trouverTIWithPath(path, t.getRoot()));
             }

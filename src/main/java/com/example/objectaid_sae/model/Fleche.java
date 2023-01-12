@@ -11,6 +11,7 @@ public class Fleche {
     private final Classe depart;
 
     private String cardinalites;
+    private int offsetLateral;
 
     private FabriqueVueFleche fabrique;
 
@@ -32,6 +33,7 @@ public class Fleche {
         this.nom = nom;
         this.cardinalites = "";
         setFabrique(centre);
+        offsetLateral = (int) Math.pow(-1,Math.floor(Model.getModel().getAToB(depart,arrivee).size()/2))*10;
     }
 
     //METHODES
@@ -43,7 +45,8 @@ public class Fleche {
         nom = nom.substring(nom.lastIndexOf(" ")).replace(" ","");
         for (Classe cl : mod.getClasses()) {
             for (String dep : cl.getDependencies()) {
-                if (dep.contains(" " + nom + " ")) {
+                System.out.println(dep);
+                if (dep.contains(" " + nom)) {
                     Fleche f;
                     if (dep.contains(".|>")) f = new Fleche(cl, c, "..|>", "", centre);
                     else if (dep.contains("-|>")) f = new Fleche(cl, c, "--|>", "", centre);
@@ -57,8 +60,9 @@ public class Fleche {
                 }
             }
             for (String dep2 : c.getDependencies()) {
+                System.out.println(dep2);
                 String temp = cl.getType().substring(cl.getType().lastIndexOf(" ") + 1);
-                if (dep2.contains(" " +temp + " ")){
+                if (dep2.contains(" " +temp)){
                     Fleche f;
                     if (dep2.contains(".|>")) f = new Fleche(c, cl, "..|>", "", centre);
                     else if (dep2.contains("-|>")) f = new Fleche(c, cl, "--|>", "", centre);
@@ -125,10 +129,6 @@ public class Fleche {
         return nom;
     }
 
-    public void setCardinalites(String cardinalites) {
-        this.cardinalites = cardinalites;
-    }
-
     private void setFabrique(VueCentre centre) {
         switch (type) {
             case "-->":
@@ -148,5 +148,9 @@ public class Fleche {
 
     public FabriqueVueFleche getFabrique() {
         return fabrique;
+    }
+
+    public int getOffsetLateral() {
+        return offsetLateral;
     }
 }
