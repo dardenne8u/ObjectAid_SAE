@@ -30,8 +30,11 @@ activate fabrique
         deactivate fabrique
 
 
+
+        fabrique -> fabrique : build(ligne, pointe, inclinaison, offsetClasseFin, x, y, longueur)
+        activate fabrique
         create VueFleche
-        fabrique -> VueFleche : build(ligne, pointe, inclinaison, offsetClasseFin, x, y, longueur)
+        fabrique -> VueFleche : new
         fabrique --> fabrique : VueFleche
         deactivate fabrique
 
