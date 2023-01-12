@@ -15,6 +15,8 @@ activate cont
     else HBox not find
         cont <-- tree : null
     end
+    deactivate tree
+
 
 utilisateur <-- cont : visuel actualiser, classe supprimer
 deactivate cont

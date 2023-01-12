@@ -1,0 +1,25 @@
+@startuml
+actor Utilisateur
+participant "cont : ControleurVueTemporaireClasse" as cont
+participant "classe : Classe" as c
+
+Utilisateur -> cont : appuyer sur bouton "Générer squelette"
+activate cont
+
+    cont -> c : genSquelette()
+    activate c
+
+        c -> c : genSqueletteSignature()
+        c -> c : genSqueletteAttributs()
+        c -> c : genSqueletteAvecLink()
+        c -> c : genSqueletteMethods
+
+    cont <-- c : class {...} : String
+    deactivate c
+
+    cont -> BufferedWriter : write( class {...} )
+    cont -> BufferedWriter : close()
+
+Utilisateur <-- cont : fichier générer
+deactivate cont
+@enduml
