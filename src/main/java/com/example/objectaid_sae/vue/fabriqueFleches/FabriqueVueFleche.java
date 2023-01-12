@@ -60,7 +60,7 @@ public abstract class FabriqueVueFleche {
         decallage = Math.abs(decallage)*-1;
         System.out.println("angle :" + absAngle + " sin :" + sin + " cos :" + cos);
         double offset;
-        if (cos != 0) offset = Math.abs(((width/2)+decallage)/cos) - 2*Math.abs(sin*decallage);
+        if (cos != 0) offset = Math.abs(((width/2)+decallage)/cos) + 2*Math.abs(sin*decallage);
         else offset =  Math.abs(((height/2))/Math.sin(absAngle)) + 2*Math.abs(cos*decallage);
         if (offset > breakpoint) offset = Math.abs(((height/2))/Math.sin(absAngle))+ 2*Math.abs(sin*decallage);
         return offset;
