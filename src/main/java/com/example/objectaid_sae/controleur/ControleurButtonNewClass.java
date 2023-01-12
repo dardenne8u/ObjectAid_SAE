@@ -1,6 +1,7 @@
 package com.example.objectaid_sae.controleur;
 
 import com.example.objectaid_sae.model.Classe;
+import com.example.objectaid_sae.model.Fleche;
 import com.example.objectaid_sae.model.Model;
 import com.example.objectaid_sae.vue.VueCentre;
 import com.example.objectaid_sae.vue.VueClasse;
@@ -70,8 +71,9 @@ public class ControleurButtonNewClass implements EventHandler<ActionEvent> {
                 }
                 VueClasse vC = new VueClasse(newClasse);
                 mod.addClasse(newClasse);
-
                 stock.getChildren().add(vC);
+                Fleche.creerFleches(newClasse, stock);
+                System.out.println(newClasse.toString());
                 stock = null;
                 newClasse.notifierObservateurs();
                 ((Stage) src.getScene().getWindow()).close();
