@@ -11,8 +11,11 @@ deactivate MouseEvent
 ControleurFichierGlisser -> Analyseur : analyseClasse(String)
 activate Analyseur
 
+create Classe
 Analyseur -> Classe
 activate Classe
+Analyseur <-- Classe
+deactivate Classe
 
 ControleurFichierGlisser <-- Analyseur : Classe c
 deactivate Analyseur
@@ -26,8 +29,13 @@ activate Classe
 ControleurFichierGlisser <-- Classe
 deactivate Classe
 
+
+create VueCentre
 ControleurFichierGlisser -> VueCentre
 activate VueCentre
+
+ControleurFichierGlisser <-- VueCentre
+deactivate VueCentre
 
 ControleurFichierGlisser -> Fleche : creerFleches(Classe, vueCentre)
 activate Fleche
