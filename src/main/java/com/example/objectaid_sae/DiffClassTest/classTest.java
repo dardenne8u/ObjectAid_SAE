@@ -1,4 +1,4 @@
-package com.example.objectaid_sae.tests;
+package com.example.objectaid_sae.DiffClassTest;
 
 import com.example.objectaid_sae.model.Analyseur;
 import com.example.objectaid_sae.model.Fleche;

@@ -1,4 +1,4 @@
-package com.example.objectaid_sae.tests;
+package com.example.objectaid_sae.DiffClassTest;
 
 public abstract class AbstractTest {
 
