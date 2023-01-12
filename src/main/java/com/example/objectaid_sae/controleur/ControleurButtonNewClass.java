@@ -70,6 +70,7 @@ public class ControleurButtonNewClass implements EventHandler<ActionEvent> {
                     newClasse.addDependencies((((TextField) src.getParent().getChildrenUnmodifiable().get(1)).getText())+" --|> " +  (((TextField) src.getParent().getChildrenUnmodifiable().get(7)).getText()));
                 }
                 VueClasse vC = new VueClasse(newClasse);
+                vC.setMaxHeight(stock.getHeight());
                 mod.addClasse(newClasse);
                 stock.getChildren().add(vC);
                 Fleche.creerFleches(newClasse, stock);

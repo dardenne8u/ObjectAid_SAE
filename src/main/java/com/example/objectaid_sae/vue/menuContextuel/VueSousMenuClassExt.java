@@ -37,6 +37,7 @@ public class VueSousMenuClassExt extends VBox implements Observateur {
                     try {
                         c = new Analyseur(packageExt).analyseClasse();
                         VueClasse vue = new VueClasse(c);
+                        vue.setMaxHeight(centre.getHeight());
                         c.setAfficheAttributsDeclare(false);
                         c.setAfficheMethodeDeclare(false);
                         c.setAfficheAttributsHerite(false);

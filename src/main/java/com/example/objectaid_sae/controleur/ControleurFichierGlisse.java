@@ -54,6 +54,7 @@ public class ControleurFichierGlisse implements EventHandler<MouseEvent> {
             line = line.split("package ")[1].split(";")[0];
             Classe c = new Analyseur(line + "." + nom).analyseClasse();
             VueClasse vue = new VueClasse(c);
+            vue.setMaxHeight(centre.getHeight());
             cb.setSelected(true);
             centre.getChildren().add(vue);
             // definition de la position x

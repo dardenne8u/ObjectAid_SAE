@@ -155,11 +155,6 @@ public class VueClasse extends VBox implements Observateur {
         if (classe.isAfficheMethodeDeclare()) this.afficherContenant(methodesMap, Classe.DECLARED);
         if (classe.isAfficheMethodeHerite()) this.afficherContenant(methodesMap, Classe.HERITED);
         //this.getChildren().add(this.separer());
-        this.setWidth(this.getMaxWidth());
-
-        if (this.getHeight() > 300) {
-            this.setHeight(300);
-        }
 
         setLayoutX(classe.getX());
         setLayoutY(classe.getY());
