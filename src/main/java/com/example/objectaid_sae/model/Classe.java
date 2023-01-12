@@ -392,4 +392,17 @@ public class Classe implements Sujet {
         }
         return line;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Classe classe = (Classe) o;
+        return Objects.equals(type, classe.type) && Objects.equals(packageName, classe.packageName);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(type, packageName);
+    }
 }

@@ -20,6 +20,8 @@ import java.io.IOException;
 
 public class VueFichiers extends GridPane implements Observateur {
 
+    public static final String PATH = "./src";
+
     private TreeView<HBox> arbre;
 
     public VueFichiers(String path) {
