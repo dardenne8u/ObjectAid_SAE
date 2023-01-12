@@ -13,7 +13,6 @@ public class VueCentre extends Pane {
 
     public VueCentre() {
         setOnMouseClicked(new ControleurCentreClique(this));
-        setMinSize(600,500);
     }
 
     public void supprimerMenusTemp() {
