@@ -53,20 +53,18 @@ public class ControleurFichierGlisse implements EventHandler<MouseEvent> {
             while (!line.contains("package ")) line = r.readLine();
             line = line.split("package ")[1].split(";")[0];
             Classe c = new Analyseur(line + "." + nom).analyseClasse();
+            // definition de la position x
+            double mouseX = mouseEvent.getSceneX() - centre.getLayoutX();
+
+            // definition de la position y
+            double mouseY = mouseEvent.getSceneY() - centre.getLayoutY();
+            mouseY = Math.max(0, mouseY);
+            c.setX(mouseX);
+            c.setY(mouseY);
             VueClasse vue = new VueClasse(c);
             vue.setMaxHeight(centre.getHeight());
             cb.setSelected(true);
             centre.getChildren().add(vue);
-            // definition de la position x
-            double mouseX = mouseEvent.getSceneX() - centre.getLayoutX();
-            mouseX = Math.max(0,mouseX); // minimum
-            mouseX = Math.min((centre.getWidth()+ centre.getLayoutX()), mouseX); // maximum
-            // definition de la position y
-            double mouseY = mouseEvent.getSceneY() - centre.getLayoutY();
-            mouseY = Math.min((centre.getLayoutY() + centre.getHeight() - vue.getHeight() - 53), mouseY); // maximum
-            mouseY = Math.max(100,mouseY -100); // minimum
-            c.setX(mouseX);
-            c.setY(mouseY);
             Fleche.creerFleches(c, (VueCentre) centre);
             mod.addClasse(c);
         } catch (Exception e) {
