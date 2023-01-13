@@ -23,12 +23,28 @@ import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.List;
 
-
+/**
+ * Controleur qui permet de recuperer une classe presente dans l'arborescence des fichiers
+ * et de la glisser dans le graphe pour la faire apparaitre
+ */
 public class ControleurFichierGlisse implements EventHandler<MouseEvent> {
 
+    /**
+     * L'evenement du controleur
+     */
     private MouseEvent mouseEvent;
+
+    /**
+     * le pane ou apparaitra la classe selectionnee
+     */
     private Pane centre;
 
+    /**
+     * methode intervenant lorsqu'on veut afficher tout un dossier dans le graphe
+     * @param abs le nom du dossier
+     * @param cb la checkbox du dossier, qui sera selectionnee lorsque tout sera affiche
+     * @param mod le modele de l'application
+     */
     public void afficherDossier(String abs, CheckBox cb, Model mod) {
         File file = new File(abs);
         if (file.isDirectory()) {
@@ -44,6 +60,12 @@ public class ControleurFichierGlisse implements EventHandler<MouseEvent> {
     }
 
 
+    /**
+     * methode permettant d'afficher une classe dans le graphe
+     * @param abs la signature de la classe
+     * @param cb la checkbox de la classe, qui sera cochée quand la classe aura sa vue
+     * @param mod le modele
+     */
     public void afficherUneClasse(String abs, CheckBox cb, Model mod) {
         try {
             String nom = abs.substring(abs.lastIndexOf("\\") + 1, abs.lastIndexOf("."));
@@ -72,6 +94,10 @@ public class ControleurFichierGlisse implements EventHandler<MouseEvent> {
         }
     }
 
+    /**
+     * methode permettant de recuperer les branches filles du TreeItem passee en parametre
+     * @param branche le treeItem dont on veut recuperer les branches
+     */
     private void recupChildrenBranch(TreeItem<HBox> branche) {
         if(branche!=null){
         for (TreeItem<HBox> other : branche.getChildren()) {
@@ -83,6 +109,13 @@ public class ControleurFichierGlisse implements EventHandler<MouseEvent> {
         }
     }
 
+    /**
+     * methode qui permet de creer et retourner une TreeItem a partir d'un chemin de
+     * dosser.
+     * @param abPath le chemin du fichier dont on veut trouver le TreeItem
+     * @param tree le treeItem
+     * @return un treeItem du dossier
+     */
     private TreeItem<HBox> trouverTIWithPath(String abPath, TreeItem<HBox> tree) {
          String verif = ((Label) tree.getValue().getChildrenUnmodifiable().get(2)).getText();
          if(verif.equals(abPath))return tree;
@@ -102,6 +135,11 @@ public class ControleurFichierGlisse implements EventHandler<MouseEvent> {
         return null;
     }
 
+    /**
+     * methode du demarrage du controleur. Permet d'afficher dans le graphe ce qui est
+     * selectionne (dossier ou classe)
+     * @param mouseEvent l'evenement
+     */
     @Override
     public void handle(MouseEvent mouseEvent) {
         Model mod = Model.getModel();
