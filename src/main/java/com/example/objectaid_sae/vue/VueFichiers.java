@@ -39,21 +39,6 @@ public class VueFichiers extends GridPane implements Observateur {
         File f = new File(path);
         if (f.exists()) {
             arbre = new TreeView<>(tree(f));
-            for(File file : f.listFiles()) {
-                if(file.getName().contains(".java")) {
-                    try {
-                        BufferedReader br = new BufferedReader(new FileReader(file));
-                        String line = br.readLine();
-                        if(line != null) {
-                            Analyseur.packageProjet = line.substring(line.indexOf(" ")+1, line.indexOf(";"));
-                        } else {
-                            Analyseur.packageProjet = "";
-                        }
-                    } catch (IOException e) {
-                        Analyseur.packageProjet = "";
-                    }
-                }
-            }
         }
 
         getChildren().add(arbre);
