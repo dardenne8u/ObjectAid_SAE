@@ -19,15 +19,39 @@ import javafx.scene.shape.Rectangle;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Vue qui permet d'afficher les informations d'une classe dans le diagramme
+ */
 public class VueClasse extends VBox implements Observateur {
 
+    /**
+     * Controleur qui permet de glisser la classe dans le diagramme
+     */
     private ControleurClasseGlissee controleurClasseGlissee;
 
+    /**
+     * icone d'une classe normale
+     */
     private static final Image imgClasse = new Image(VueClasse.class.getResource("/img/Class.png").toExternalForm());
+    /**
+     * icone d'une classe abstraite
+     */
     private static final Image imgAbstract = new Image(VueClasse.class.getResource("/img/Abstract.png").toExternalForm());
+    /**
+     * icone d'une interface
+     */
     private static final Image imgInterface = new Image(VueClasse.class.getResource("/img/Interface.png").toExternalForm());
+    /**
+     * icone d'un element public d'une classe
+     */
     public static final Image imgPublic = new Image(VueClasse.class.getResource("/img/plus.png").toExternalForm());
+    /**
+     * icone d'un element prive d'une classe
+     */
     public static final Image imgPrivate = new Image(VueClasse.class.getResource("/img/moin.png").toExternalForm());
+    /**
+     * icone d'un element protege d'une classe
+     */
     public static final Image imgProtected = new Image(VueClasse.class.getResource("/img/pr.png").toExternalForm());
 
     /**
@@ -43,6 +67,11 @@ public class VueClasse extends VBox implements Observateur {
         notifier(classe);
     }
 
+    /**
+     * Methode qui permet de savoir si l'element est public, private ou protected de la classe
+     * @param value signature de l'element
+     * @return la HBox cree avec l'icone de l'element
+     */
     public HBox visibilite(String value) {
         HBox boite = new HBox();
         String[] table = value.split(" ");
@@ -85,7 +114,7 @@ public class VueClasse extends VBox implements Observateur {
     /**
      * methode mettant a jour l'affichage dans la vue
      *
-     * @param s, la classe a afficher
+     * @param s la classe a afficher
      */
     @Override
     public void notifier(Sujet s) {
@@ -171,6 +200,11 @@ public class VueClasse extends VBox implements Observateur {
     }
 
 
+    /**
+     * methode qui permet de recuperer les elements de la classe et de l'afficher
+     * @param map la map contenant les elements a afficher
+     * @param typeAttribut le numero du type d'attribut à afficher (herite ou declare)
+     */
     public void afficherContenant(Map<Integer, List<String>> map, int typeAttribut) {
         if (map != null) {
 
@@ -187,12 +221,23 @@ public class VueClasse extends VBox implements Observateur {
         }
     }
 
+
+    /**
+     * methode qui compare la vue avec un objet
+     * @param obj l'objet compare
+     * @return true si les deux elements sont egaux
+     */
     @Override
     public boolean equals(Object obj) {
         if (obj.getClass() != getClass()) return false;
         return (((VueClasse) obj).controleurClasseGlissee.getClasse().getType().equals(controleurClasseGlissee.getClasse().getType()));
     }
 
+    /**
+     * informe si le controleur controle la classe passee en parametre
+     * @param classe la classe dont on cherche le controleur
+     * @return true si le controleur gere la classe passee en parametre
+     */
     public boolean isForClasse(Classe classe) {
         return controleurClasseGlissee.getClasse().getType().equals(classe.getType());
     }
