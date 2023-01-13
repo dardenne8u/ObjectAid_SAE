@@ -34,12 +34,15 @@ public class FabriqueVueFlecheUtilisation extends FabriqueVueFleche{
     }
 
     protected VueFleche build(Line l, Polygon poly, double inclinaison, double offset, double x, double y, double len, double decall){
+        // creation de la base de la fleeche
         VueFleche res = super.build(l,poly,inclinaison,offset,x,y,len,decall);
+        // initialisation des objets visuels
         String attribut = fleche.getNom();
         Label name = new Label(attribut.substring(attribut.lastIndexOf(" ")+1));
         Label card = new Label(fleche.getCardinalites());
         HBox hb = new HBox();
         ImageView iv = getImage(attribut);
+        // ajout et placement des nouveaux objets
         if (iv != null) hb.getChildren().addAll(iv,name);
         card.setTranslateX(15);
         card.setTranslateY(offset);
