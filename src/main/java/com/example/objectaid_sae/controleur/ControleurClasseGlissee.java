@@ -9,8 +9,14 @@ import javafx.event.EventHandler;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 
+/**
+ * Controleur qui permet de deplacer une classe dans le pane
+ */
 public class ControleurClasseGlissee implements EventHandler<MouseEvent> {
 
+    /**
+     * sujet Classe de la classe glissee
+     */
     Classe s;
 
     /**
@@ -24,6 +30,10 @@ public class ControleurClasseGlissee implements EventHandler<MouseEvent> {
 
     }
 
+    /**
+     * methode handle pour gerer le deplacement des classes dans le pane central
+     * @param mouseEvent l'evenement dragged de la souris sur la classe
+     */
     @Override
     public void handle(MouseEvent mouseEvent) {
         if (mouseEvent.getButton() == MouseButton.SECONDARY) return;
@@ -49,6 +59,10 @@ public class ControleurClasseGlissee implements EventHandler<MouseEvent> {
         Fleche.actualiserFleches(center);
     }
 
+    /**
+     * retourne la classe selectionnee par la souris, enregistree dans le controleur
+     * @return la Classe
+     */
     public Classe getClasse() {
         return s;
     }

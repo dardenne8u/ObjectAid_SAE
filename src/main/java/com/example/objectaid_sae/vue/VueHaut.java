@@ -19,6 +19,9 @@ import javafx.scene.text.FontWeight;
 
 import java.util.ArrayList;
 
+/**
+ * Vue qui affiche la partie superieure de l'application.
+ */
 public class VueHaut extends GridPane {
 
     /**
