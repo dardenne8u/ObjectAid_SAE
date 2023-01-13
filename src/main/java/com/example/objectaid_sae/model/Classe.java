@@ -8,15 +8,15 @@ import java.util.*;
 public class Classe implements Sujet {
 
     /**
-     * constante qui correspond à un attribut déclaré
+     * constante qui correspond à un attribut declare
      */
     public static final int DECLARED = 1;
     /**
-     * constant qui correspond à un attrbut hérité
+     * constant qui correspond à un attrbut herite
      */
     public static final int HERITED = 2;
     /**
-     * booleen permettant de savoir si les attributs et méthodes doivent etre affiches dans
+     * booleen permettant de savoir si les attributs et methodes doivent etre affiches dans
      * l'application ou non
      */
     private boolean afficheAttributsDeclare;
@@ -51,24 +51,49 @@ public class Classe implements Sujet {
      */
     private final List<String> dependencies;
 
+    /**
+     * liste des package des classes Externes de la classe
+     */
+
     private List<String> packageClassExternes;
 
+    /**
+     * String contenant le nom du package de la classe
+     */
     private String packageName;
 
     //METHODES
 
-
+    /**
+     * methode qui affecte la signature de la classe
+     * @param  type String contenant la signature de la classe
+     */
     public void setType(String type) {
         this.type = type;
     }
+
+    /**
+     * methode qui modifie la coordonee X de la classe
+     * @param  x cooredonee X de la classe
+     */
 
     public void setX(double x) {
         this.x = x;
     }
 
+    /**
+     * methode qui modifie la coordonee y de la classe
+     * @param  y cooredonee y de la classe
+     */
+
+
     public void setY(double y) {
         this.y = y;
     }
+
+    /**
+     * Constructeur de la classe qui initialise les attribut.
+     */
 
     public Classe() {
         this.packageName = "";
@@ -88,34 +113,66 @@ public class Classe implements Sujet {
         afficheAttributsHerite = afficheMethodeHerite = false;
     }
 
+    /**
+     * methode pour obtenir le nom du package de la classe
+     * @return le nom du package de la classe
+     */
     public String getPackageName() {
         return this.packageName;
     }
+
+    /**
+     * methode qui modifie le nom du package de la classe
+     * @param name nom du package
+     */
 
     public void setPackageName(String name) {
         this.packageName = name;
     }
 
-
+    /**
+     * methode qui ajoute un package Externe à la classe
+     * @param packageExt nom du package Externe
+     */
     public void addPackageExternes(String packageExt) {
         if (!this.packageClassExternes.contains(packageExt))
             this.packageClassExternes.add(packageExt);
     }
 
+    /**
+     * methode qui donne les noms des packages externes
+     * @return Liste contenant les noms des packages externes
+     */
     public List<String> getPackageExternes() {
         return this.packageClassExternes;
     }
 
+    /**
+     * methode qui ajoute un attribut à la classe
+     * @param type declare ou herite
+     * @param attribut attribut en question à ajouter
+     */
     public void addAttribut(int type, String attribut) {
         if (!this.attributs.get(type).contains(attribut))
             this.attributs.get(type).add(attribut);
         notifierObservateurs();
     }
 
+    /**
+     * methode qui supprime un attribut de la classe
+     * @param type declare ou herite
+     * @param attribut attribut en question à supprimer
+     */
     public void removeAttribut(int type, String attribut) {
         this.attributs.get(type).remove(attribut);
         notifierObservateurs();
     }
+
+    /**
+     * methode qui ajoute une methode à la classe
+     * @param type declare ou herite
+     * @param methode methode en question à ajouter
+     */
 
     public void addMethode(int type, String methode) {
         if (!this.methodes.get(type).contains(methode))
@@ -123,65 +180,124 @@ public class Classe implements Sujet {
         notifierObservateurs();
     }
 
+    /**
+     * methode qui supprime une methode de la classe
+     * @param type declare ou herite
+     * @param methode methode en question à supprimer
+     */
+
     public void removeMethode(int type, String methode) {
         this.methodes.get(type).remove(methode);
         notifierObservateurs();
     }
+
+    /**
+     * methode qui permet d'ajouter un constructeur à la classe
+     * @param constructeur constructeur a ajouter
+     */
 
     public void addConstructeur(String constructeur) {
         if (!this.constructeurs.contains(constructeur))
             this.constructeurs.add(constructeur);
     }
 
+    /**
+     * methode qui permet d'ajouter des dependances a la classe
+     * @param dependence dependance a ajouter a la classe
+     */
     public void addDependencies(String dependence) {
         if (!this.dependencies.contains(dependence))
             this.dependencies.add(dependence);
     }
 
-
+    /**
+     * permet de savoir l'etat du boolean pour l'affichage des attributs declares
+     * @return l'etat du boolean en question
+     */
     public boolean isAfficheAttributsDeclare() {
         return afficheAttributsDeclare;
     }
 
+    /**
+     * permet de savoir l'etat du boolean pour l'affichage des attributs herites
+     * @return l'etat du boolean en question
+     */
     public boolean isAfficheAttributsHerite() {
         return afficheAttributsHerite;
     }
 
+    /**
+     * permet dde savoir l'etat du boolean pour l'affichage des methodes declares
+     * @return l'etat du boolean en question
+     */
     public boolean isAfficheMethodeDeclare() {
         return afficheMethodeDeclare;
     }
-
+    /**
+     * permet dde savoir l'etat du boolean pour l'affichage des methodes herite
+     * @return l'etat du boolean en question
+     */
     public boolean isAfficheMethodeHerite() {
         return afficheMethodeHerite;
     }
 
+    /**
+     * permet dde savoir l'etat du boolean pour l'affichage des constructeurs
+     * @return l'etat du boolean en question
+     */
     public boolean isAfficheConstructeur() {
         return afficheConstructeur;
     }
 
+    /**
+     * permet de recuperer les listes des attributs de la classe (herites et declares)
+     * @return la map contenant les deux listes
+     */
     public Map<Integer, List<String>> getAttributs() {
         return attributs;
     }
 
+
+    /**
+     * permet de recuperer les listes des methodes de la classe (herites et declares)
+     * @return la map contenant les deux listes
+     */
     public Map<Integer, List<String>> getMethodes() {
         return methodes;
     }
 
+    /**
+     * permet d'obtenir les constructeur de la classe
+     * @return Liste de constructeur de cette classe
+     */
     public List<String> getConstructeurs() {
         return constructeurs;
     }
 
+    /**
+     * donne la signature de la classe
+     * @return le string contenant la signature de la classe
+     */
     public String getType() {
         return type;
     }
 
+    /**
+     * donne les coordonées X de la classe
+     * @return double correspondant au cooredonées X de la classe
+     */
     public double getX() {
         return x;
     }
 
+    /**
+     * donne les coordonées Y de la classe
+     * @return double correspondant au cooredonées Y de la classe
+     */
     public double getY() {
         return y;
     }
+
 
     public void setAfficheAttributsDeclare(boolean afficheAttributsDeclare) {
         this.afficheAttributsDeclare = afficheAttributsDeclare;
@@ -260,6 +376,10 @@ public class Classe implements Sujet {
         return s;
     }
 
+    /**
+     * permet d'obtenir la list des dependances de cette classe
+     * @return liste des dependance de cette classe
+     */
     public List<String> getDependencies() {
         return dependencies;
     }
@@ -269,6 +389,11 @@ public class Classe implements Sujet {
         this.notifierObservateurs();
     }
 
+    /**
+     * permet de savoir l'etat du boolean concernant les dependances
+     * @return le boolean correposndant a l'affichage des dependances
+     */
+
     public boolean isAfficheDependances() {
         return afficheDependances;
     }
@@ -277,6 +402,10 @@ public class Classe implements Sujet {
         this.afficheDependances = afficheDependances;
     }
 
+    /**
+     * methode qui permet de generer le squelette de la classe
+     * @return le string contenant le squelette de la classe
+     */
     public String genSquelette() {
         String squelette = "";
         if(!packageName.equals(""))
@@ -289,6 +418,10 @@ public class Classe implements Sujet {
         return squelette;
     }
 
+    /**
+     * genere le squelette pour la signature de la classe
+     * @return string contenant le squelette de la signature de la classe
+     */
     private String genSqueletteSignature() {
         String signature = convertToSignature(this.type);
         String extendsClass = "";
@@ -315,6 +448,10 @@ public class Classe implements Sujet {
         return signature;
     }
 
+    /**
+     * genere le squelette concernant les dependances
+     * @return string contenant le squelettes des dependances de la classe
+     */
     private String genSqueletteAvecLink() {
         StringBuilder builder = new StringBuilder();
         for (String line : this.dependencies) {
@@ -342,7 +479,10 @@ public class Classe implements Sujet {
         }
         return builder.toString();
     }
-
+    /**
+     * genere le squelette pour les attributs de la classe
+     * @return string contenant le squelette des attributs de la classe
+     */
     private String genSqueletteAttributs() {
         StringBuilder builder = new StringBuilder();
         for (int key : this.attributs.keySet()) {
@@ -352,7 +492,10 @@ public class Classe implements Sujet {
         }
         return builder.toString();
     }
-
+    /**
+     * genere le squelette concernant les methodes
+     * @return string contenant le squelettes des methodes de la classe
+     */
     private String genSqueletteMethods() {
         StringBuilder builder = new StringBuilder();
         for (String line : this.constructeurs) {
@@ -364,7 +507,10 @@ public class Classe implements Sujet {
 
         return builder.toString();
     }
-
+    /**
+     * permet de transformer les symboles (+,- et #) en string (public, private, protected)
+     * @return string contenant les symboles traduit en mots
+     */
     private String convertToSignature(String line) {
         if (line.contains("-"))
             line = line.replace("-", "private");
