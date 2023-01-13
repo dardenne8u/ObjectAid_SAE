@@ -25,7 +25,6 @@ public class FabriqueFlecheAsso extends FabriqueVueFleche{
 
     public FabriqueFlecheAsso(Fleche f, VueCentre centre) {
         super(f, centre);
-        System.out.println("asso");
     }
 
     @Override

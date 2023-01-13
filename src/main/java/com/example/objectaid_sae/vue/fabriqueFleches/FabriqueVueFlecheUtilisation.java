@@ -4,6 +4,11 @@ import com.example.objectaid_sae.model.Fleche;
 import com.example.objectaid_sae.vue.VueCentre;
 import com.example.objectaid_sae.vue.VueClasse;
 import com.example.objectaid_sae.vue.VueFleche;
+import javafx.geometry.Pos;
+import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Polygon;
@@ -22,11 +27,38 @@ public class FabriqueVueFlecheUtilisation extends FabriqueVueFleche{
     }
     public FabriqueVueFlecheUtilisation(Fleche f, VueCentre centre){
         super(f,centre);
-        System.out.println("utilisation");
     }
     @Override
     public VueFleche fabriquer() {
         return faireFleche(fleche.getDepart().getX(), fleche.getDepart().getY(), fleche.getArrivee().getX(), fleche.getArrivee().getY());
+    }
+
+    protected VueFleche build(Line l, Polygon poly, double inclinaison, double offset, double x, double y, double len, double decall){
+        VueFleche res = super.build(l,poly,inclinaison,offset,x,y,len,decall);
+        String attribut = fleche.getNom();
+        Label name = new Label(attribut.substring(attribut.lastIndexOf(" ")));
+        Label card = new Label(fleche.getCardinalites());
+        HBox hb = new HBox();
+        hb.getChildren().addAll(getImage(attribut),name);
+        card.setTranslateX(15);
+        card.setTranslateY(offset);
+        card.setRotate(-inclinaison);
+        hb.setRotate(-inclinaison);
+        hb.setAlignment(Pos.CENTER);
+        res.getChildren().addAll(hb,card);
+        hb.setTranslateY(len/2);
+        return res;
+    }
+
+    private ImageView getImage(String attribut){
+        Image i;
+        if (attribut.contains("+")) i = VueClasse.imgPublic;
+        if (attribut.contains("-")) i = VueClasse.imgPrivate;
+        else i = VueClasse.imgProtected;
+        ImageView iv = new ImageView(i);
+        iv.setFitHeight(10);
+        iv.setFitWidth(10);
+        return iv;
     }
 
 }

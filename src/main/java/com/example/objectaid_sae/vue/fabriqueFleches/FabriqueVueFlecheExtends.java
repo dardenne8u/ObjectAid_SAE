@@ -27,7 +27,6 @@ public class FabriqueVueFlecheExtends extends FabriqueVueFleche{
     }
     public FabriqueVueFlecheExtends(Fleche f, VueCentre centre){
         super(f,centre);
-        System.out.println("extend");
     }
     @Override
     public VueFleche fabriquer() {

@@ -24,7 +24,6 @@ public class FabriqueVueFlecheImplement extends FabriqueVueFleche {
     }
     public FabriqueVueFlecheImplement(Fleche f, VueCentre centre) {
         super(f,centre);
-        System.out.println("implement");
     }
 
     @Override
