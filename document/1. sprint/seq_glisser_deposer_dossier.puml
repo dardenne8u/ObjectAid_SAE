@@ -1,0 +1,54 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+activate Model
+activate ControleurFichierGlisser
+
+ControleurFichierGlisser -> MouseEvent : getSource()
+activate MouseEvent
+ControleurFichierGlisser <-- MouseEvent
+deactivate MouseEvent
+
+ControleurFichierGlisser -> ControleurFichierGlisser : afficherDossier(String, CheckBox, Model)
+
+
+ControleurFichierGlisser -> Analyseur : analyseClasse(String)
+activate Analyseur
+
+create Classe
+Analyseur -> Classe
+activate Classe
+Analyseur <-- Classe
+deactivate Classe
+
+ControleurFichierGlisser <-- Analyseur : Classe c
+deactivate Analyseur
+
+ControleurFichierGlisser -> Classe : setX(mouseX)
+activate Classe
+ControleurFichierGlisser <-- Classe
+deactivate Classe
+ControleurFichierGlisser -> Classe : setY(mouseY)
+activate Classe
+ControleurFichierGlisser <-- Classe
+deactivate Classe
+
+
+create VueCentre
+ControleurFichierGlisser -> VueCentre
+activate VueCentre
+
+ControleurFichierGlisser <-- VueCentre
+deactivate VueCentre
+
+ControleurFichierGlisser -> Fleche : creerFleches(Classe, vueCentre)
+activate Fleche
+ControleurFichierGlisser <-- Fleche
+deactivate Fleche
+
+ControleurFichierGlisser -> Model : addClasse(Classe)
+ControleurFichierGlisser <-- Model
+
+deactivate ControleurFichierGlisser
+
+@enduml
