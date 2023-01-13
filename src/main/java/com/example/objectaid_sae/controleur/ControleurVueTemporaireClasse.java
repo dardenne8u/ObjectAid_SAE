@@ -24,16 +24,35 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 
+/**
+ * Controleur permettant de relever un clique droit sur une classe et d'afficher
+ * un menu contextuel
+ */
 public class ControleurVueTemporaireClasse implements EventHandler<ActionEvent> {
 
+    /**
+     * sujet considere
+     */
     Classe classe;
+    /**
+     * le menu contextuel a afficher
+     */
     VBox MenuTemp;
 
+    /**
+     * constructeur
+     * @param classe le sujet sur lequel l'utilisateur a clique
+     */
     public ControleurVueTemporaireClasse(Classe classe) {
         this.classe = classe;
     }
 
-
+    /**
+     * retourne un booleen pour verifier si la chaine de caractere respect le pattern
+     * d'un attribut
+     * @param attribut le string de l'attribut verifie
+     * @return true si le string verifie le pattern d'ecriture d'un attribut
+     */
     public boolean estAttribut(String attribut) {
         if (attribut == null || attribut.trim().length() == 0) {
             return false;
@@ -43,6 +62,12 @@ public class ControleurVueTemporaireClasse implements EventHandler<ActionEvent> 
         return attribut.matches(pattern);
     }
 
+    /**
+     * Methode qui verifie si le string passe en parametre verifie le pattern d'ecriture
+     * d'une methode
+     * @param methode le string dont on verifie le pattern
+     * @return true si le string respect le pattern d'ecriture d'une methode
+     */
     public boolean estMethode(String methode) {
         if (methode == null || methode.trim().length() == 0) {
             return false;
@@ -54,7 +79,11 @@ public class ControleurVueTemporaireClasse implements EventHandler<ActionEvent> 
         return methode.matches(pattern);
     }
 
-
+    /**
+     *
+     * @param n le noeud
+     * @return true
+     */
     public boolean affichageCoteDroit(Node n) {
         VueCentre pane = (VueCentre) n.getParent().getParent();
         double wp = pane.getWidth();
@@ -63,6 +92,10 @@ public class ControleurVueTemporaireClasse implements EventHandler<ActionEvent> 
         return true;
     }
 
+    /**
+     * methode de lancement du controleur lorsqu'on fait un clique droti sur une classe
+     * @param evt l'evenement
+     */
     @Override
     public void handle(ActionEvent evt) {
         // recuperation de la source de l'event et verification de sa classe
