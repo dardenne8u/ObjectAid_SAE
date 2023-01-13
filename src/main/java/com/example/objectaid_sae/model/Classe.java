@@ -5,6 +5,9 @@ import com.example.objectaid_sae.observateur.Sujet;
 
 import java.util.*;
 
+/**
+ * Classe qui enregistre toutes les donnees d'un fichier .java analyse par l'Analyseur
+ */
 public class Classe implements Sujet {
 
     /**

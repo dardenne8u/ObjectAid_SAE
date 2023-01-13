@@ -4,6 +4,9 @@ import java.lang.reflect.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Classe qui permet d'analyser un fichier .java et le converti en Classe.java
+ */
 public class Analyseur {
 
 
@@ -269,6 +272,7 @@ public class Analyseur {
         }
 
     }
+
 
     public static void main(String[] args) throws ClassNotFoundException {
         Analyseur.packageProjet = "com.example.objectaid_sae";

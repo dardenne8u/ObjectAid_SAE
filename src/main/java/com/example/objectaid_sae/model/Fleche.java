@@ -3,16 +3,38 @@ package com.example.objectaid_sae.model;
 import com.example.objectaid_sae.vue.VueCentre;
 import com.example.objectaid_sae.vue.fabriqueFleches.*;
 
+/**
+ * Classe qui represente une fleche de dependance
+ */
 public class Fleche {
 
     //ATTRIBUTS
+    /**
+     * le type et le nom de la fleche
+     */
     private final String type, nom;
+    /**
+     * La classe d'arrivee de la fleche
+     */
     private final Classe arrivee;
+    /**
+     * la classe de depart de la fleche
+     */
     private final Classe depart;
 
+    /**
+     * Represente les cardinalites de la fleche
+     */
     private String cardinalites;
+
+    /**
+     * ?
+     */
     private double offsetLateral;
 
+    /**
+     * La fabrique qui gerera l'affichage de la fleche
+     */
     private FabriqueVueFleche fabrique;
 
     //CONSTRUCTEURS
