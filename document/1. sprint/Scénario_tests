@@ -1,0 +1,6 @@
+1. Test Glisser-déposer une classe:
+L’utilisateur clique sur le nom d’une classe du TreeView et la glisse dans le pane centrale.
+Une VBox apparaît. Cette VBox contient des HBox qui contiennent elles-mêmes des imageViews
+et des Labels qui représentent l’Etat de la classe et les différents textes qui la décrivent
+(nom, attributs, méthodes, constructeurs).
+ La classe glissé est également cochée grâce à la  CheckBox  dans le Treeview  à l’endroit correspondant.

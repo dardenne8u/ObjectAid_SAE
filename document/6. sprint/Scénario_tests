@@ -1,0 +1,4 @@
+1. Test - Supprimer Tout :
+L’utilisateur appuie sur le bouton « Tout Supprimer » en haut à droite de l’application.
+Le pane central devient vide car un nouveau remplace l’ancien.
+Idem pour le Model ainsi que l’arborescence : un nouveau remplace l’ancien.

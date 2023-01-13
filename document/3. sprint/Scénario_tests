@@ -1,0 +1,24 @@
+1. Test - Créer une nouvelle classe  :
+
+L’utilisateur appuie sur le bouton « Nouvelle classe » situé en haut à droite de l’application.
+Une nouvelle fenêtre apparaît. Dans cette fenêtre ce trouve plusieurs Checkbox et textfields
+Permettant de remplir les information de la classe qui est en création
+(nom, type : interface, abstract, class, implémentation, héritage, nom du package,
+statut : public, private, protected)  ainsi qu’un bouton « valider » et « annuler ».
+
+Premier cas :
+L’utilisateur remplit le formulaire et appuie sur valider.
+Si les informations entrées sont correctes alors la fenêtre se ferme et ajoute une nouvelle classe
+dans le pane centrale à l’aide des informations
+Second cas :
+L’utilisateur appuie sur annuler à n’importe quel moment. La fenêtre se ferme et rien ne se passe
+car la manipulation a été interrompue.
+Il peut donc réutiliser l’application sans problème.
+
+2. - Afficher/Masquer certaines informations pour toutes les classes
+
+L’utilisateur appuie sur le bouton « Affichage » situé en haut à droite de l’application.
+Un panel avec plusieurs bouton apparait en dessous. Il permet d’afficher ou de masquer les informations des classes.
+S’il on appuie sur un des boutons du Panel le nom du bouton change d’afficher à masquer. Et inversement à chaque clique.
+Idem pour le reste des boutons du panel.
+Cela met également à jour les classes afficher dans le pane central pour visualiser seulement ce qui est désiré.

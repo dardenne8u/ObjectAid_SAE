@@ -1,0 +1,8 @@
+1. Test -Ajouter une méthode ou un attribut à une classe :
+L’utilisateur créer une nouvelle classe à l’aide du bouton «Nouvelle Classe» situé en haut à droite
+ou fait  un glisser-déposer d’un classe situé dans l’arborescence à gauche.
+Il doit ensuite faire un faire un clique droit sur la VBox qui à apparut dans le pane central.
+Puis sélectionner le bouton désiré :« ajouter un attribut » ou « ajouter une méthode » dans un menu temporaire qui est devenu visible.
+Un sous-menu apparaît alors contenant un textField et un bouton valider.
+L’utilisateur entre les données dans le texteField et clique sur valider pour finir l’action.
+Le visuel de classe se met alors à jour pour afficher les nouvelles données.
