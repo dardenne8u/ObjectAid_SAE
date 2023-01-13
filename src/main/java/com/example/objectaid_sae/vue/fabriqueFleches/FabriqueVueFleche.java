@@ -14,20 +14,55 @@ import java.util.Arrays;
 
 public abstract class FabriqueVueFleche {
 
+    /**
+     * attributs de la classe
+     * attribut fleche stock la fleche qui sert de model a la fabrique
+     * attribut centre stock la VueCentre oo ajouter la fleche
+     */
     protected Fleche fleche;
     protected VueCentre centre;
+
+    /**
+     * constructeur de FabriqueVueFleche
+     * @param f Fleche servant de model
+     * @param centre Vue ou ajouter la fleche apres creation
+     */
     public FabriqueVueFleche(Fleche f, VueCentre centre){
         fleche = f;
         this.centre = centre;
     }
 
-
+    /**
+     * methode genererLigne, sert a generer la ligne pour la fleche
+     * @param len correspond a la longueur de la fleche
+     * @return Line, ligne de la longueur correspondante
+     */
     public abstract Line genererLigne(double len);
 
+    /**
+     * methode genererPointe, generer la pointe d ela fleche
+     * @return Polygon pointe de la fleche
+     */
     public abstract Polygon genererPointe();
 
+    /**
+     * methode fabriquer retourne la VueFleche correspondant a la fleche en attribut
+     * @return VueFleche contenant la fleche placee au bon endroit dans la vueCentre
+     */
     public abstract VueFleche fabriquer();
 
+    /**
+     * methode Build initialise et assemble la VueFleche avec tous ses elements
+     * @param l Ligne correspondant au corps de la fleche
+     * @param poly Polygone correspondant a la pointe de la fleche
+     * @param inclinaison angle de la fleche par rapport au plan vertical
+     * @param offset distance par rapport au centre de la classe d'arrivée de la fleche
+     * @param x coordonnee x du centre de la classe d'arrivee de la fleche
+     * @param y coordonnee y du centre de la classe d'arrivee de la fleche
+     * @param len longueur de de la fleche
+     * @param decall decallage sur le cote de la fleche, evite la superposition de fleches
+     * @return VueFleche, la vueFleche correspondant a la fleche en attribut
+     */
     protected VueFleche build(Line l, Polygon poly, double inclinaison, double offset, double x, double y, double len, double decall){
         // initialisation des objets visuels
         VueFleche res = new VueFleche();
@@ -48,6 +83,15 @@ public abstract class FabriqueVueFleche {
         res.getTransforms().add(r);
         return res;
     }
+
+    /**
+     * methode getOffset, calcule la distance entre le bord de la Vueclasse et son centre
+     * @param angle angle de la fleche
+     * @param width largeur de la classe
+     * @param height hauteur de la classe
+     * @param decallage decallage de la fleche sur le cote
+     * @return VueFleche, la vueFleche correspondant a la fleche en attribut
+     */
     protected double getOffset(double angle, double width, double height, double decallage){
         // definition de la longueur a partir de laquelle on est plus au bord de la classe
         double breakpoint = Math.sqrt((width*width)/4 + (height*height)/4) - decallage;
@@ -65,6 +109,14 @@ public abstract class FabriqueVueFleche {
         return offset;
     }
 
+    /**
+     * methode faireFleche, clacule les données de la fleche avant d'appeler la methode build pour assembler les composants
+     * @param x1 coordonnee x du centre de la classe de depart
+     * @param y1 coordonnee y du centre de la classe de depart
+     * @param x2 coordonnee x du centre de la classe d'arrivee
+     * @param y2 coordonnee y du centre de la classe d'arrivee
+     * @return VueFleche, la vueFleche correspondant a la fleche en attribut
+     */
     protected VueFleche faireFleche(double x1, double y1, double x2, double y2){
         // recuperation des vues des classes concernées
         VueClasse vc1 = (VueClasse) centre.getChildren().get(centre.getChildren().indexOf(new VueClasse(fleche.getDepart())));
