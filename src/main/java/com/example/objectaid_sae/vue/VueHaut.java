@@ -21,6 +21,9 @@ import java.util.ArrayList;
 
 public class VueHaut extends GridPane {
 
+    /**
+     * Constructeur de la VueHaut, pour le menu de l'application
+     */
     public VueHaut(){
        // setGridLinesVisible(true);
         setMinHeight(50);
