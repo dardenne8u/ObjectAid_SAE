@@ -36,10 +36,11 @@ public class FabriqueVueFlecheUtilisation extends FabriqueVueFleche{
     protected VueFleche build(Line l, Polygon poly, double inclinaison, double offset, double x, double y, double len, double decall){
         VueFleche res = super.build(l,poly,inclinaison,offset,x,y,len,decall);
         String attribut = fleche.getNom();
-        Label name = new Label(attribut.substring(attribut.lastIndexOf(" ")));
+        Label name = new Label(attribut.substring(attribut.lastIndexOf(" ")+1));
         Label card = new Label(fleche.getCardinalites());
         HBox hb = new HBox();
-        hb.getChildren().addAll(getImage(attribut),name);
+        ImageView iv = getImage(attribut);
+        if (iv != null) hb.getChildren().addAll(iv,name);
         card.setTranslateX(15);
         card.setTranslateY(offset);
         card.setRotate(-inclinaison);
@@ -51,13 +52,16 @@ public class FabriqueVueFlecheUtilisation extends FabriqueVueFleche{
     }
 
     private ImageView getImage(String attribut){
-        Image i;
+        Image i = null;
         if (attribut.contains("+")) i = VueClasse.imgPublic;
-        if (attribut.contains("-")) i = VueClasse.imgPrivate;
-        else i = VueClasse.imgProtected;
-        ImageView iv = new ImageView(i);
-        iv.setFitHeight(10);
-        iv.setFitWidth(10);
+        else if (attribut.contains("-")) i = VueClasse.imgPrivate;
+        else if(attribut.contains("#")) i = VueClasse.imgProtected;
+        ImageView iv = null;
+        if (i!= null) {
+            iv = new ImageView(i);
+            iv.setFitHeight(10);
+            iv.setFitWidth(10);
+        }
         return iv;
     }
 
