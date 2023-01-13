@@ -9,6 +9,12 @@ import javafx.scene.paint.Color;
 
 public class VueCheckClass extends VBox {
 
+    /**
+     * VueCheckClass permettant
+     * d'afficher ou non des
+     * attributs et méthodes
+     * @param handler
+     */
     public VueCheckClass(EventHandler<ActionEvent> handler){
         setBorder(new Border(new BorderStroke(Color.valueOf("#9E9E9E"), BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
         CheckBox attdec = new CheckBox("attributs declarés");

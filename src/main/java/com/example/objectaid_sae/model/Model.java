@@ -92,16 +92,18 @@ public class Model implements Sujet {
     }
 
     /**
-     * retourne la liste de fleches du modele
-     * @return une liste de fleches
+     * Permet de recuperer les fleches
+     * contenus dans le model
+     * @return List des fleches du model
      */
     public List<Fleche> getFleches() {
         return fleches;
     }
 
     /**
-     * Permet d'ajouter une fleche a la liste
-     * @param f la fleche a ajouter
+     * Permet d'ajouter une
+     * fleche dans le model
+     * @param f Fleche a ajoute
      */
     public void addFleche(Fleche f){
         if(f != null)
@@ -109,8 +111,9 @@ public class Model implements Sujet {
     }
 
     /**
-     * permet d'enregistrer le modele au format UML en recuperant toutes les donnees des classes
-     * @return String, le contenu complet lisible par un format UML
+     * Permet d'enregistrer les donnees sous
+     * format UML
+     * @return string du plantUML
      */
     public String enregistrerUML(){
         String UML = "@startuml\n" +
@@ -129,9 +132,10 @@ public class Model implements Sujet {
     }
 
     /**
-     * permet de retourner une liste de fleches a partir de sa classe de depart
-     * @param classe la classe de depart des fleches recherchees
-     * @return une liste de fleches
+     * Permet de trouver les fleches
+     * qui correspondent a une classe
+     * @param classe Classe pour laquelle on cherche
+     * @return List de fleche en relation a la classe
      */
     public List<Fleche> findFleche(Classe classe) {
         List<Fleche> flechesList = new ArrayList<>();
@@ -143,10 +147,11 @@ public class Model implements Sujet {
     }
 
     /**
-     * Retourne toutes les fleches allant d'une classe depart vers une classe d'arrivee
-     * @param dep la classe de depart de la fleche
-     * @param arr la classe d'arrivee de la fleche
-     * @return la liste de fleche trouvee
+     * Donne toute les fleches qui vont
+     * de dep a arr
+     * @param dep Classe de depart
+     * @param arr Classe d'arriver
+     * @return
      */
     public List<Fleche> getAToB(Classe dep, Classe arr){
         List<Fleche> flechesList = new ArrayList<>();

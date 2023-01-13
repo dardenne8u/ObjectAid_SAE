@@ -10,15 +10,30 @@ import javafx.scene.layout.VBox;
 
 public class VueMenuTemporaire extends VBox implements Observateur {
 
+    /**
+     * VUE_TEMP
+     */
     public static VueMenuTemporaire VUE_TEMP = new VueMenuTemporaire();
 
+    /**
+     * Permet de cacher la vue
+     */
     public boolean cacher;
 
+    /**
+     * Creer la vue
+     */
     public VueMenuTemporaire(){
         this.cacher=true;
     }
 
 
+    /**
+     * Permet de notifier
+     * la vue en fonction
+     *
+     * @param s
+     */
     @Override
     public void notifier(Sujet s) {
         if (!this.cacher){

@@ -25,6 +25,8 @@ public class Fleche {
      * @param debut la classe de debut
      * @param fin   la classe de fin
      * @param type  le type de fleche
+     * @param nom nomd e la liaison
+     * @param centre VueCentre ou trouver les vueClasses
      */
     public Fleche(Classe debut, Classe fin, String type, String nom, VueCentre centre) {
         this.type = type;
@@ -40,6 +42,13 @@ public class Fleche {
     //METHODES
 
     // genere toutes les fleches d'une classe donnée et les ajoutes à la vue
+
+    /**
+     * methode creerFleches, cree toutes les fleches ayant un lien avec la classe passee en parametre, ajoute leur vue a la VueCentre
+     * utilise les classe stockees dans le model et stock les nouvelles fleches dans le model
+     * @param c Classe dont on veux creeer toutes les fleches
+     * @param centre VueCentre où ajouter les fleches
+     */
     public static void creerFleches(Classe c, VueCentre centre) {
         Model mod = Model.getModel();
         String nom = c.getType();
@@ -77,6 +86,10 @@ public class Fleche {
         }
     }
 
+    /**
+     * methode actualiserFleches, actualise les fleches presentes dans le model
+     * @param centre VueCentre ou ajouter les VueFleches
+     */
     public static void actualiserFleches(VueCentre centre){
         centre.supprimerFleches();
         for (Fleche f : Model.getModel().getFleches()){
@@ -120,14 +133,27 @@ public class Fleche {
         return this.depart.isAfficheDependances();
     }
 
+    /**
+     * methode getCardinalites renvoie les cardinalites d'arrivee de la fleche
+     * @return cardinalites chaine de caractere contenant la cardinalite
+     */
+
     public String getCardinalites() {
         return cardinalites;
     }
 
+    /**
+     * methoded getNom retourne le nom de la liaison pour les fleches d'utilisation
+     * @return String nom de la liaison
+     */
     public String getNom() {
         return nom;
     }
 
+    /**
+     * cree la fabriqueVueFleche de la fleche en fonction de son type
+     * @param centre vueCentre ou trouver les vues des classes
+     */
     private void setFabrique(VueCentre centre) {
         switch (type) {
             case "-->":
@@ -145,10 +171,20 @@ public class Fleche {
         }
     }
 
+    /**
+     * methode getFabrique retourne la fabrique correspondant a la fleche
+     * @return FabriqueVueFleche fabricant la VueFleche
+     */
+
     public FabriqueVueFleche getFabrique() {
         return fabrique;
     }
 
+    /**
+     * methode getOffsetLateral, retourne le decallage sur le cote de la fleche pour la placee correcetment
+     * pour eviter la superposition
+     * @return
+     */
     public double getOffsetLateral() {
         return offsetLateral;
     }

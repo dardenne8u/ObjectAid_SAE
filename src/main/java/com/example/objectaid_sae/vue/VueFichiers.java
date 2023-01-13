@@ -20,10 +20,21 @@ import java.io.IOException;
 
 public class VueFichiers extends GridPane implements Observateur {
 
+    /**
+     * Chemin du projet
+     */
     public static final String PATH = "./src";
 
+    /**
+     * Arborescence des fichiers
+     */
     private TreeView<HBox> arbre;
 
+    /**
+     * Creer une vue fichier a partir
+     * d'un chemin donnee en parametre
+     * @param path chemin donnee en parametre
+     */
     public VueFichiers(String path) {
         File f = new File(path);
         if (f.exists()) {
@@ -50,6 +61,12 @@ public class VueFichiers extends GridPane implements Observateur {
 
     }
 
+    /**
+     * Methode recursif afin de
+     * creer l'arborescence des fichiers
+     * @param file fichier qu'on verifie
+     * @return TreeItem<HBox> pour le visuel
+     */
     public TreeItem<HBox> tree(File file) {
         TreeItem<HBox> res;
         res = creerItem(file);
@@ -67,6 +84,12 @@ public class VueFichiers extends GridPane implements Observateur {
     }
 
 
+    /**
+     * Permet de creer un item pour l'avoir
+     * au meme format a chaque fois
+     * @param f Fichier utiliser pour la creation
+     * @return TreeItem du fichier
+     */
     public TreeItem<HBox> creerItem(File f) {
         HBox box = new HBox();
         box.setSpacing(5);
@@ -84,10 +107,25 @@ public class VueFichiers extends GridPane implements Observateur {
         return res;
     }
 
+
+    /**
+     * Permet de trouver une HBox
+     * correspondant a une classe
+     * @param classe Classe pour la recherche
+     * @return La HBox trouvee
+     */
     public HBox findBoxRelativeToClasse(Classe classe) {
         return parcoursArbre(classe, arbre.getRoot());
     }
 
+    /**
+     * Methodes recursif qui parcourt
+     * l'arborescence pour trouver le hbox correspondant
+     * a la classe
+     * @param classe classe pour la recherche
+     * @param tree partie de l'arborescence
+     * @return la hbox trouvee
+     */
     private HBox parcoursArbre(Classe classe, TreeItem<HBox> tree) {
         String path = classe.getPackageName();
         String nom = classe.getType();
