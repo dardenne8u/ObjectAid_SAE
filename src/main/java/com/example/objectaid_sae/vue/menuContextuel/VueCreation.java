@@ -11,6 +11,12 @@ import javafx.scene.paint.Color;
 
 public class VueCreation extends VBox {
 
+    /**
+     * Permet de faire une vue creant
+     * des attributs et methods
+     * @param type  attributs ou methodes
+     * @param handler controleur
+     */
     public VueCreation(String type, EventHandler<ActionEvent> handler){
         setBorder(new Border(new BorderStroke(Color.valueOf("#9E9E9E"), BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
         Label l = new Label("Entrez le nom de votre " + type);

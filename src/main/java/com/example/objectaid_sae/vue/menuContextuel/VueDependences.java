@@ -24,6 +24,11 @@ public class VueDependences extends VBox implements Observateur {
 
     }
 
+    /**
+     * Permet de mettre l'affichage
+     * pour choisir une classe existante
+     * dans le model
+     */
     private void vueChoisirClass() {
         final Model model = Model.getModel();
         for(Classe c : model.getClasses()) {
@@ -38,6 +43,11 @@ public class VueDependences extends VBox implements Observateur {
         }
     }
 
+    /**
+     * Permet de mettre l'affichage pour
+     * choisir une fleche parmis celle qui
+     * existe
+     */
     private void vueChoisirFleche() {
         Button ext = new Button("Heritage");
         Button imp = new Button("Implementation");
@@ -49,6 +59,10 @@ public class VueDependences extends VBox implements Observateur {
         this.getChildren().addAll(ext, imp, use);
     }
 
+    /**
+     * Permet de clear les donnees
+     * stocker dans la vue
+     */
     public void clear() {
         this.sujet = null;
         this.classeSelection = null;

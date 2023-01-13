@@ -15,6 +15,10 @@ public class VueCentre extends Pane {
         setOnMouseClicked(new ControleurCentreClique(this));
     }
 
+    /**
+     * Permet de supprimer tout
+     * les menus contextuels d'ouvert
+     */
     public void supprimerMenusTemp() {
         Class[] menusTemps = {VueCheckClass.class, VueMenuTemporaire.class, VueCreation.class, VueAffichageGlobal.class, VueSousMenuClassExt.class, VueDependences.class};
         ArrayList<Class> menus = new ArrayList<>(List.of(menusTemps));
@@ -23,10 +27,20 @@ public class VueCentre extends Pane {
         VueMenuTemporaire.VUE_TEMP.notifier(null);
     }
 
+    /**
+     * Permet de supprimer toutes
+     * les fleches
+     */
     public void supprimerFleches(){
         getChildren().removeIf(n -> n.getClass() == VueFleche.class);
     }
 
+    /**
+     * Permet de trouver la vue classe en relation
+     * a la classe donnee en parametre
+     * @param classe Classe donnee en parametre
+     * @return une vue classe non null si elle trouve
+     */
     public VueClasse findVueClasse(Classe classe) {
         VueClasse res = null;
         for(Node node : this.getChildren()) {

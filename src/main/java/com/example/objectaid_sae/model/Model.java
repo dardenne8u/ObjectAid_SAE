@@ -70,15 +70,30 @@ public class Model implements Sujet {
         }
     }
 
+    /**
+     * Permet de recuperer les fleches
+     * contenus dans le model
+     * @return List des fleches du model
+     */
     public List<Fleche> getFleches() {
         return fleches;
     }
 
+    /**
+     * Permet d'ajouter une
+     * fleche dans le model
+     * @param f Fleche a ajoute
+     */
     public void addFleche(Fleche f){
         if(f != null)
         fleches.add(f);
     }
 
+    /**
+     * Permet d'enregistrer les donnees sous
+     * format UML
+     * @return string du plantUML
+     */
     public String enregistrerUML(){
         String UML = "@startuml\n" +
                 "'https://plantuml.com/class-diagram\n" +
@@ -95,6 +110,12 @@ public class Model implements Sujet {
 
     }
 
+    /**
+     * Permet de trouver les fleches
+     * qui correspondent a une classe
+     * @param classe Classe pour laquelle on cherche
+     * @return List de fleche en relation a la classe
+     */
     public List<Fleche> findFleche(Classe classe) {
         List<Fleche> flechesList = new ArrayList<>();
         for(Fleche fleche : this.fleches) {
@@ -104,6 +125,13 @@ public class Model implements Sujet {
         return flechesList;
     }
 
+    /**
+     * Donne toute les fleches qui vont
+     * de dep a arr
+     * @param dep Classe de depart
+     * @param arr Classe d'arriver
+     * @return
+     */
     public List<Fleche> getAToB(Classe dep, Classe arr){
         List<Fleche> flechesList = new ArrayList<>();
         for(Fleche fleche : this.fleches) {
