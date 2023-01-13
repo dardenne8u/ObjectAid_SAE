@@ -1,0 +1,61 @@
+@startuml
+abstract class Personnage {
+    # nomIm : String
+    # prix : double
+    + getLogo() : MyImage
+    + {abstract} combienCaCoute() : double
+}
+
+class ReneLaTaupe {
+    + ReneLaTaupe()
+    + combienCaCoute()
+}
+
+class CrazyFrog {
+    + CrazyFrog()
+    + combienCaCoute()
+}
+
+abstract class DecorateurPersonnage {
+    # decalX : int
+    # decalY : int
+    + DecorateurPersonnage(String, double, Personnage)
+    + combienCaCoute() : double
+    + getLogo() : MyImage
+    + getDecalX() : int
+    + getDecalY() : int
+}
+
+class SmileyOnPersonnage {
+    + SmileyOnPersonnage(Personnage)
+}
+
+class LunetteOnPersonnage {
+    + LunetteOnPersonnage(Personnage)
+}
+
+class ChapeauOnPersonnage {
+    + ChapeauOnPersonnage(Personnage)
+}
+
+class CandyOnPersonnage {
+    + CandyOnPersonnage(Personnage)
+}
+
+class TextOnPersonnage {
+    + TextOnPersonnage(Personnage, String)
+    + getLogo() : MyImage
+}
+
+Personnage <|-- ReneLaTaupe
+Personnage <|-- CrazyFrog
+Personnage <|-- DecorateurPersonnage
+Personnage "1" <-- DecorateurPersonnage : personnage
+DecorateurPersonnage <|-- SmileyOnPersonnage
+DecorateurPersonnage <|-- LunetteOnPersonnage
+DecorateurPersonnage <|-- ChapeauOnPersonnage
+DecorateurPersonnage <|-- CandyOnPersonnage
+DecorateurPersonnage <|-- TextOnPersonnage
+
+
+@enduml

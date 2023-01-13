@@ -28,7 +28,6 @@ public class ControleurFichierGlisse implements EventHandler<MouseEvent> {
 
     private MouseEvent mouseEvent;
     private Pane centre;
-    private TreeItem<HBox> treeActuel;
 
     public void afficherDossier(String abs, CheckBox cb, Model mod) {
         File file = new File(abs);
@@ -53,6 +52,7 @@ public class ControleurFichierGlisse implements EventHandler<MouseEvent> {
             while (!line.contains("package ")) line = r.readLine();
             line = line.split("package ")[1].split(";")[0];
             Classe c = new Analyseur(line + "." + nom).analyseClasse();
+            if(Model.getModel().getClasses().contains(c)) return;
             // definition de la position x
             double mouseX = mouseEvent.getSceneX() - centre.getLayoutX();
 

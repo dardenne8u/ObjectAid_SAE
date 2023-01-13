@@ -86,7 +86,7 @@ public class VueHaut extends GridPane {
         general.setOnAction(event -> {
             BorderPane pane = (BorderPane) ((Node)event.getSource()).getParent().getParent();
             ((VueCentre)(pane.getCenter())).getChildren().clear();
-            pane.setLeft(new VueFichiers("./src/main/java/com/example/objectaid_sae"));
+            pane.setLeft(new VueFichiers(VueFichiers.PATH));
             Model.resetModel();
         });
 

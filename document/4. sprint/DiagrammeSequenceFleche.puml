@@ -1,0 +1,43 @@
+@startuml
+participant "fleche : Fleche" as f
+participant "fabrique : FabriquerVueFleche" as fabrique
+
+f -> fabrique : fabriquer()
+activate fabrique
+
+    fabrique -> fabrique : faireFleche(xDep, yDep, xFin, yFin)
+    activate fabrique #00ff7b
+
+
+        fabrique -> fabrique : getOffset(inclinaison, largeurClasseDepart, hauteurClasseDepart)
+        activate fabrique
+        fabrique --> fabrique : offsetClasseDepart
+        deactivate fabrique
+
+        fabrique -> fabrique : getOffset(inclinaison, largeurClasseFin, hauteurClasseFin)
+        activate fabrique
+        fabrique --> fabrique : offsetClasseFin
+        deactivate fabrique
+
+        fabrique -> fabrique : genererLigne(longueur - offsetClasseDepart + offsetClasseFin)
+        activate fabrique
+        fabrique --> fabrique : ligne
+        deactivate fabrique
+
+        fabrique -> fabrique : genererPointe()
+        activate fabrique
+        fabrique --> fabrique : pointe
+        deactivate fabrique
+
+
+
+        fabrique -> fabrique : build(ligne, pointe, inclinaison, offsetClasseFin, x, y, longueur)
+        activate fabrique
+        create VueFleche
+        fabrique -> VueFleche : new
+        fabrique --> fabrique : VueFleche
+        deactivate fabrique
+
+f <-- fabrique : VueFleche
+deactivate fabrique
+@enduml

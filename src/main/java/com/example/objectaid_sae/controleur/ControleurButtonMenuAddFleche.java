@@ -33,7 +33,6 @@ public class ControleurButtonMenuAddFleche implements EventHandler {
                 System.out.println("Problème");
         }
         link += " "+ type +" " + nomFin;
-        System.out.println(link);
         depart.addDependencies(link);
         ((VueDependences) btn.getParent()).clear();
         VueCentre centre= (VueCentre) btn.getParent().getParent();
