@@ -7,6 +7,9 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+/**
+ * le model de l'application. Unique.
+ */
 public class Model implements Sujet {
 
     /**
